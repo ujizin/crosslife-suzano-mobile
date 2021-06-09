@@ -1,20 +1,28 @@
-import Dependency.initImplementation
+import Deps.generalDependencies
+import Deps.implementAndroidLibs
+import Deps.implementAndroidTestLibs
+import Deps.implementCompose
+import Deps.implementHilt
+import Deps.implementLifecycle
+import Deps.implementUnitTestLibs
 
 plugins {
     id("com.android.application")
     id("kotlin-android")
+    id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
-    compileSdkVersion(30)
+    compileSdk = 30
     buildToolsVersion = "30.0.3"
     defaultConfig {
         applicationId = "br.com.crosslife"
-        minSdkVersion(21)
-        targetSdkVersion(30)
+        minSdk = 21
+        targetSdk = 30
         versionCode = 1
         versionName = "1.0"
-
+        buildConfigField("String", "BASE_URL", "\"https://www.google.com/\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -42,12 +50,16 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Dependency.Version.COMPOSE
+        kotlinCompilerExtensionVersion = Deps.Version.COMPOSE
     }
 }
 
 dependencies {
-    initImplementation {
-        compose = true
-    }
+    implementCompose()
+    implementUnitTestLibs()
+    implementAndroidTestLibs()
+    implementHilt()
+    implementLifecycle()
+    implementAndroidLibs()
+    generalDependencies()
 }

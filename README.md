@@ -19,16 +19,17 @@ Foram utilizadas bibliotecas mais recentes do Android, como:
 - Compose
 - Navigator Compose
 - Kotlin gradle DSL (KTS)
-- Koin
+- Hilt DI
+- DataStore
 - LiveData
 - Flow
 - Material IO
-- Entre outros
 - Modules
+- Entre outros
 
 ## Layout
 
-O Layout foi inteiramente realizado na ferramenta [FIGMA](www.figma.com).
+O Layout foi inteiramente realizado na ferramenta [FIGMA](https://www.figma.com).
 
 <img src="https://i.imgur.com/broOqPL.png">
 <font size="3px">Para mais detalhes, acesse aqui: https://www.figma.com/file/fb9DxWbWhOglfcohtqfuC4/5Tech-Mobile?node-id=0%3A1</font>
