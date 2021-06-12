@@ -4,6 +4,7 @@ import Deps.implementAndroidTestLibs
 import Deps.implementCompose
 import Deps.implementHilt
 import Deps.implementLifecycle
+import Deps.implementRoom
 import Deps.implementUnitTestLibs
 
 plugins {
@@ -61,5 +62,6 @@ dependencies {
     implementHilt()
     implementLifecycle()
     implementAndroidLibs()
+    implementRoom()
     generalDependencies()
 }

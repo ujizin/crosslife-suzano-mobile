@@ -24,6 +24,9 @@ object Deps {
         // Retrofit
         const val RETROFIT = "2.9.0"
 
+        // Room
+        const val ROOM = "2.3.0"
+
         // Espresso
         const val ESPRESSO = "3.3.0"
 
@@ -84,12 +87,13 @@ object Deps {
         kapt("androidx.hilt:hilt-compiler:1.0.0")
     }
 
-    private fun DependencyHandler.api(name: String) {
-        add("api", name)
-    }
-
     fun DependencyHandler.implementLifecycle() {
         implementation("androidx.lifecycle:lifecycle-viewmodel-compose:${Version.COMPOSE_LIFECYCLE}")
+    }
+
+    fun DependencyHandlerScope.implementRoom() {
+        implementation("androidx.room:room-runtime:${Version.ROOM}")
+        kapt("androidx.room:room-compiler:${Version.ROOM}")
     }
 
     fun DependencyHandlerScope.generalDependencies() {
@@ -98,12 +102,4 @@ object Deps {
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3")
         implementation("com.squareup.retrofit2:retrofit:${Version.RETROFIT}")
     }
-
-    data class ImplementationBuilder(
-        var compose: Boolean = false,
-        var unitTest: Boolean = false,
-        var androidTest: Boolean = false,
-        var hilt: Boolean = false,
-        var androidLifecycle: Boolean = false,
-    )
 }
