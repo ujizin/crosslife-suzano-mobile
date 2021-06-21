@@ -17,10 +17,12 @@ interface Router {
         @Composable
         fun Init() {
             val navController = rememberNavController()
-            NavHost(navController, startDestination = Route.Splash.path) {
-                route(Route.Splash) { SplashScreen(navController) }
-                route(Route.Login) { LoginScreen(navController) }
-                route(Route.Home) { Text(text = "Home") }
+            navController.apply {
+                NavHost(this, startDestination = Route.Splash.path) {
+                    route(Route.Splash) { SplashScreen() }
+                    route(Route.Login) { LoginScreen() }
+                    route(Route.Home) { Text(text = "Home") }
+                }
             }
         }
 
@@ -37,4 +39,10 @@ interface Router {
 
 fun NavController.navigate(route: Route) {
     navigate(route.path)
+}
+
+fun NavController.navigateAndPop(route: Route, popUpUntil: Route) {
+    navigate(route.path) {
+        popUpTo(popUpUntil.path) { inclusive = true }
+    }
 }

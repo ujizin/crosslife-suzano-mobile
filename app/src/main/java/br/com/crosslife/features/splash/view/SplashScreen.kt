@@ -16,9 +16,10 @@ import br.com.crosslife.Route
 import br.com.crosslife.features.splash.viewmodel.SplashResult
 import br.com.crosslife.features.splash.viewmodel.SplashViewModel
 import br.com.crosslife.navigate
+import br.com.crosslife.navigateAndPop
 
 @Composable
-fun SplashScreen(navController: NavController, viewModel: SplashViewModel = hiltViewModel()) {
+fun NavController.SplashScreen(viewModel: SplashViewModel = hiltViewModel()) {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -36,7 +37,7 @@ fun SplashScreen(navController: NavController, viewModel: SplashViewModel = hilt
     val isAuthenticated by viewModel.isAuthenticated.collectAsState()
     when (isAuthenticated) {
         SplashResult.Initial -> return
-        SplashResult.Authenticated -> navController.navigate(Route.Home)
-        SplashResult.NotAuthenticated -> navController.navigate(Route.Login)
+        SplashResult.Authenticated -> navigateAndPop(Route.Home, Route.Splash)
+        SplashResult.NotAuthenticated -> navigateAndPop(Route.Login, Route.Splash)
     }
 }

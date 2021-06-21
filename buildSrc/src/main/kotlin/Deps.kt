@@ -5,7 +5,7 @@ object Deps {
 
     object Version {
         // Compose
-        const val COMPOSE = "1.0.0-beta07"
+        const val COMPOSE = "1.0.0-beta09"
         const val ACTIVITY_COMPOSE = "1.3.0-alpha07"
         const val NAVIGATION_COMPOSE = "2.4.0-alpha01"
 
@@ -62,6 +62,7 @@ object Deps {
         implementation("androidx.activity:activity-compose:${Version.ACTIVITY_COMPOSE}")
         implementation("androidx.navigation:navigation-compose:${Version.NAVIGATION_COMPOSE}")
         implementation("androidx.hilt:hilt-navigation-compose:1.0.0-alpha02")
+        implementation("androidx.compose.material:material-icons-extended:${Version.COMPOSE}")
     }
 
     fun DependencyHandler.implementUnitTestLibs() {

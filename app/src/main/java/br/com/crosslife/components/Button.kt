@@ -1,6 +1,7 @@
 package br.com.crosslife.components
 
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -22,7 +23,7 @@ fun Button(
             backgroundColor = MaterialTheme.colors.primary,
             contentColor = MaterialTheme.colors.onPrimary,
         ),
-        modifier = modifier,
+        modifier = modifier.defaultMinSize(minHeight = 40.dp),
         onClick = onClick,
         content = content ?: {
             Text(
