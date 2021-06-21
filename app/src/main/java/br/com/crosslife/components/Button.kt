@@ -3,6 +3,7 @@ package br.com.crosslife.components
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -14,6 +15,7 @@ import androidx.compose.material.Button as MaterialButton
 fun Button(
     modifier: Modifier = Modifier,
     buttonStyle: Style.Button = Style.Button.Primary,
+    isLoading: Boolean = false,
     textButton: String = "",
     onClick: () -> Unit,
     content: (@Composable RowScope.() -> Unit)? = null,
@@ -22,16 +24,29 @@ fun Button(
         colors = ButtonDefaults.buttonColors(
             backgroundColor = MaterialTheme.colors.primary,
             contentColor = MaterialTheme.colors.onPrimary,
+            disabledBackgroundColor = MaterialTheme.colors.primary,
         ),
         modifier = modifier.defaultMinSize(minHeight = 40.dp),
         onClick = onClick,
-        content = content ?: {
-            Text(
-                text = textButton,
-                modifier = Modifier.padding(top = 4.dp, bottom = 4.dp),
-                textAlign = TextAlign.Center,
-                fontSize = MaterialTheme.typography.subtitle1.fontSize,
-            )
-        },
+        enabled = isLoading.not(),
+        content = {
+            if (isLoading) {
+                CircularProgressIndicator(
+                    color = MaterialTheme.colors.onPrimary,
+                    modifier = Modifier
+                        .padding(top = 4.dp, bottom = 4.dp)
+                        .size(22.dp, 22.dp)
+                )
+            } else {
+                content?.invoke(this) ?: run {
+                    Text(
+                        text = textButton,
+                        modifier = Modifier.padding(top = 4.dp, bottom = 4.dp),
+                        textAlign = TextAlign.Center,
+                        fontSize = MaterialTheme.typography.subtitle1.fontSize,
+                    )
+                }
+            }
+        }
     )
 }

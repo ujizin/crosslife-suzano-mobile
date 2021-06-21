@@ -4,9 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -17,12 +15,14 @@ import androidx.navigation.NavController
 import br.com.crosslife.R
 import br.com.crosslife.components.Button
 import br.com.crosslife.components.input.TextField
+import br.com.crosslife.data.Result
 import br.com.crosslife.features.login.viewmodel.LoginViewModel
 
 @Composable
 fun NavController.LoginScreen(viewModel: LoginViewModel = hiltViewModel()) {
     val usernameState = remember { mutableStateOf("") }
     val passwordState = remember { mutableStateOf("") }
+    val state by viewModel.login.collectAsState()
     Column(
         modifier = Modifier
             .padding(horizontal = 20.dp)
@@ -58,7 +58,10 @@ fun NavController.LoginScreen(viewModel: LoginViewModel = hiltViewModel()) {
                 .padding(top = 16.dp)
                 .padding(bottom = 20.dp)
                 .fillMaxWidth(),
-            onClick = {},
+            isLoading = state is Result.Loading,
+            onClick = {
+                viewModel.fetchLogin(usernameState.value, passwordState.value)
+            },
             textButton = stringResource(id = R.string.enter),
         )
     }
