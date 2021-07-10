@@ -1,4 +1,4 @@
-package br.com.crosslife.models
+package br.com.crosslife.domain.models
 
 data class User(
     val id: Int,

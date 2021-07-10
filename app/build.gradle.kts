@@ -23,7 +23,7 @@ android {
         targetSdk = 30
         versionCode = 1
         versionName = "1.0"
-        buildConfigField("String", "BASE_URL", "\"https://www.google.com/\"")
+        buildConfigField("String", "BASE_URL", "\"https://crosslifeapi.herokuapp.com/\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 

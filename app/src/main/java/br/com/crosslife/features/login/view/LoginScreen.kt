@@ -13,56 +13,64 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import br.com.crosslife.R
+import br.com.crosslife.Route
 import br.com.crosslife.components.Button
 import br.com.crosslife.components.input.TextField
 import br.com.crosslife.data.Result
 import br.com.crosslife.features.login.viewmodel.LoginViewModel
+import br.com.crosslife.navigate
+import br.com.crosslife.navigateAndPop
 
 @Composable
 fun NavController.LoginScreen(viewModel: LoginViewModel = hiltViewModel()) {
     val usernameState = remember { mutableStateOf("") }
     val passwordState = remember { mutableStateOf("") }
     val state by viewModel.login.collectAsState()
-    Column(
-        modifier = Modifier
-            .padding(horizontal = 20.dp)
-            .fillMaxHeight()
-            .verticalScroll(rememberScrollState()),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
-    ) {
-        Image(
-            painter = painterResource(R.drawable.crosslife_logo),
-            contentDescription = stringResource(id = R.string.app_logo),
-            modifier = Modifier
-                .padding(top = 20.dp)
-                .width(155.dp)
-                .height(150.dp)
-        )
-        TextField(
-            label = stringResource(id = R.string.label_email),
-            state = usernameState,
-            modifier = Modifier
-                .fillMaxWidth(),
-        )
-        TextField(
-            label = stringResource(id = R.string.label_password),
-            state = passwordState,
-            modifier = Modifier
-                .padding(top = 8.dp)
-                .fillMaxWidth(),
-            isPassword = true,
-        )
-        Button(
-            modifier = Modifier
-                .padding(top = 16.dp)
-                .padding(bottom = 20.dp)
-                .fillMaxWidth(),
-            isLoading = state is Result.Loading,
-            onClick = {
-                viewModel.fetchLogin(usernameState.value, passwordState.value)
-            },
-            textButton = stringResource(id = R.string.enter),
-        )
+    when (state) {
+        is Result.Success -> navigateAndPop(Route.Home, Route.Login)
+        else -> {
+            Column(
+                modifier = Modifier
+                    .padding(horizontal = 20.dp)
+                    .fillMaxHeight()
+                    .verticalScroll(rememberScrollState()),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+            ) {
+                Image(
+                    painter = painterResource(R.drawable.crosslife_logo),
+                    contentDescription = stringResource(id = R.string.app_logo),
+                    modifier = Modifier
+                        .padding(top = 20.dp)
+                        .width(155.dp)
+                        .height(150.dp)
+                )
+                TextField(
+                    label = stringResource(id = R.string.label_email),
+                    state = usernameState,
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                )
+                TextField(
+                    label = stringResource(id = R.string.label_password),
+                    state = passwordState,
+                    modifier = Modifier
+                        .padding(top = 8.dp)
+                        .fillMaxWidth(),
+                    isPassword = true,
+                )
+                Button(
+                    modifier = Modifier
+                        .padding(top = 16.dp)
+                        .padding(bottom = 20.dp)
+                        .fillMaxWidth(),
+                    isLoading = state is Result.Loading,
+                    onClick = {
+                        viewModel.fetchLogin(usernameState.value, passwordState.value)
+                    },
+                    textButton = stringResource(id = R.string.enter),
+                )
+            }
+        }
     }
 }

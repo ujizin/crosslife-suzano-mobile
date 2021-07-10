@@ -2,7 +2,6 @@ package br.com.crosslife.core.local
 
 import android.content.Context
 import androidx.room.Room
-import androidx.room.RoomDatabase
 import br.com.crosslife.core.local.dao.TrainDao
 import br.com.crosslife.core.local.datapreferences.DataPreferences
 import br.com.crosslife.core.local.datapreferences.DataPreferencesImpl

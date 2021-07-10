@@ -1,6 +1,6 @@
-package br.com.crosslife.data.repositories.user
+package br.com.crosslife.domain.repositories
 
-import br.com.crosslife.models.User
+import br.com.crosslife.domain.models.User
 import kotlinx.coroutines.flow.Flow
 
 interface UserRepository {

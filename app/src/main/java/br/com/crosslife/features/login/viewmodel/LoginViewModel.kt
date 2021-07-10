@@ -3,9 +3,9 @@ package br.com.crosslife.features.login.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.crosslife.data.Result
-import br.com.crosslife.data.repositories.user.UserRepository
+import br.com.crosslife.domain.repositories.UserRepository
 import br.com.crosslife.extensions.notify
-import br.com.crosslife.models.User
+import br.com.crosslife.domain.models.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

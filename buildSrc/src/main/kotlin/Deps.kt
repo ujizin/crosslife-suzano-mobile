@@ -102,5 +102,6 @@ object Deps {
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3")
         implementation("com.squareup.retrofit2:retrofit:${Version.RETROFIT}")
+        implementation("com.squareup.retrofit2:converter-moshi:${Version.RETROFIT}")
     }
 }
