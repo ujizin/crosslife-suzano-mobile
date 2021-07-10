@@ -9,7 +9,7 @@ O aplicativo terá o foco de auxiliar e comunicar aos clientes da academia sobre
 - Treinos da semana
 - Notícias
 - Chat
-- Perfil avançado, contendo informações de biopendância
+- Perfil avançado, contendo informações de bioimpedância
 - Entre outros
 
 ## Tecnologias (Bibliotecas)
