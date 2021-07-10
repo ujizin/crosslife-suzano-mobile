@@ -3,4 +3,10 @@
     <string name="label_email">email</string>
     <string name="label_password">senha</string>
     <string name="enter">entrar</string>
+
+    <!--  Menu  -->
+    <string name="menu_item_home">home</string>
+    <string name="menu_item_search">buscar</string>
+    <string name="menu_item_chat">chat</string>
+    <string name="menu_item_profile">perfil</string>
 </resources>

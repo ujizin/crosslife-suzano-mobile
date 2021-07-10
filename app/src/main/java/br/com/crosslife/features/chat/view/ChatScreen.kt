@@ -1,10 +1,10 @@
-package br.com.crosslife.features.home.view
+package br.com.crosslife.features.chat.view
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 
 @Composable
-fun NavController.HomeScreen() {
-    Text("Home")
+fun NavController.ChatScreen() {
+    Text(text = "Chat")
 }
