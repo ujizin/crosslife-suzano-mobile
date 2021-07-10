@@ -7,6 +7,7 @@ import androidx.navigation.compose.NamedNavArgument
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import br.com.crosslife.features.home.view.HomeScreen
 import br.com.crosslife.features.login.view.LoginScreen
 import br.com.crosslife.features.splash.view.SplashScreen
 
@@ -21,7 +22,7 @@ interface Router {
                 NavHost(this, startDestination = Route.Splash.path) {
                     route(Route.Splash) { SplashScreen() }
                     route(Route.Login) { LoginScreen() }
-                    route(Route.Home) { Text(text = "Home") }
+                    route(Route.Home) { HomeScreen() }
                 }
             }
         }

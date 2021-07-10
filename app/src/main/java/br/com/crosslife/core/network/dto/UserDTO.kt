@@ -5,11 +5,11 @@ import br.com.crosslife.extensions.orEmpty
 import com.squareup.moshi.Json
 
 data class UserDTO(
-    @Json(name = "id")
+    @field:Json(name = "id")
     val id: Int?,
-    @Json(name = "user")
+    @field:Json(name = "user")
     val user: String?,
-    @Json(name = "Token")
+    @field:Json(name = "Token")
     val token: String,
 ) {
 

@@ -1,9 +1,8 @@
 package br.com.crosslife.features.splash.viewmodel
 
-import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.crosslife.core.local.datapreferences.DataPreferences
+import br.com.crosslife.domain.preferences.UserStore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
@@ -11,14 +10,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    dataStore: DataPreferences
+    userStore: UserStore,
 ) : ViewModel() {
 
     private val _isAuthenticated = MutableStateFlow(SplashResult.Initial)
     val isAuthenticated: StateFlow<SplashResult> get() = _isAuthenticated
 
     init {
-        dataStore.get(tokenKey, "")
+        userStore.getToken()
             .onStart {
                 delay(SPLASH_DELAY)
             }
@@ -31,7 +30,6 @@ class SplashViewModel @Inject constructor(
 
     companion object {
         private const val SPLASH_DELAY = 1000L
-        private val tokenKey = stringPreferencesKey("token")
     }
 }
 

@@ -8,7 +8,7 @@ class UserStoreImpl(private val dataStore: DataPreferences): UserStore {
 
     private val tokenKey = stringPreferencesKey(USER_TOKEN_KEY)
 
-    override suspend fun getToken() = dataStore.get(tokenKey, "")
+    override fun getToken() = dataStore.get(tokenKey, "")
 
     override suspend fun setToken(token: String) {
         dataStore.set(tokenKey, token)
