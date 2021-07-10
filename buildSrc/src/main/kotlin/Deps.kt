@@ -5,7 +5,7 @@ object Deps {
 
     object Version {
         // Compose
-        const val COMPOSE = "1.0.0-beta07"
+        const val COMPOSE = "1.0.0-beta09"
         const val ACTIVITY_COMPOSE = "1.3.0-alpha07"
         const val NAVIGATION_COMPOSE = "2.4.0-alpha01"
 
@@ -23,6 +23,9 @@ object Deps {
 
         // Retrofit
         const val RETROFIT = "2.9.0"
+
+        // Room
+        const val ROOM = "2.3.0"
 
         // Espresso
         const val ESPRESSO = "3.3.0"
@@ -59,6 +62,7 @@ object Deps {
         implementation("androidx.activity:activity-compose:${Version.ACTIVITY_COMPOSE}")
         implementation("androidx.navigation:navigation-compose:${Version.NAVIGATION_COMPOSE}")
         implementation("androidx.hilt:hilt-navigation-compose:1.0.0-alpha02")
+        implementation("androidx.compose.material:material-icons-extended:${Version.COMPOSE}")
     }
 
     fun DependencyHandler.implementUnitTestLibs() {
@@ -84,12 +88,13 @@ object Deps {
         kapt("androidx.hilt:hilt-compiler:1.0.0")
     }
 
-    private fun DependencyHandler.api(name: String) {
-        add("api", name)
-    }
-
     fun DependencyHandler.implementLifecycle() {
         implementation("androidx.lifecycle:lifecycle-viewmodel-compose:${Version.COMPOSE_LIFECYCLE}")
+    }
+
+    fun DependencyHandlerScope.implementRoom() {
+        implementation("androidx.room:room-runtime:${Version.ROOM}")
+        kapt("androidx.room:room-compiler:${Version.ROOM}")
     }
 
     fun DependencyHandlerScope.generalDependencies() {
@@ -97,13 +102,6 @@ object Deps {
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3")
         implementation("com.squareup.retrofit2:retrofit:${Version.RETROFIT}")
+        implementation("com.squareup.retrofit2:converter-moshi:${Version.RETROFIT}")
     }
-
-    data class ImplementationBuilder(
-        var compose: Boolean = false,
-        var unitTest: Boolean = false,
-        var androidTest: Boolean = false,
-        var hilt: Boolean = false,
-        var androidLifecycle: Boolean = false,
-    )
 }

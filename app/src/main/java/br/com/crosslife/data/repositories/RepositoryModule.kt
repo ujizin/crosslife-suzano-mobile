@@ -1,8 +1,9 @@
 package br.com.crosslife.data.repositories
 
 import br.com.crosslife.core.network.services.UserService
-import br.com.crosslife.data.repositories.user.UserRepository
+import br.com.crosslife.domain.repositories.UserRepository
 import br.com.crosslife.data.repositories.user.UserRepositoryImpl
+import br.com.crosslife.domain.preferences.UserStore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,6 +16,8 @@ object RepositoryModule {
 
     @ViewModelScoped
     @Provides
-    fun provideUserRepository(userService: UserService): UserRepository =
-        UserRepositoryImpl(userService)
+    fun provideUserRepository(
+        userService: UserService,
+        userStore: UserStore,
+    ): UserRepository = UserRepositoryImpl(userService, userStore)
 }

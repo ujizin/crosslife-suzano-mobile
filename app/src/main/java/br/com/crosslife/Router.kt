@@ -2,38 +2,27 @@ package br.com.crosslife
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavBackStackEntry
-import androidx.navigation.NavDeepLink
-import androidx.navigation.NavGraphBuilder
+import androidx.navigation.*
 import androidx.navigation.compose.NamedNavArgument
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import br.com.crosslife.features.login.view.LoginScreen
 import br.com.crosslife.features.splash.view.SplashScreen
 
 interface Router {
-
-    sealed class Route(val path: String) {
-        object Splash : Route(SPLASH_PATH)
-        object Login : Route(LOGIN_PATH)
-        object Home : Route(HOME_PATH)
-
-        companion object {
-            private const val SPLASH_PATH = "splash"
-            private const val LOGIN_PATH = "login"
-            private const val HOME_PATH = "home"
-        }
-    }
 
     companion object {
 
         @Composable
         fun Init() {
             val navController = rememberNavController()
-            NavHost(navController, startDestination = Route.Splash.path) {
-                route(Route.Splash) { SplashScreen() }
-                route(Route.Login) { Text(text = "Login") }
-                route(Route.Home) { Text(text = "Home") }
+            navController.apply {
+                NavHost(this, startDestination = Route.Splash.path) {
+                    route(Route.Splash) { SplashScreen() }
+                    route(Route.Login) { LoginScreen() }
+                    route(Route.Home) { Text(text = "Home") }
+                }
             }
         }
 
@@ -45,5 +34,15 @@ interface Router {
         ) {
             composable(route.path, arguments, deepLinks, content)
         }
+    }
+}
+
+fun NavController.navigate(route: Route) {
+    navigate(route.path)
+}
+
+fun NavController.navigateAndPop(route: Route, popUpUntil: Route) {
+    navigate(route.path) {
+        popUpTo(popUpUntil.path) { inclusive = true }
     }
 }

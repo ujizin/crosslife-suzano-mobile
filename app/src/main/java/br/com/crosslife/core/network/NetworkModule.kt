@@ -2,12 +2,14 @@ package br.com.crosslife.core.network
 
 import br.com.crosslife.BuildConfig
 import br.com.crosslife.core.network.services.UserService
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
 @Module
@@ -24,6 +26,7 @@ object NetworkModule {
     @Provides
     fun provideRetrofit(): Retrofit = Retrofit.Builder()
         .baseUrl(BuildConfig.BASE_URL)
+        .addConverterFactory(MoshiConverterFactory.create())
         .client(okHttpClient)
         .build()
 
