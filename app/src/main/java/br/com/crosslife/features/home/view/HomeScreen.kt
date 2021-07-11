@@ -45,15 +45,11 @@ fun NavController.HomeScreen() {
             .fillMaxSize()
             .padding(bottom = Space.BOTTOM_NAVIGATION),
     ) {
-        item {
-            Logo()
-            TextFieldSearch(searchState)
-            WeeklyTrain(pagerState)
-        }
+        item { Logo() }
+        item { TextFieldSearch(searchState) }
+        item { WeeklyTrain(pagerState) }
         Notices()
-        item {
-            Spacer(Modifier.height(Space.BORDER))
-        }
+        item { Spacer(Modifier.height(Space.BORDER)) }
     }
 }
 

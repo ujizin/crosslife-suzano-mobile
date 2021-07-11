@@ -2,7 +2,6 @@ package br.com.crosslife.ui.components.bottomnavigation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -13,7 +12,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import br.com.crosslife.extensions.capitalize
@@ -30,6 +28,7 @@ fun BottomNavigation(navController: NavController) {
         Tab.values().forEach { tab ->
             val isCurrentSelected = currentRoute?.route == tab.route.path
             BottomNavigationItem(
+                modifier = Modifier.background(MaterialTheme.colors.surface),
                 icon = {
                     val color = if (isCurrentSelected) MaterialTheme.colors.primary else Gray
                     Image(
