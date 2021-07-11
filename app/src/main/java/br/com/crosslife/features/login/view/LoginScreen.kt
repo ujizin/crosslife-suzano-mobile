@@ -20,6 +20,7 @@ import br.com.crosslife.data.Result
 import br.com.crosslife.features.login.viewmodel.LoginViewModel
 import br.com.crosslife.navigate
 import br.com.crosslife.navigateAndPop
+import br.com.crosslife.ui.theme.Space
 
 @Composable
 fun NavController.LoginScreen(viewModel: LoginViewModel = hiltViewModel()) {
@@ -31,7 +32,7 @@ fun NavController.LoginScreen(viewModel: LoginViewModel = hiltViewModel()) {
         else -> {
             Column(
                 modifier = Modifier
-                    .padding(horizontal = 20.dp)
+                    .padding(horizontal = Space.BORDER)
                     .fillMaxHeight()
                     .verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -41,7 +42,7 @@ fun NavController.LoginScreen(viewModel: LoginViewModel = hiltViewModel()) {
                     painter = painterResource(R.drawable.crosslife_logo),
                     contentDescription = stringResource(id = R.string.app_logo),
                     modifier = Modifier
-                        .padding(top = 20.dp)
+                        .padding(top = Space.XXXS)
                         .width(155.dp)
                         .height(150.dp)
                 )
@@ -55,14 +56,14 @@ fun NavController.LoginScreen(viewModel: LoginViewModel = hiltViewModel()) {
                     label = stringResource(id = R.string.label_password),
                     state = passwordState,
                     modifier = Modifier
-                        .padding(top = 8.dp)
+                        .padding(top = Space.XS)
                         .fillMaxWidth(),
                     isPassword = true,
                 )
                 Button(
                     modifier = Modifier
-                        .padding(top = 16.dp)
-                        .padding(bottom = 20.dp)
+                        .padding(top = Space.XXS)
+                        .padding(bottom = Space.XXXS)
                         .fillMaxWidth(),
                     isLoading = state is Result.Loading,
                     onClick = {

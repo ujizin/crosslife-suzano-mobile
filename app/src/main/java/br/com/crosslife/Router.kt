@@ -16,11 +16,13 @@ import br.com.crosslife.features.profile.view.ProfileScreen
 import br.com.crosslife.features.search.view.SearchScreen
 import br.com.crosslife.features.splash.view.SplashScreen
 import br.com.crosslife.ui.components.tabbar.TabBar
+import com.google.accompanist.pager.ExperimentalPagerApi
 
 interface Router {
 
     companion object {
 
+        @ExperimentalPagerApi
         @Composable
         fun Init() {
             val navController = rememberNavController()
@@ -47,8 +49,10 @@ interface Router {
     }
 }
 
-fun NavController.navigate(route: Route) {
-    navigate(route.path)
+fun NavController.navigate(route: Route, singleTop: Boolean = false) {
+    navigate(route.path) {
+        launchSingleTop = singleTop
+    }
 }
 
 fun NavController.navigateAndPop(route: Route, popUpUntil: Route) {

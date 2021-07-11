@@ -101,6 +101,7 @@ object Deps {
         implementation("androidx.datastore:datastore-preferences:1.0.0-beta01")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3")
+        implementation("com.google.accompanist:accompanist-pager:0.13.0")
         implementation("com.squareup.retrofit2:retrofit:${Version.RETROFIT}")
         implementation("com.squareup.retrofit2:converter-moshi:${Version.RETROFIT}")
     }

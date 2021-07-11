@@ -28,9 +28,9 @@ fun BottomNavigation(navController: NavController) {
         val currentRoute = navBackStackEntry?.destination
         Tab.values().forEach { tab ->
             val isCurrentSelected = currentRoute?.route == tab.route.path
-            val color = if (isCurrentSelected) MaterialTheme.colors.primary else Gray
             BottomNavigationItem(
                 icon = {
+                    val color = if (isCurrentSelected) MaterialTheme.colors.primary else Gray
                     Image(
                         painter = painterResource(id = tab.iconRes),
                         colorFilter = ColorFilter.tint(color),
@@ -38,8 +38,7 @@ fun BottomNavigation(navController: NavController) {
                     )
                 },
                 alwaysShowLabel = false,
-                selectedContentColor = MaterialTheme.colors.primary,
-                unselectedContentColor = Color.White,
+                selectedContentColor = Color.White,
                 label = {
                     Text(
                         stringResource(id = tab.titleRes).replaceFirstChar { it.uppercase() },
@@ -48,7 +47,7 @@ fun BottomNavigation(navController: NavController) {
                     )
                 },
                 selected = isCurrentSelected,
-                onClick = { navController.navigate(tab.route) },
+                onClick = { navController.navigate(tab.route, true) },
             )
         }
     }

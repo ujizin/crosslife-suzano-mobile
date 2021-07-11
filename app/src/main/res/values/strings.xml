@@ -9,4 +9,9 @@
     <string name="menu_item_search">buscar</string>
     <string name="menu_item_chat">chat</string>
     <string name="menu_item_profile">perfil</string>
+    <string name="search">pesquisar</string>
+
+    <!-- Home -->
+    <string name="weekly_train">treino da semana</string>
+    <string name="notices">noticias</string>
 </resources>
