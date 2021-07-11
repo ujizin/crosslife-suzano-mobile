@@ -9,6 +9,8 @@ import br.com.crosslife.ui.components.bottomnavigation.BottomNavigation
 fun NavController.TabBar(content: @Composable () -> Unit) {
     Scaffold(
         bottomBar = { BottomNavigation(this) },
-        content = { content() }
+        content = {
+            content()
+        }
     )
 }

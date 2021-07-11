@@ -16,4 +16,6 @@ object Space {
     val XXXL = 80.dp
 
     val BORDER = 20.dp
+
+    val BOTTOM_NAVIGATION = 56.dp
 }

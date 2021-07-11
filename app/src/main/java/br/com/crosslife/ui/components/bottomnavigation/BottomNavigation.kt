@@ -16,6 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import br.com.crosslife.extensions.capitalize
 import br.com.crosslife.navigate
 import br.com.crosslife.ui.theme.Gray
 
@@ -41,7 +42,7 @@ fun BottomNavigation(navController: NavController) {
                 selectedContentColor = Color.White,
                 label = {
                     Text(
-                        stringResource(id = tab.titleRes).replaceFirstChar { it.uppercase() },
+                        stringResource(id = tab.titleRes).capitalize(),
                         color = MaterialTheme.colors.primary,
                         style = MaterialTheme.typography.overline,
                     )

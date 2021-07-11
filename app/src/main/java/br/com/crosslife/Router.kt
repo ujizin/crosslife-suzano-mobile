@@ -1,5 +1,6 @@
 package br.com.crosslife
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
@@ -22,6 +23,7 @@ interface Router {
 
     companion object {
 
+        @ExperimentalFoundationApi
         @ExperimentalPagerApi
         @Composable
         fun Init() {

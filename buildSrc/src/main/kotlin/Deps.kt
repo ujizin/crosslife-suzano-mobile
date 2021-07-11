@@ -59,6 +59,7 @@ object Deps {
         implementation("androidx.compose.ui:ui-tooling:${Version.COMPOSE}")
         implementation("androidx.compose.material:material:${Version.COMPOSE}")
         implementation("androidx.compose.ui:ui:${Version.COMPOSE}")
+        implementation("androidx.compose.runtime:runtime:${Version.COMPOSE}")
         implementation("androidx.activity:activity-compose:${Version.ACTIVITY_COMPOSE}")
         implementation("androidx.navigation:navigation-compose:${Version.NAVIGATION_COMPOSE}")
         implementation("androidx.hilt:hilt-navigation-compose:1.0.0-alpha02")
