@@ -16,4 +16,10 @@
     <string name="notices">noticias</string>
     <string name="chat_description">converse e tire suas dúvidas com nossos  instrutores por aqui:</string>
     <string name="or">ou</string>
+
+    <!-- Profile  -->
+    <string name="background">fundo</string>
+    <string name="advanced_profile">perfil avançado</string>
+    <string name="change_password">trocar senha</string>
+    <string name="leave_account">sair da conta</string>
 </resources>

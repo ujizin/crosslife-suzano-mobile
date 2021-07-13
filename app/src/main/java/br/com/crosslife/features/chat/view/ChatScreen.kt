@@ -5,17 +5,18 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
-import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import br.com.crosslife.R
+import br.com.crosslife.components.Button
 import br.com.crosslife.extensions.capitalize
 import br.com.crosslife.ui.theme.Space
 
@@ -59,12 +60,39 @@ fun InstructorCard(modifier: Modifier) {
     Card(
         modifier
             .fillMaxWidth()
-            .height(120.dp),
+            .wrapContentHeight(),
         backgroundColor = MaterialTheme.colors.surface,
         shape = MaterialTheme.shapes.large,
     ) {
-        Row() {
-
+        Row(
+            Modifier
+                .padding(Space.XXS)
+                .height(120.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Box(
+                Modifier
+                    .fillMaxHeight()
+                    .aspectRatio(1F)
+                    .background(Color.Black, MaterialTheme.shapes.medium)
+            )
+            Column(
+                Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight()
+                    .padding(start = Space.XXS)
+            ) {
+                Text("Caio Teixeira", style = MaterialTheme.typography.h3)
+                Text("Instrutor 1", style = MaterialTheme.typography.body2)
+                Spacer(Modifier.weight(1F))
+                Button(
+                    Modifier
+                        .align(Alignment.End)
+                        .defaultMinSize(minWidth = 80.dp),
+                    textButton = stringResource(id = R.string.menu_item_chat).capitalize(),
+                    onClick = {}
+                )
+            }
         }
     }
 }

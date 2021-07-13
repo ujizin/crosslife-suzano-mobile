@@ -38,7 +38,7 @@ fun NavController.HomeScreen() {
     val pagerState = rememberPagerState(
         pageCount = 7,
         infiniteLoop = true,
-        initialOffscreenLimit = 7,
+        initialOffscreenLimit = 2,
     )
     LazyColumn(
         Modifier
@@ -64,7 +64,7 @@ fun Logo() {
         Image(
             modifier = Modifier
                 .padding(top = Space.XXS)
-                .size(50.dp, 48.dp),
+                .size(56.dp, 52.dp),
             painter = painterResource(
                 id = R.drawable.crosslife_logo),
             contentDescription = stringResource(id = R.string.app_logo),
@@ -81,7 +81,7 @@ fun TextFieldSearch(searchState: MutableState<String>) {
         },
         singleLine = true,
         modifier = Modifier
-            .padding(top = Space.M)
+            .padding(top = Space.XXXS)
             .padding(horizontal = Space.BORDER)
             .fillMaxWidth(),
         placeholder = {

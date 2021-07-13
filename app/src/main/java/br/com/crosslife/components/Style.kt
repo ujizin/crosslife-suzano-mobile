@@ -1,8 +1,5 @@
 package br.com.crosslife.components
 
-object Style {
-
-    enum class Button {
-        Primary, Outline,
-    }
+enum class Button {
+    Primary, Outline,
 }

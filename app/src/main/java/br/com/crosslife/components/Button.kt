@@ -14,7 +14,7 @@ import androidx.compose.material.Button as MaterialButton
 @Composable
 fun Button(
     modifier: Modifier = Modifier,
-    buttonStyle: Style.Button = Style.Button.Primary,
+    buttonStyle: Button = Button.Primary,
     isLoading: Boolean = false,
     textButton: String = "",
     onClick: () -> Unit,
@@ -26,7 +26,9 @@ fun Button(
             contentColor = MaterialTheme.colors.onPrimary,
             disabledBackgroundColor = MaterialTheme.colors.primary,
         ),
-        modifier = modifier.defaultMinSize(minHeight = 40.dp),
+        modifier = Modifier
+            .defaultMinSize(minHeight = 40.dp)
+            .then(modifier),
         onClick = onClick,
         enabled = isLoading.not(),
         content = {
