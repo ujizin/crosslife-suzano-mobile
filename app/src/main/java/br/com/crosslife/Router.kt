@@ -1,11 +1,12 @@
 package br.com.crosslife
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavBackStackEntry
-import androidx.navigation.NavController
-import androidx.navigation.NavDeepLink
-import androidx.navigation.NavGraphBuilder
+import androidx.navigation.*
 import androidx.navigation.compose.NamedNavArgument
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -23,6 +24,7 @@ interface Router {
 
     companion object {
 
+        @ExperimentalAnimationApi
         @ExperimentalFoundationApi
         @ExperimentalPagerApi
         @Composable
@@ -51,10 +53,11 @@ interface Router {
     }
 }
 
-fun NavController.navigate(route: Route, singleTop: Boolean = false) {
-    navigate(route.path) {
-        launchSingleTop = singleTop
-    }
+fun NavController.navigate(
+    route: Route,
+    block: NavOptionsBuilder.() -> Unit = {},
+) {
+    navigate(route.path, block)
 }
 
 fun NavController.navigateAndPop(route: Route, popUpUntil: Route) {
