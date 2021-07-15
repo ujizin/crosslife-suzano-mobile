@@ -1,42 +1,26 @@
 package br.com.crosslife.ui.components.tabbar
 
 import androidx.compose.animation.*
-import androidx.compose.animation.core.MutableTransitionState
-import androidx.compose.animation.core.tween
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.navigation.NavController
+import br.com.crosslife.ui.components.animation.FadeAnimation
+import br.com.crosslife.ui.components.animation.VerticalSlideAnimation
 import br.com.crosslife.ui.components.bottomnavigation.BottomNavigation
+import br.com.crosslife.ui.components.bottomnavigation.Tab
+
 
 @ExperimentalAnimationApi
 @Composable
-fun TransitionFade(
-    durationMillis: Int = 500,
-    content: @Composable AnimatedVisibilityScope.() -> Unit,
-) {
-    val visibleState = remember { MutableTransitionState(false) }
-    visibleState.targetState = true
-    AnimatedVisibility(
-        visibleState = visibleState,
-        enter = fadeIn(
-            initialAlpha = 0.0f,
-            animationSpec = tween(durationMillis = durationMillis)
-        ),
-        exit = fadeOut(
-            animationSpec = tween(durationMillis = durationMillis)
-        ),
-        content = content,
-    )
-}
-
-@ExperimentalAnimationApi
-@Composable
-fun NavController.TabBar(content: @Composable () -> Unit) {
+fun NavController.TabBar(currentTab: Tab, content: @Composable () -> Unit) {
     Scaffold(
-        bottomBar = { BottomNavigation(this) },
+        bottomBar = {
+            VerticalSlideAnimation(visible = currentTab != Tab.None) {
+                BottomNavigation(currentTab)
+            }
+        },
         content = {
-            TransitionFade {
+            FadeAnimation {
                 content()
             }
         }

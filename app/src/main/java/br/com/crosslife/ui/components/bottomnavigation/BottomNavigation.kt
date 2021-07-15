@@ -6,27 +6,23 @@ import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
-import androidx.navigation.compose.currentBackStackEntryAsState
 import br.com.crosslife.extensions.capitalize
 import br.com.crosslife.navigate
 import br.com.crosslife.ui.theme.Gray
 
 @Composable
-fun BottomNavigation(navController: NavController) {
+fun NavController.BottomNavigation(currentTab: Tab) {
     androidx.compose.material.BottomNavigation(
         modifier = Modifier.background(MaterialTheme.colors.surface)
     ) {
-        val navBackStackEntry by navController.currentBackStackEntryAsState()
-        val currentRoute = navBackStackEntry?.destination
-        Tab.values().forEach { tab ->
-            val isCurrentSelected = currentRoute?.route == tab.route.path
+        MenuItem.values().forEach { tab ->
+            val isCurrentSelected = tab.name == currentTab.name
             BottomNavigationItem(
                 modifier = Modifier.background(MaterialTheme.colors.surface),
                 icon = {
@@ -48,8 +44,13 @@ fun BottomNavigation(navController: NavController) {
                 },
                 selected = isCurrentSelected,
                 onClick = {
-                    navController.navigate(tab.route) {
-                        popUpTo(navController.graph.startDestinationId) {
+                    /****
+                     * Figure out how to get child routes already instances to show when it is
+                     * not on parent route
+                     * if child route clicks on parent routes, backstack until current.
+                     * */
+                    navigate(tab.route) {
+                        popUpTo(graph.startDestinationId) {
                             saveState = true
                         }
                         launchSingleTop = true

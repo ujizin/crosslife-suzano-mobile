@@ -5,7 +5,7 @@ import androidx.annotation.StringRes
 import br.com.crosslife.R
 import br.com.crosslife.Route
 
-enum class Tab(
+enum class MenuItem(
     @StringRes val titleRes: Int,
     @DrawableRes val iconRes: Int,
     val route: Route,
@@ -14,4 +14,12 @@ enum class Tab(
     Search(R.string.menu_item_search, R.drawable.ic_search, Route.Search),
     Chat(R.string.menu_item_chat, R.drawable.ic_chat, Route.Chat),
     Profile(R.string.menu_item_profile, R.drawable.ic_user, Route.Profile),
+}
+
+enum class Tab {
+    None,
+    Home,
+    Search,
+    Chat,
+    Profile
 }

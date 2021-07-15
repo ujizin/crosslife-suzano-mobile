@@ -1,5 +1,6 @@
 package br.com.crosslife.features.profile.view
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -23,7 +24,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import br.com.crosslife.R
+import br.com.crosslife.Route
 import br.com.crosslife.extensions.capitalize
+import br.com.crosslife.navigate
 import br.com.crosslife.ui.theme.Purple
 import br.com.crosslife.ui.theme.Red
 import br.com.crosslife.ui.theme.Space
@@ -61,12 +64,16 @@ fun NavController.ProfileScreen() {
                         Purple,
                         painterResource(id = R.drawable.ic_strength),
                         stringResource(id = R.string.advanced_profile),
-                    )
+                    ) {
+                        navigate(Route.DetailProfile)
+                    }
                     ProfileItem(
                         Yellow,
                         painterResource(id = R.drawable.ic_lock),
                         stringResource(id = R.string.change_password),
-                    )
+                    ) {
+                        navigate(Route.ChangePassword)
+                    }
                     ProfileItem(
                         Red,
                         painterResource(id = R.drawable.ic_exit),
@@ -93,6 +100,17 @@ fun ProfileBackground() {
             contentScale = ContentScale.Crop,
         )
     }
+    Box(
+        Modifier.fillMaxSize(),
+        contentAlignment = Alignment.BottomCenter
+    ) {
+        Box(
+            Modifier
+                .fillMaxWidth()
+                .height(Space.BOTTOM_NAVIGATION)
+                .background(MaterialTheme.colors.background)
+        )
+    }
 }
 
 @Composable
@@ -100,6 +118,7 @@ fun ProfileItem(
     color: Color,
     image: Painter,
     description: String,
+    onClick: () -> Unit = {},
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -107,11 +126,8 @@ fun ProfileItem(
             .padding(top = Space.XXS)
             .clip(CircleShape)
             .fillMaxWidth()
-            .clickable {
-
-            }
-            .padding(Space.XS)
-        ,
+            .clickable(onClick = onClick)
+            .padding(Space.XS),
     ) {
         Box(
             Modifier.size(48.dp),

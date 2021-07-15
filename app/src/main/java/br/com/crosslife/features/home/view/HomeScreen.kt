@@ -41,15 +41,13 @@ fun NavController.HomeScreen() {
         initialOffscreenLimit = 2,
     )
     LazyColumn(
-        Modifier
-            .fillMaxSize()
-            .padding(bottom = Space.BOTTOM_NAVIGATION),
+        Modifier.fillMaxSize(),
     ) {
         item { Logo() }
         item { TextFieldSearch(searchState) }
         item { WeeklyTrain(pagerState) }
         Notices()
-        item { Spacer(Modifier.height(Space.BORDER)) }
+        item { Spacer(Modifier.height(Space.BOTTOM_NAVIGATION_MARGIN)) }
     }
 }
 
