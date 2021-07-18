@@ -3,17 +3,17 @@ package br.com.crosslife.ui.components.bottomnavigation
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import br.com.crosslife.R
-import br.com.crosslife.Route
+import br.com.crosslife.Screen
 
 enum class MenuItem(
     @StringRes val titleRes: Int,
     @DrawableRes val iconRes: Int,
-    val route: Route,
+    val screen: Screen,
 ) {
-    Home(R.string.menu_item_home, R.drawable.ic_home, Route.Home),
-    Search(R.string.menu_item_search, R.drawable.ic_search, Route.Search),
-    Chat(R.string.menu_item_chat, R.drawable.ic_chat, Route.Chat),
-    Profile(R.string.menu_item_profile, R.drawable.ic_user, Route.Profile),
+    Home(R.string.menu_item_home, R.drawable.ic_home, Screen.HomeRoot),
+    Search(R.string.menu_item_search, R.drawable.ic_search, Screen.SearchRoot),
+    Chat(R.string.menu_item_chat, R.drawable.ic_chat, Screen.ChatRoot),
+    Profile(R.string.menu_item_profile, R.drawable.ic_user, Screen.ProfileRoot),
 }
 
 enum class Tab {

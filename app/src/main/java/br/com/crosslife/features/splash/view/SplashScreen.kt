@@ -12,10 +12,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import br.com.crosslife.R
-import br.com.crosslife.Route
+import br.com.crosslife.Screen
 import br.com.crosslife.features.splash.viewmodel.SplashResult
 import br.com.crosslife.features.splash.viewmodel.SplashViewModel
-import br.com.crosslife.navigate
 import br.com.crosslife.navigateAndPop
 
 @Composable
@@ -37,7 +36,7 @@ fun NavController.SplashScreen(viewModel: SplashViewModel = hiltViewModel()) {
     val isAuthenticated by viewModel.isAuthenticated.collectAsState()
     when (isAuthenticated) {
         SplashResult.Initial -> return
-        SplashResult.Authenticated -> navigateAndPop(Route.Home, Route.Splash)
-        SplashResult.NotAuthenticated -> navigateAndPop(Route.Login, Route.Splash)
+        SplashResult.Authenticated -> navigateAndPop(Screen.HomeRoot, Screen.Splash, true)
+        SplashResult.NotAuthenticated -> navigateAndPop(Screen.Login, Screen.Splash)
     }
 }

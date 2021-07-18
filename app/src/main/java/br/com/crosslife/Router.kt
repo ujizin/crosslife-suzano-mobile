@@ -3,9 +3,6 @@ package br.com.crosslife
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.navigation.*
 import androidx.navigation.compose.NamedNavArgument
 import androidx.navigation.compose.NavHost
@@ -20,7 +17,6 @@ import br.com.crosslife.features.profile.view.ProfileScreen
 import br.com.crosslife.features.search.view.SearchScreen
 import br.com.crosslife.features.splash.view.SplashScreen
 import br.com.crosslife.ui.components.animation.FadeAnimation
-import br.com.crosslife.ui.components.bottomnavigation.Tab
 import br.com.crosslife.ui.components.tabbar.TabBar
 import com.google.accompanist.pager.ExperimentalPagerApi
 
@@ -34,19 +30,41 @@ interface Router {
         @Composable
         fun Init() {
             val navController = rememberNavController()
-            val currentTab = remember { mutableStateOf(Tab.None) }
             navController.apply {
-                TabBar(currentTab.value) {
-                    NavHost(this, startDestination = Route.Splash.path) {
-                        Pair(this, currentTab).apply {
-                            route(Route.Splash) { SplashScreen() }
-                            route(Route.Login) { LoginScreen() }
-                            route(Route.Home) { HomeScreen() }
-                            route(Route.Search) { SearchScreen() }
-                            route(Route.Chat) { ChatScreen() }
-                            route(Route.Profile) { ProfileScreen() }
-                            route(Route.DetailProfile) { DetailProfileScreen() }
-                            route(Route.ChangePassword) { ChangePasswordScreen() }
+                TabBar {
+                    NavHost(navController = this, startDestination = Screen.Root.route) {
+                        navigation(
+                            route = Screen.Root.route,
+                            startDestination = Screen.Splash.route
+                        ) {
+                            route(Screen.Splash) { SplashScreen() }
+                            route(Screen.Login) { LoginScreen() }
+                        }
+                        navigation(
+                            route = Screen.HomeRoot.route,
+                            startDestination = Screen.Home.route,
+                        ) {
+                            route(Screen.Home) { HomeScreen() }
+                        }
+                        navigation(
+                            route = Screen.SearchRoot.route,
+                            startDestination = Screen.Search.route
+                        ) {
+                            route(Screen.Search) { SearchScreen() }
+                        }
+                        navigation(
+                            route = Screen.ChatRoot.route,
+                            startDestination = Screen.Chat.route
+                        ) {
+                            route(Screen.Chat) { ChatScreen() }
+                        }
+                        navigation(
+                            route = Screen.ProfileRoot.route,
+                            startDestination = Screen.Profile.route,
+                        ) {
+                            route(Screen.Profile) { ProfileScreen() }
+                            route(Screen.DetailProfile) { DetailProfileScreen() }
+                            route(Screen.ChangePassword) { ChangePasswordScreen() }
                         }
                     }
                 }
@@ -54,15 +72,13 @@ interface Router {
         }
 
         @ExperimentalAnimationApi
-        private fun Pair<NavGraphBuilder, MutableState<Tab>>.route(
-            route: Route,
+        private fun NavGraphBuilder.route(
+            screen: Screen,
             arguments: List<NamedNavArgument> = emptyList(),
             deepLinks: List<NavDeepLink> = emptyList(),
             content: @Composable (NavBackStackEntry) -> Unit,
         ) {
-            val (navGraph, currentTabState) = this
-            navGraph.composable(route.path, arguments, deepLinks) {
-                currentTabState.value = route.tabItem
+            composable(screen.route, arguments, deepLinks) {
                 FadeAnimation {
                     content(it)
                 }
@@ -72,14 +88,27 @@ interface Router {
 }
 
 fun NavController.navigate(
-    route: Route,
-    block: NavOptionsBuilder.() -> Unit = {},
+    screen: Screen,
 ) {
-    navigate(route.path, block)
+    navigate(screen.route)
 }
 
-fun NavController.navigateAndPop(route: Route, popUpUntil: Route) {
-    navigate(route.path) {
-        popUpTo(popUpUntil.path) { inclusive = true }
+fun NavController.navigate(
+    screen: Screen,
+    block: NavOptionsBuilder.() -> Unit,
+) {
+    navigate(screen.route, block)
+}
+
+fun NavController.navigateAndPop(
+    screen: Screen,
+    popUpUntil: Screen,
+    isStartDestination: Boolean = false,
+) {
+    navigate(screen.route) {
+        popUpTo(popUpUntil.route) { inclusive = true }
+        if (isStartDestination) {
+            graph.setStartDestination(screen.route)
+        }
     }
 }

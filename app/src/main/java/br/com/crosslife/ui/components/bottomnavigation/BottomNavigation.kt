@@ -11,13 +11,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.navigation.NavController
+import br.com.crosslife.Screen
 import br.com.crosslife.extensions.capitalize
-import br.com.crosslife.navigate
 import br.com.crosslife.ui.theme.Gray
 
 @Composable
-fun NavController.BottomNavigation(currentTab: Tab) {
+fun BottomNavigation(currentTab: Tab, onTabItemClicked: (Screen) -> Unit) {
     androidx.compose.material.BottomNavigation(
         modifier = Modifier.background(MaterialTheme.colors.surface)
     ) {
@@ -43,20 +42,7 @@ fun NavController.BottomNavigation(currentTab: Tab) {
                     )
                 },
                 selected = isCurrentSelected,
-                onClick = {
-                    /****
-                     * Figure out how to get child routes already instances to show when it is
-                     * not on parent route
-                     * if child route clicks on parent routes, backstack until current.
-                     * */
-                    navigate(tab.route) {
-                        popUpTo(graph.startDestinationId) {
-                            saveState = true
-                        }
-                        launchSingleTop = true
-                        restoreState = true
-                    }
-                },
+                onClick = { onTabItemClicked(tab.screen) },
             )
         }
     }

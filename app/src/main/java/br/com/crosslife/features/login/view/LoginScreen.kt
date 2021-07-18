@@ -13,12 +13,11 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import br.com.crosslife.R
-import br.com.crosslife.Route
+import br.com.crosslife.Screen
 import br.com.crosslife.components.Button
 import br.com.crosslife.components.input.TextField
 import br.com.crosslife.data.Result
 import br.com.crosslife.features.login.viewmodel.LoginViewModel
-import br.com.crosslife.navigate
 import br.com.crosslife.navigateAndPop
 import br.com.crosslife.ui.theme.Space
 
@@ -28,7 +27,7 @@ fun NavController.LoginScreen(viewModel: LoginViewModel = hiltViewModel()) {
     val passwordState = remember { mutableStateOf("") }
     val state by viewModel.login.collectAsState()
     when (state) {
-        is Result.Success -> navigateAndPop(Route.Home, Route.Login)
+        is Result.Success -> navigateAndPop(Screen.HomeRoot, Screen.Login, true)
         else -> {
             Column(
                 modifier = Modifier
