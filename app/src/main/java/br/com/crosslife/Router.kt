@@ -2,6 +2,7 @@ package br.com.crosslife
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.*
 import androidx.navigation.compose.NamedNavArgument
@@ -24,6 +25,7 @@ interface Router {
 
     companion object {
 
+        @ExperimentalMaterialApi
         @ExperimentalAnimationApi
         @ExperimentalFoundationApi
         @ExperimentalPagerApi

@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -31,6 +32,7 @@ import br.com.crosslife.ui.theme.Red
 import br.com.crosslife.ui.theme.Space
 import br.com.crosslife.ui.theme.Yellow
 
+@ExperimentalMaterialApi
 @Composable
 fun NavController.ProfileScreen() {
     ProfileBackground()

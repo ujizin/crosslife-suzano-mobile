@@ -11,6 +11,7 @@ import androidx.compose.runtime.remember
 fun FadeAnimation(
     visible: Boolean = true,
     durationMillis: Int = 500,
+    delay: Boolean = false,
     content: @Composable AnimatedVisibilityScope.() -> Unit,
 ) {
     val visibleState = remember { MutableTransitionState(false) }
@@ -19,10 +20,16 @@ fun FadeAnimation(
         visibleState = visibleState,
         enter = fadeIn(
             initialAlpha = 0.0f,
-            animationSpec = tween(durationMillis = durationMillis)
+            animationSpec = tween(
+                delayMillis = if (delay) durationMillis else 0,
+                durationMillis = durationMillis,
+            )
         ),
         exit = fadeOut(
-            animationSpec = tween(durationMillis = durationMillis)
+            animationSpec = tween(
+                delayMillis = if (delay) durationMillis else 0,
+                durationMillis = durationMillis,
+            )
         ),
         content = content,
     )

@@ -22,4 +22,11 @@
     <string name="advanced_profile">perfil avançado</string>
     <string name="change_password">trocar senha</string>
     <string name="leave_account">sair da conta</string>
+    <string name="old_password">senha antiga</string>
+
+    <!-- Change Password  -->
+    <string name="new_password">nova senha</string>
+    <string name="confirm_new_password">confirme sua nova senha</string>
+    <string name="change">trocar</string>
+
 </resources>

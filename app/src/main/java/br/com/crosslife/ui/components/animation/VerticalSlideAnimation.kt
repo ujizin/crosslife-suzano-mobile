@@ -11,6 +11,7 @@ import androidx.compose.runtime.remember
 fun VerticalSlideAnimation(
     visible: Boolean = true,
     durationMillis: Int = 500,
+    anim: Slide = Slide.DownToUp,
     content: @Composable AnimatedVisibilityScope.() -> Unit,
 ) {
     val visibleState = remember { MutableTransitionState(false) }
@@ -18,7 +19,7 @@ fun VerticalSlideAnimation(
     AnimatedVisibility(
         visibleState = visibleState,
         enter = slideInVertically(
-            initialOffsetY = { it * 2 },
+            initialOffsetY = { anim.getInitialOffSetY(it) },
             animationSpec = tween(durationMillis = durationMillis)
         ),
         exit = slideOutVertically(
@@ -27,4 +28,10 @@ fun VerticalSlideAnimation(
         ),
         content = content,
     )
+}
+
+enum class Slide(private val initial: Int) {
+    UpToDown(-1), DownToUp(2);
+
+    fun getInitialOffSetY(offset: Int): Int = offset * initial
 }
