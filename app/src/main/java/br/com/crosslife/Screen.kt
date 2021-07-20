@@ -17,11 +17,14 @@ enum class Screen(val route: String, val tabItem: Tab = Tab.Home) {
     HomeRoot(Screen.HOME_ROOT_PATH),
     SearchRoot(Screen.SEARCH_ROOT_PATH),
     ProfileRoot(Screen.PROFILE_ROOT_PATH),
-    ChatRoot(Screen.CHAT_ROOT_PATH);
+    ChatRoot(Screen.CHAT_ROOT_PATH),
+
+    Logout(Screen.LOGOUT_PATH, Tab.Profile);
 
     companion object {
         private const val SPLASH_PATH = "splash"
         private const val LOGIN_PATH = "login"
+        private const val LOGOUT_PATH = "logout"
 
         // Tabs
         private const val ROOT_PATH = "root"

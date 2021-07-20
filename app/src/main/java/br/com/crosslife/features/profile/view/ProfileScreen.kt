@@ -79,7 +79,9 @@ fun NavController.ProfileScreen() {
                         Red,
                         painterResource(id = R.drawable.ic_exit),
                         stringResource(id = R.string.leave_account),
-                    )
+                    ) {
+                        navigate(Screen.Logout)
+                    }
                 }
             }
         }

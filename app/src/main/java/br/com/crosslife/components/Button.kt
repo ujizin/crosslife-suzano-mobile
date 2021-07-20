@@ -27,7 +27,7 @@ fun Button(
             disabledBackgroundColor = MaterialTheme.colors.primary,
         ),
         modifier = Modifier
-            .defaultMinSize(minHeight = 48.dp)
+            .defaultMinSize(minHeight = 40.dp)
             .then(modifier),
         onClick = onClick,
         enabled = isLoading.not(),

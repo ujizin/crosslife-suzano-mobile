@@ -5,14 +5,12 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.*
-import androidx.navigation.compose.NamedNavArgument
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation.compose.*
 import br.com.crosslife.features.changepassword.view.ChangePasswordScreen
 import br.com.crosslife.features.chat.view.ChatScreen
 import br.com.crosslife.features.home.view.HomeScreen
 import br.com.crosslife.features.login.view.LoginScreen
+import br.com.crosslife.features.logout.LogoutDialog
 import br.com.crosslife.features.profile.view.DetailProfileScreen
 import br.com.crosslife.features.profile.view.ProfileScreen
 import br.com.crosslife.features.search.view.SearchScreen
@@ -68,6 +66,7 @@ interface Router {
                             route(Screen.DetailProfile) { DetailProfileScreen() }
                             route(Screen.ChangePassword) { ChangePasswordScreen() }
                         }
+                        dialog(Screen.Logout.route) { LogoutDialog() }
                     }
                 }
             }
