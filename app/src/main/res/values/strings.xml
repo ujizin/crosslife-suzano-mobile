@@ -3,7 +3,7 @@
     <string name="label_email">email</string>
     <string name="label_password">senha</string>
     <string name="enter">entrar</string>
-
+    <string name="send">enviar</string>
     <!--  Menu  -->
     <string name="menu_item_home">home</string>
     <string name="menu_item_search">buscar</string>
@@ -33,5 +33,7 @@
     <string name="logout_title">você tem certeza?</string>
     <string name="logout_description">ao sair da sua conta, você ter que se conectar novamente.</string>
     <string name="logout">sair</string>
+    <string name="forgot_password">esqueci a senha</string>
+    <string name="type_your_mail">digite seu e-mail</string>
 
 </resources>

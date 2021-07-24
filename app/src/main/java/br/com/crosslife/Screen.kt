@@ -6,6 +6,8 @@ import br.com.crosslife.ui.components.bottomnavigation.Tab
 enum class Screen(val route: String, val tabItem: Tab = Tab.Home) {
     Splash(Screen.SPLASH_PATH, Tab.None),
     Login(Screen.LOGIN_PATH, Tab.None),
+    ForgotPassword(Screen.FORGOT_PASSWORD_PATH, Tab.None),
+
     Home(Screen.HOME_PATH, Tab.Home),
     Search(Screen.SEARCH_PATH, Tab.Search),
     Chat(Screen.CHAT_PATH, Tab.Chat),
@@ -24,6 +26,7 @@ enum class Screen(val route: String, val tabItem: Tab = Tab.Home) {
     companion object {
         private const val SPLASH_PATH = "splash"
         private const val LOGIN_PATH = "login"
+        private const val FORGOT_PASSWORD_PATH = "forgot_password"
         private const val LOGOUT_PATH = "logout"
 
         // Tabs

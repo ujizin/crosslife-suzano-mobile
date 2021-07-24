@@ -8,6 +8,7 @@ import androidx.navigation.*
 import androidx.navigation.compose.*
 import br.com.crosslife.features.changepassword.view.ChangePasswordScreen
 import br.com.crosslife.features.chat.view.ChatScreen
+import br.com.crosslife.features.forgotpassword.ForgotPasswordScreen
 import br.com.crosslife.features.home.view.HomeScreen
 import br.com.crosslife.features.login.view.LoginScreen
 import br.com.crosslife.features.logout.LogoutDialog
@@ -39,6 +40,7 @@ interface Router {
                         ) {
                             route(Screen.Splash) { SplashScreen() }
                             route(Screen.Login) { LoginScreen() }
+                            route(Screen.ForgotPassword) { ForgotPasswordScreen() }
                         }
                         navigation(
                             route = Screen.HomeRoot.route,

@@ -1,13 +1,19 @@
 package br.com.crosslife.features.login.view
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.ButtonDefaults.outlinedButtonColors
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.OutlinedButton
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -19,6 +25,7 @@ import br.com.crosslife.components.Button
 import br.com.crosslife.components.input.TextField
 import br.com.crosslife.data.Result
 import br.com.crosslife.features.login.viewmodel.LoginViewModel
+import br.com.crosslife.navigate
 import br.com.crosslife.navigateAndPop
 import br.com.crosslife.ui.theme.Space
 
@@ -63,7 +70,6 @@ fun NavController.LoginScreen(viewModel: LoginViewModel = hiltViewModel()) {
                 Button(
                     modifier = Modifier
                         .padding(top = Space.XXS)
-                        .padding(bottom = Space.XXXS)
                         .fillMaxWidth(),
                     isLoading = state is Result.Loading,
                     onClick = {
@@ -71,6 +77,26 @@ fun NavController.LoginScreen(viewModel: LoginViewModel = hiltViewModel()) {
                     },
                     textButton = stringResource(id = R.string.enter),
                 )
+                OutlinedButton(
+                    modifier = Modifier
+                        .defaultMinSize(minHeight = 40.dp)
+                        .padding(top = Space.XS)
+                        .padding(bottom = Space.XXXS)
+                        .fillMaxWidth(),
+                    colors = outlinedButtonColors(
+                        backgroundColor = Color.Transparent,
+                    ),
+                    border = BorderStroke(0.dp, Color.Transparent),
+                    onClick = {
+                        navigate(Screen.ForgotPassword)
+                    }) {
+                    Text(
+                        stringResource(id = R.string.forgot_password),
+                        color = MaterialTheme.colors.primary,
+                        style = MaterialTheme.typography.body1,
+                        modifier = Modifier.padding(top = 4.dp, bottom = 4.dp),
+                    )
+                }
             }
         }
     }
