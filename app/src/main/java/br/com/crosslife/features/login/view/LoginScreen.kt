@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -23,8 +24,8 @@ import br.com.crosslife.ui.theme.Space
 
 @Composable
 fun NavController.LoginScreen(viewModel: LoginViewModel = hiltViewModel()) {
-    val usernameState = remember { mutableStateOf("") }
-    val passwordState = remember { mutableStateOf("") }
+    val usernameState = rememberSaveable { mutableStateOf("") }
+    val passwordState = rememberSaveable { mutableStateOf("") }
     val state by viewModel.login.collectAsState()
     when (state) {
         is Result.Success -> navigateAndPop(Screen.HomeRoot, Screen.Login, true)

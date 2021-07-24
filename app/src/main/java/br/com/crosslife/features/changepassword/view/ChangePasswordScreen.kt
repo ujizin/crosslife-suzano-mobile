@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
@@ -19,9 +19,9 @@ import br.com.crosslife.ui.theme.Space
 @ExperimentalAnimationApi
 @Composable
 fun NavController.ChangePasswordScreen() {
-    val oldPasswordState = remember { mutableStateOf("") }
-    val newPasswordState = remember { mutableStateOf("") }
-    val confirmNewPasswordState = remember { mutableStateOf("") }
+    val oldPasswordState = rememberSaveable { mutableStateOf("") }
+    val newPasswordState = rememberSaveable { mutableStateOf("") }
+    val confirmNewPasswordState = rememberSaveable { mutableStateOf("") }
 
     ScaffoldTopbar(titleRes = R.string.change_password) {
         val modifier = Modifier.padding(top = Space.XXS)
