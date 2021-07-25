@@ -4,74 +4,49 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
-import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import br.com.crosslife.R
+import br.com.crosslife.data.Result
+import br.com.crosslife.domain.models.WeeklyTrain
 import br.com.crosslife.extensions.capitalize
+import br.com.crosslife.features.home.viewmodel.HomeViewModel
 import br.com.crosslife.ui.theme.DarkGray
 import br.com.crosslife.ui.theme.Gray
 import br.com.crosslife.ui.theme.Space
+import br.com.crosslife.utils.DayOfWeek
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.PagerState
+import com.google.accompanist.pager.PagerScope
 import com.google.accompanist.pager.rememberPagerState
 
 @ExperimentalPagerApi
 @Composable
-fun NavController.HomeScreen() {
-    val searchState = remember { mutableStateOf("") }
-    val pagerState = rememberPagerState(
-        pageCount = 7,
-        infiniteLoop = true,
-        initialOffscreenLimit = 2,
-    )
-    LazyColumn(
-        Modifier.fillMaxSize(),
-    ) {
+fun NavController.HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
+    LazyColumn(Modifier.fillMaxSize()) {
         item { Logo() }
-        item { TextFieldSearch(searchState) }
-        item { WeeklyTrain(pagerState) }
+        item { TextFieldSearch(viewModel) }
+        item { WeeklyTrain(viewModel.weeklyTrains.collectAsState().value) }
         Notices()
         item { Spacer(Modifier.height(Space.BOTTOM_NAVIGATION_MARGIN)) }
     }
 }
 
 @Composable
-fun Logo() {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = Space.BORDER),
-        contentAlignment = Alignment.Center,
-    ) {
-        Image(
-            modifier = Modifier
-                .padding(top = Space.XXS)
-                .size(56.dp, 52.dp),
-            painter = painterResource(
-                id = R.drawable.crosslife_logo),
-            contentDescription = stringResource(id = R.string.app_logo),
-        )
-    }
-}
-
-@Composable // TODO Change type from TextField
-fun TextFieldSearch(searchState: MutableState<String>) {
+fun TextFieldSearch(viewModel: HomeViewModel) {
+    val searchState = remember { mutableStateOf("") }
     TextField(
         value = searchState.value,
         onValueChange = {
@@ -107,7 +82,7 @@ fun TextFieldSearch(searchState: MutableState<String>) {
 
 @Composable
 @ExperimentalPagerApi
-fun WeeklyTrain(pagerState: PagerState) {
+private fun NavController.WeeklyTrain(weeklyTrains: Result<List<WeeklyTrain>>) {
     Text(
         modifier = Modifier
             .padding(top = Space.XS)
@@ -115,33 +90,62 @@ fun WeeklyTrain(pagerState: PagerState) {
         text = stringResource(id = R.string.weekly_train).capitalize(),
         style = MaterialTheme.typography.h3,
     )
+    when (weeklyTrains) {
+        Result.Initial, Result.Loading -> Loading()
+        is Result.Error -> Loading()
+        is Result.Success -> WeeklyTrainComponent(weeklyTrains.data) { id ->
+
+        }
+    }
+}
+
+@ExperimentalPagerApi
+@Composable
+fun WeeklyTrainComponent(weeklyTrains: List<WeeklyTrain>, onWeeklyTrainClick: (Int) -> Unit) {
+    val pagerState = rememberPagerState(
+        pageCount = weeklyTrains.size,
+        infiniteLoop = true,
+        initialPage = DayOfWeek.getCurrentDay(),
+        initialOffscreenLimit = 7,
+    )
     HorizontalPager(
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = Space.XXS),
         horizontalAlignment = Alignment.Start,
         state = pagerState,
+    ) { page ->
+        val weeklyTrain = weeklyTrains[page]
+        WeeklyTrainItem(weeklyTrain, onWeeklyTrainClick)
+    }
+}
+
+@ExperimentalPagerApi
+@Composable
+fun PagerScope.WeeklyTrainItem(weeklyTrain: WeeklyTrain, onWeeklyTrainClick: (Int) -> Unit) {
+    Card(
+        Modifier
+            .align(Alignment.CenterStart)
+            .padding(start = Space.BORDER)
+            .fillMaxWidth(0.8F)
+            .defaultMinSize(minHeight = 200.dp)
+            .aspectRatio(1.5F)
+            .clip(MaterialTheme.shapes.large)
+            .clickable(onClick = { onWeeklyTrainClick(weeklyTrain.id) }),
+        backgroundColor = MaterialTheme.colors.surface,
+        shape = MaterialTheme.shapes.large,
     ) {
-        Card(
-            Modifier
-                .align(Alignment.CenterStart)
-                .padding(start = Space.BORDER)
-                .fillMaxWidth(0.8F)
-                .height(200.dp),
-            backgroundColor = MaterialTheme.colors.surface,
-            shape = MaterialTheme.shapes.large,
+        Column(
+            verticalArrangement = Arrangement.Bottom,
+            modifier = Modifier.padding(start = Space.XXS, bottom = Space.XXS)
         ) {
-            Column(
-                verticalArrangement = Arrangement.Bottom,
-                modifier = Modifier.padding(start = Space.XXS, bottom = Space.XXS)
-            ) {
-                Text("Segunda-Feira", style = MaterialTheme.typography.h3)
-                Text(
-                    "Flexão de braço",
-                    fontWeight = FontWeight.Bold,
-                    style = MaterialTheme.typography.body1,
-                )
-            }
+            val dayOfWeekRes = DayOfWeek.getDay(weeklyTrain.dayWeek).stringRes
+            Text(stringResource(dayOfWeekRes).capitalize(), style = MaterialTheme.typography.h3)
+            Text(
+                weeklyTrain.title,
+                fontWeight = FontWeight.Bold,
+                style = MaterialTheme.typography.body1,
+            )
         }
     }
 }
@@ -157,18 +161,23 @@ fun LazyListScope.Notices() {
         )
     }
     items(10) {
-        Notice()
+        NoticeItem()
     }
 }
 
 @Composable
-fun Notice() {
+fun NoticeItem() {
     Row(
         Modifier
             .fillMaxWidth()
             .padding(horizontal = Space.BORDER)
-            .padding(top = Space.XXS)
-            .wrapContentHeight(),
+            .padding(top = Space.XS)
+            .wrapContentHeight()
+            .clip(MaterialTheme.shapes.small)
+            .clickable {
+
+            }
+            .padding(Space.S),
     ) {
         Box(
             Modifier
@@ -197,5 +206,37 @@ fun Notice() {
                 color = DarkGray,
             )
         }
+    }
+}
+
+@Composable
+private fun Logo() {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = Space.BORDER),
+        contentAlignment = Alignment.Center,
+    ) {
+        Image(
+            modifier = Modifier
+                .padding(top = Space.XXS)
+                .size(56.dp, 52.dp),
+            painter = painterResource(
+                id = R.drawable.crosslife_logo),
+            contentDescription = stringResource(id = R.string.app_logo),
+        )
+    }
+}
+
+@Composable
+private fun Loading() {
+    Box(
+        Modifier
+            .fillMaxWidth()
+            .defaultMinSize(minHeight = 200.dp)
+            .aspectRatio(1.75F),
+        contentAlignment = Alignment.Center,
+    ) {
+        CircularProgressIndicator()
     }
 }
