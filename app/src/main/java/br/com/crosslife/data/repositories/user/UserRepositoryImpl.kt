@@ -18,6 +18,6 @@ class UserRepositoryImpl(
         val userDto = userService.fetchLogin(userPayload)
 
         userStore.setToken(userDto.token)
-        emit(userDto.toUser())
+        emit(userDto.toDomain())
     }
 }

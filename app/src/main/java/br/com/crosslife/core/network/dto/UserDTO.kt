@@ -1,7 +1,5 @@
 package br.com.crosslife.core.network.dto
 
-import br.com.crosslife.domain.models.User
-import br.com.crosslife.extensions.orEmpty
 import com.squareup.moshi.Json
 
 data class UserDTO(
@@ -11,7 +9,4 @@ data class UserDTO(
     val user: String?,
     @field:Json(name = "Token")
     val token: String,
-) {
-
-    fun toUser(): User = User(id.orEmpty(), user.orEmpty())
-}
+)
