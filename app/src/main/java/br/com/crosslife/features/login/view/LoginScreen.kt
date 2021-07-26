@@ -1,5 +1,6 @@
 package br.com.crosslife.features.login.view
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -9,11 +10,15 @@ import androidx.compose.material.ButtonDefaults.outlinedButtonColors
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -23,12 +28,15 @@ import br.com.crosslife.R
 import br.com.crosslife.Screen
 import br.com.crosslife.components.Button
 import br.com.crosslife.components.input.TextField
+import br.com.crosslife.components.snackbar.SnackBar
 import br.com.crosslife.data.Result
 import br.com.crosslife.features.login.viewmodel.LoginViewModel
 import br.com.crosslife.navigate
 import br.com.crosslife.navigateAndPop
 import br.com.crosslife.ui.theme.Space
+import br.com.crosslife.utils.ErrorHelper
 
+@ExperimentalAnimationApi
 @Composable
 fun NavController.LoginScreen(viewModel: LoginViewModel = hiltViewModel()) {
     val usernameState = rememberSaveable { mutableStateOf("") }
@@ -98,6 +106,13 @@ fun NavController.LoginScreen(viewModel: LoginViewModel = hiltViewModel()) {
                     )
                 }
             }
+            if (state is Result.Error) SnackBarError(state as Result.Error)
         }
     }
+}
+
+@ExperimentalAnimationApi
+@Composable
+fun SnackBarError(state: Result.Error) { val message = ErrorHelper.getMessageFromState(LocalContext.current, state.error)
+    SnackBar(message, SnackBar.TIME_LONG, SnackBar.Error)
 }
