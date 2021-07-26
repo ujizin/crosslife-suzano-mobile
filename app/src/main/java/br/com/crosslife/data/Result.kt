@@ -4,9 +4,9 @@ import android.util.Log
 
 sealed class Result<out R> {
     data class Success<T>(val data: T) : Result<T>()
-    data class Error(val e: br.com.crosslife.core.network.Error) : Result<Nothing>() {
+    data class Error(val error: br.com.crosslife.core.network.Error) : Result<Nothing>() {
         init {
-            Log.e(ERROR_NETWORK_LOG, e.error.message.orEmpty())
+            Log.e(ERROR_NETWORK_LOG, error.error.message.orEmpty())
         }
     }
 
