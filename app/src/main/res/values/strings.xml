@@ -44,4 +44,6 @@
     <string name="friday">sexta-feira</string>
     <string name="saturday">sábado</string>
 
+    <string name="empty_error_message">preencha todos os campos corretamente</string>
+    <string name="default_error_message">ops, parece que houve um erro, tente novamente</string>
 </resources>
