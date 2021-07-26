@@ -23,15 +23,16 @@ fun VerticalSlideAnimation(
             animationSpec = tween(durationMillis = durationMillis)
         ),
         exit = slideOutVertically(
-            targetOffsetY = { it },
+            targetOffsetY = { anim.getTargetOffSetY(it) },
             animationSpec = tween(durationMillis = durationMillis)
         ),
         content = content,
     )
 }
 
-enum class Slide(private val initial: Int) {
-    UpToDown(-1), DownToUp(2);
+enum class Slide(private val initial: Int, private val target: Int,) {
+    UpToDown(-1, -1), DownToUp(2, 2);
 
     fun getInitialOffSetY(offset: Int): Int = offset * initial
+    fun getTargetOffSetY(offset: Int): Int = offset * target
 }
