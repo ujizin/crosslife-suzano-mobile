@@ -105,5 +105,6 @@ object Deps {
         implementation("com.google.accompanist:accompanist-pager:0.13.0")
         implementation("com.squareup.retrofit2:retrofit:${Version.RETROFIT}")
         implementation("com.squareup.retrofit2:converter-moshi:${Version.RETROFIT}")
+        implementation("org.jetbrains.kotlin:kotlin-reflect:1.5.10")
     }
 }
