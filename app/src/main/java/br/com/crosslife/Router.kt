@@ -16,6 +16,7 @@ import br.com.crosslife.features.profile.view.DetailProfileScreen
 import br.com.crosslife.features.profile.view.ProfileScreen
 import br.com.crosslife.features.search.view.SearchScreen
 import br.com.crosslife.features.splash.view.SplashScreen
+import br.com.crosslife.features.weeklytrain.WeeklyTrainScreen
 import br.com.crosslife.ui.components.animation.FadeAnimation
 import br.com.crosslife.ui.components.tabbar.TabBar
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -47,6 +48,14 @@ interface Router {
                             startDestination = Screen.Home.route,
                         ) {
                             route(Screen.Home) { HomeScreen() }
+                            route(
+                                screen = Screen.WeeklyTrain,
+                                arguments = listOf(
+                                    navArgument("id") { type = NavType.LongType }
+                                )
+                            ) {
+                                WeeklyTrainScreen()
+                            }
                         }
                         navigation(
                             route = Screen.SearchRoot.route,

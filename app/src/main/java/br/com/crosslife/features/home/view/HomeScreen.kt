@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import br.com.crosslife.R
+import br.com.crosslife.Screen
 import br.com.crosslife.data.Result
 import br.com.crosslife.domain.models.WeeklyTrain
 import br.com.crosslife.extensions.capitalize
@@ -38,7 +39,7 @@ fun NavController.HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
     LazyColumn(Modifier.fillMaxSize()) {
         item { Logo() }
         item { TextFieldSearch(viewModel) }
-        item { WeeklyTrain(viewModel.weeklyTrains.collectAsState().value) }
+        item { WeeklyTrain(viewModel) }
         Notices()
         item { Spacer(Modifier.height(Space.BOTTOM_NAVIGATION_MARGIN)) }
     }
@@ -82,7 +83,8 @@ fun TextFieldSearch(viewModel: HomeViewModel) {
 
 @Composable
 @ExperimentalPagerApi
-private fun NavController.WeeklyTrain(weeklyTrains: Result<List<WeeklyTrain>>) {
+private fun NavController.WeeklyTrain(viewModel: HomeViewModel) {
+    val weeklyTrains by viewModel.weeklyTrains.collectAsState()
     Text(
         modifier = Modifier
             .padding(top = Space.XS)
@@ -90,11 +92,11 @@ private fun NavController.WeeklyTrain(weeklyTrains: Result<List<WeeklyTrain>>) {
         text = stringResource(id = R.string.weekly_train).capitalize(),
         style = MaterialTheme.typography.h3,
     )
-    when (weeklyTrains) {
+    when (val state = weeklyTrains) {
         Result.Initial, Result.Loading -> Loading()
         is Result.Error -> Loading()
-        is Result.Success -> WeeklyTrainComponent(weeklyTrains.data) { id ->
-
+        is Result.Success -> WeeklyTrainComponent(state.data) { id ->
+            navigate(Screen.WeeklyTrain.createRoute(id))
         }
     }
 }
