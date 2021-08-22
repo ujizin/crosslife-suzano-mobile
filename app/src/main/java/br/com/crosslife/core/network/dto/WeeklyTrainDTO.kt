@@ -9,4 +9,6 @@ data class WeeklyTrainDTO(
     val title: String,
     @field:Json(name = "dia_da_semana")
     val dayOfWeek: Int,
+//    @field:Json(name = "")
+//    val description: String,
 )

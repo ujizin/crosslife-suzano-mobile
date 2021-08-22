@@ -19,7 +19,7 @@ fun NavController.LogoutDialog() {
     Column(
         Modifier
             .padding(Space.XXS)
-            .fillMaxWidth(0.8F),
+            .fillMaxWidth(),
     ) {
         Text(
             stringResource(id = R.string.logout_title).capitalize(),

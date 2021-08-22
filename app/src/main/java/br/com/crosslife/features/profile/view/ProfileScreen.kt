@@ -27,6 +27,7 @@ import br.com.crosslife.R
 import br.com.crosslife.Screen
 import br.com.crosslife.extensions.capitalize
 import br.com.crosslife.navigate
+import br.com.crosslife.ui.components.bottombox.BottomBox
 import br.com.crosslife.ui.theme.Purple
 import br.com.crosslife.ui.theme.Red
 import br.com.crosslife.ui.theme.Space
@@ -36,54 +37,27 @@ import br.com.crosslife.ui.theme.Yellow
 @Composable
 fun NavController.ProfileScreen() {
     ProfileBackground()
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(bottom = Space.BOTTOM_NAVIGATION),
-        contentAlignment = Alignment.BottomCenter,
-    ) {
-        Column(Modifier.fillMaxWidth()) {
-            Text(
-                text = "Lucas Yuji",
-                style = MaterialTheme.typography.h2,
-                modifier = Modifier.padding(horizontal = Space.BORDER),
-            )
-            Card(
-                Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-                    .padding(top = Space.XXS),
-                shape = RoundedCornerShape(topStart = Space.XXXS, topEnd = Space.XXXS),
-                backgroundColor = MaterialTheme.colors.background,
-            ) {
-                Column(
-                    Modifier
-                        .padding(Space.BORDER)
-                        .wrapContentHeight(),
-                ) {
-                    ProfileItem(
-                        Purple,
-                        painterResource(id = R.drawable.ic_strength),
-                        stringResource(id = R.string.advanced_profile),
-                    ) {
-                        navigate(Screen.DetailProfile)
-                    }
-                    ProfileItem(
-                        Yellow,
-                        painterResource(id = R.drawable.ic_lock),
-                        stringResource(id = R.string.change_password),
-                    ) {
-                        navigate(Screen.ChangePassword)
-                    }
-                    ProfileItem(
-                        Red,
-                        painterResource(id = R.drawable.ic_exit),
-                        stringResource(id = R.string.leave_account),
-                    ) {
-                        navigate(Screen.Logout)
-                    }
-                }
-            }
+    BottomBox("Lucas Yuji") {
+        ProfileItem(
+            Purple,
+            painterResource(id = R.drawable.ic_strength),
+            stringResource(id = R.string.advanced_profile),
+        ) {
+            navigate(Screen.DetailProfile)
+        }
+        ProfileItem(
+            Yellow,
+            painterResource(id = R.drawable.ic_lock),
+            stringResource(id = R.string.change_password),
+        ) {
+            navigate(Screen.ChangePassword)
+        }
+        ProfileItem(
+            Red,
+            painterResource(id = R.drawable.ic_exit),
+            stringResource(id = R.string.leave_account),
+        ) {
+            navigate(Screen.Logout)
         }
     }
 }

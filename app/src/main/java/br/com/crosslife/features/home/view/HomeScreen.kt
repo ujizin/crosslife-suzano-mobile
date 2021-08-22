@@ -8,6 +8,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -24,14 +25,13 @@ import br.com.crosslife.data.Result
 import br.com.crosslife.domain.models.WeeklyTrain
 import br.com.crosslife.extensions.capitalize
 import br.com.crosslife.features.home.viewmodel.HomeViewModel
+import br.com.crosslife.navigate
 import br.com.crosslife.ui.theme.DarkGray
 import br.com.crosslife.ui.theme.Gray
 import br.com.crosslife.ui.theme.Space
 import br.com.crosslife.utils.DayOfWeek
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.PagerScope
-import com.google.accompanist.pager.rememberPagerState
+import br.com.crosslife.utils.Saver
+import com.google.accompanist.pager.*
 
 @ExperimentalPagerApi
 @Composable
@@ -47,7 +47,7 @@ fun NavController.HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
 
 @Composable
 fun TextFieldSearch(viewModel: HomeViewModel) {
-    val searchState = remember { mutableStateOf("") }
+    val searchState = rememberSaveable { mutableStateOf("") }
     TextField(
         value = searchState.value,
         onValueChange = {
@@ -95,21 +95,30 @@ private fun NavController.WeeklyTrain(viewModel: HomeViewModel) {
     when (val state = weeklyTrains) {
         Result.Initial, Result.Loading -> Loading()
         is Result.Error -> Loading()
-        is Result.Success -> WeeklyTrainComponent(state.data) { id ->
-            navigate(Screen.WeeklyTrain.createRoute(id))
+        is Result.Success -> WeeklyTrainComponent(state.data) { weeklyTrain ->
+            currentBackStackEntry?.arguments?.putParcelable(
+                "detail_item",
+                weeklyTrain.toDetailItem(context)
+            )
+            navigate(Screen.WeeklyTrain)
         }
     }
 }
 
 @ExperimentalPagerApi
 @Composable
-fun WeeklyTrainComponent(weeklyTrains: List<WeeklyTrain>, onWeeklyTrainClick: (Int) -> Unit) {
-    val pagerState = rememberPagerState(
-        pageCount = weeklyTrains.size,
-        infiniteLoop = true,
-        initialPage = DayOfWeek.getCurrentDay(),
-        initialOffscreenLimit = 7,
-    )
+fun WeeklyTrainComponent(
+    weeklyTrains: List<WeeklyTrain>,
+    onWeeklyTrainClick: (WeeklyTrain) -> Unit,
+) {
+    val pagerState = rememberSaveable(saver = Saver.getPagerState(7, true)) {
+        PagerState(
+            pageCount = weeklyTrains.size,
+            infiniteLoop = true,
+            currentPage = DayOfWeek.getCurrentDay(),
+            offscreenLimit = 7,
+        )
+    }
     HorizontalPager(
         modifier = Modifier
             .fillMaxWidth()
@@ -124,7 +133,10 @@ fun WeeklyTrainComponent(weeklyTrains: List<WeeklyTrain>, onWeeklyTrainClick: (I
 
 @ExperimentalPagerApi
 @Composable
-fun PagerScope.WeeklyTrainItem(weeklyTrain: WeeklyTrain, onWeeklyTrainClick: (Int) -> Unit) {
+fun PagerScope.WeeklyTrainItem(
+    weeklyTrain: WeeklyTrain,
+    onWeeklyTrainClick: (WeeklyTrain) -> Unit,
+) {
     Card(
         Modifier
             .align(Alignment.CenterStart)
@@ -133,7 +145,7 @@ fun PagerScope.WeeklyTrainItem(weeklyTrain: WeeklyTrain, onWeeklyTrainClick: (In
             .defaultMinSize(minHeight = 200.dp)
             .aspectRatio(1.5F)
             .clip(MaterialTheme.shapes.large)
-            .clickable(onClick = { onWeeklyTrainClick(weeklyTrain.id) }),
+            .clickable(onClick = { onWeeklyTrainClick(weeklyTrain) }),
         backgroundColor = MaterialTheme.colors.surface,
         shape = MaterialTheme.shapes.large,
     ) {

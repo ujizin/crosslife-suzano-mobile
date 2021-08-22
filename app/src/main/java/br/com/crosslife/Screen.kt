@@ -21,9 +21,7 @@ sealed class Screen(val route: String, val tabItem: Tab = Tab.Home) {
     object ProfileRoot : Screen(PROFILE_ROOT_PATH)
     object ChatRoot : Screen(CHAT_ROOT_PATH)
 
-    object WeeklyTrain : Screen("$WEEKLY_TRAIN_PATH/{id}") {
-        fun createRoute(id: Int) = "$WEEKLY_TRAIN_PATH/$id"
-    }
+    object WeeklyTrain : Screen("$WEEKLY_TRAIN_PATH/detail", Tab.None)
 
     object Logout : Screen(LOGOUT_PATH, Tab.Profile)
 

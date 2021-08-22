@@ -21,7 +21,7 @@ import br.com.crosslife.ui.components.animation.VerticalSlideAnimation
 @ExperimentalAnimationApi
 @Composable
 fun NavController.ScaffoldTopbar(
-    @StringRes titleRes: Int,
+    @StringRes titleRes: Int? = null,
     content: @Composable (PaddingValues) -> Unit,
 ) {
     Scaffold(
@@ -31,8 +31,9 @@ fun NavController.ScaffoldTopbar(
             ) {
                 TopAppBar(
                     title = {
+                        val title = titleRes ?: return@TopAppBar
                         Text(
-                            stringResource(id = titleRes).capitalize(),
+                            stringResource(id = title).capitalize(),
                             style = MaterialTheme.typography.body1,
                             fontWeight = FontWeight.Bold,
                         )

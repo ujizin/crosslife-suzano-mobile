@@ -5,7 +5,7 @@ object Deps {
 
     object Version {
         // Compose
-        const val COMPOSE = "1.0.0-rc01"
+        const val COMPOSE = "1.0.0"
         const val ACTIVITY_COMPOSE = "1.3.0-alpha07"
         const val NAVIGATION_COMPOSE = "2.4.0-alpha04"
 
