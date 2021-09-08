@@ -28,6 +28,7 @@
     <string name="new_password">nova senha</string>
     <string name="confirm_new_password">confirme sua nova senha</string>
     <string name="change">trocar</string>
+    <string name="changed_password">senha alterada!</string>
 
     <!-- Logout Dialog -->
     <string name="logout_title">você tem certeza?</string>
