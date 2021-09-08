@@ -7,4 +7,6 @@ data class UserPayload(
     val username: String,
     @field:Json(name = "senha")
     val password: String,
+    @field:Json(name = "novaSenha")
+    val newPassword: String? = null,
 )
