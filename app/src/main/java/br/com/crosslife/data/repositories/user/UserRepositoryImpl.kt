@@ -19,7 +19,26 @@ class UserRepositoryImpl(
         val userPayload = UserPayload(username, password)
         val userDto = userService.fetchLogin(userPayload)
 
-        userStore.setToken(userDto.token)
+        userStore.apply {
+            setUsername(username)
+            setToken(userDto.token)
+        }
         emit(userDto.toDomain())
+    }
+
+    override fun changePassword(
+        username: String,
+        password: String,
+        newPassword: String,
+    ): Flow<User> = flow {
+        check(username.isNotEmpty() && password.isNotEmpty() && newPassword.isNotEmpty()) { throw EmptyError() }
+        val userPayload = UserPayload(username, password, newPassword)
+        val userDto = userService.changePassword(userPayload)
+        emit(userDto.toDomain())
+    }
+
+    override fun fetchLogout() = flow {
+        userService.logout()
+        emit(Unit)
     }
 }
