@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.*
 fun <T> Flow<T>.catchNetwork(block: (Error) -> Unit) = catch { block(it.toApiError()) }
 
 fun <T> Flow<T>.notify(
-    scope: CoroutineScope,
+    scope: CoroutineScope? = null,
     stateFlow: MutableStateFlow<Result<T>>,
     finallyBlock: () -> Unit = {},
 ) =
@@ -21,4 +21,7 @@ fun <T> Flow<T>.notify(
     }.onEach {
         stateFlow.value = Result.Success(it)
         finallyBlock()
-    }.launchIn(scope)
+    }.apply {
+        val coroutineScope = scope ?: return@apply
+        launchIn(coroutineScope)
+    }
