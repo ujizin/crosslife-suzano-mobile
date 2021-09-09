@@ -2,9 +2,7 @@ package br.com.crosslife.core.network.services
 
 import br.com.crosslife.core.network.dto.UserDTO
 import br.com.crosslife.core.network.payload.UserPayload
-import retrofit2.http.Body
-import retrofit2.http.POST
-import retrofit2.http.PUT
+import retrofit2.http.*
 
 interface UserService {
 
@@ -16,4 +14,7 @@ interface UserService {
 
     @POST("/logout")
     suspend fun logout()
+
+    @POST("/recuperar-senha")
+    suspend fun forgotPassword(@Body userPayload: UserPayload)
 }

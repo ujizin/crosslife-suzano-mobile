@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Cross Life</string>
-    <string name="label_email">email</string>
+    <string name="label_email">usuário</string>
     <string name="label_password">senha</string>
     <string name="enter">entrar</string>
     <string name="send">enviar</string>
@@ -24,6 +24,7 @@
     <string name="leave_account">sair da conta</string>
     <string name="old_password">senha antiga</string>
     <string name="password_not_equals">ops! sua confirmação não está correta</string>
+
     <!-- Change Password  -->
     <string name="new_password">nova senha</string>
     <string name="confirm_new_password">confirme sua nova senha</string>
@@ -34,8 +35,12 @@
     <string name="logout_title">você tem certeza?</string>
     <string name="logout_description">ao sair da sua conta, você ter que se conectar novamente.</string>
     <string name="logout">sair</string>
+    <string name="type_your_username">digite seu usuário</string>
+
+    <!--  Forgot password  -->
     <string name="forgot_password">esqueci a senha</string>
-    <string name="type_your_mail">digite seu e-mail</string>
+    <string name="forgot_password_sent">enviado um email com sucesso!</string>
+
 
     <string name="sunday">domingo</string>
     <string name="monday">segunda-feira</string>

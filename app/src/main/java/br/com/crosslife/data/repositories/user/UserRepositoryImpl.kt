@@ -38,7 +38,17 @@ class UserRepositoryImpl(
     }
 
     override fun fetchLogout() = flow {
+        userStore.apply {
+            setUsername("")
+            setToken("")
+        }
         userService.logout()
+        emit(Unit)
+    }
+
+    override fun fetchPassword(username: String): Flow<Unit> = flow {
+        val userPayload = UserPayload(username)
+        userService.forgotPassword(userPayload)
         emit(Unit)
     }
 }
