@@ -25,7 +25,7 @@ object NetworkModule {
                 runBlocking {
                     val token = userStore.getToken().first()
                     val request = it.request().newBuilder()
-                        .addHeader("Authorization", token)
+                        .addHeader("Authorization", "Bearer $token")
                         .build()
                     it.proceed(request)
                 }

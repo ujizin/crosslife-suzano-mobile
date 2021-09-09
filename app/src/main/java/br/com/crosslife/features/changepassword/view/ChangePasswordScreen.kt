@@ -19,6 +19,7 @@ import br.com.crosslife.components.input.TextField
 import br.com.crosslife.components.snackbar.SnackBar
 import br.com.crosslife.data.Result
 import br.com.crosslife.features.changepassword.viewmodel.ChangePasswordViewModel
+import br.com.crosslife.features.login.view.SnackBarError
 import br.com.crosslife.ui.components.topbar.ScaffoldTopbar
 import br.com.crosslife.ui.theme.Space
 
@@ -29,45 +30,52 @@ fun NavController.ChangePasswordScreen(viewModel: ChangePasswordViewModel = hilt
     val newPasswordState = rememberSaveable { mutableStateOf("") }
     val confirmNewPasswordState = rememberSaveable { mutableStateOf("") }
     val changePasswordState by viewModel.result.collectAsState()
-    when (changePasswordState) {
-        is Result.Success -> ChangePasswordSuccessScreen()
-        else -> ScaffoldTopbar(titleRes = R.string.change_password) {
-            Column(
+
+    ScaffoldTopbar(titleRes = R.string.change_password) {
+        Column(
+            modifier = Modifier
+                .padding(horizontal = Space.BORDER)
+                .verticalScroll(rememberScrollState()),
+        ) {
+            ProfileTextField(
+                labelRes = R.string.old_password,
+                state = oldPasswordState,
+            )
+            ProfileTextField(
+                labelRes = R.string.new_password,
+                state = newPasswordState,
+            )
+            ProfileTextField(
+                labelRes = R.string.confirm_new_password,
+                state = confirmNewPasswordState,
+            )
+            Button(
+                textButton = stringResource(id = R.string.change),
                 modifier = Modifier
-                    .padding(horizontal = Space.BORDER)
-                    .verticalScroll(rememberScrollState()),
-            ) {
-                ProfileTextField(
-                    labelRes = R.string.old_password,
-                    state = oldPasswordState,
-                )
-                ProfileTextField(
-                    labelRes = R.string.confirm_new_password,
-                    state = newPasswordState,
-                )
-                ProfileTextField(
-                    labelRes = R.string.confirm_new_password,
-                    state = confirmNewPasswordState,
-                )
-                Button(
-                    textButton = stringResource(id = R.string.change),
-                    modifier = Modifier
-                        .padding(top = Space.XXS)
-                        .padding(bottom = Space.XXS)
-                        .fillMaxWidth(),
-                    onClick = {
-                        viewModel.changePassword(oldPasswordState.value, newPasswordState.value)
-                    },
-                    isLoading = changePasswordState is Result.Loading
-                )
-            }
+                    .padding(top = Space.XXS)
+                    .padding(bottom = Space.XXS)
+                    .fillMaxWidth(),
+                onClick = {
+                    viewModel.changePassword(
+                        oldPasswordState.value,
+                        newPasswordState.value,
+                        confirmNewPasswordState.value,
+                    )
+                },
+                isLoading = changePasswordState is Result.Loading
+            )
         }
+    }
+    when (val result = changePasswordState) {
+        is Result.Error -> SnackBarError(result)
+        is Result.Success -> ChangedPasswordSnackBar()
+        else -> Unit
     }
 }
 
 @ExperimentalAnimationApi
 @Composable
-fun ChangePasswordSuccessScreen() {
+fun ChangedPasswordSnackBar() {
     SnackBar(
         text = stringResource(id = R.string.changed_password),
         durationMillis = SnackBar.TIME_LONG

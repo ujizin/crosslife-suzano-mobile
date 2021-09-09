@@ -21,7 +21,7 @@ import kotlinx.coroutines.delay
 fun SnackBar(
     text: String,
     durationMillis: Long,
-    snackBarType: SnackBar = SnackBar.Success,
+    type: SnackBar = SnackBar.Success,
 ) {
     val visibleState = rememberSaveable { mutableStateOf(true) }
     LaunchedEffect(visibleState) {
@@ -34,7 +34,7 @@ fun SnackBar(
         anim = Slide.UpToDown,
     ) {
         Snackbar(
-            backgroundColor = snackBarType.color,
+            backgroundColor = type.color,
             shape = RectangleShape
         ) {
             Text(text, style = MaterialTheme.typography.body1)

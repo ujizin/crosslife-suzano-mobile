@@ -12,7 +12,7 @@ interface UserService {
     suspend fun fetchLogin(@Body userPayload: UserPayload): UserDTO
 
     @PUT("/conta-aluno")
-    suspend fun changePassword(@Body userPayload: UserPayload): UserDTO
+    suspend fun changePassword(@Body userPayload: UserPayload)
 
     @POST("/logout")
     suspend fun logout()

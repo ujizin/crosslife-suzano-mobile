@@ -23,7 +23,7 @@
     <string name="change_password">trocar senha</string>
     <string name="leave_account">sair da conta</string>
     <string name="old_password">senha antiga</string>
-
+    <string name="password_not_equals">ops! sua confirmação não está correta</string>
     <!-- Change Password  -->
     <string name="new_password">nova senha</string>
     <string name="confirm_new_password">confirme sua nova senha</string>

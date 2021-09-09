@@ -1,9 +1,9 @@
 package br.com.crosslife.features.changepassword.viewmodel
 
-import br.com.crosslife.data.Result
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.crosslife.domain.models.User
+import br.com.crosslife.data.Result
+import br.com.crosslife.data.errors.PasswordNotEqualsError
 import br.com.crosslife.domain.preferences.UserStore
 import br.com.crosslife.domain.repositories.UserRepository
 import br.com.crosslife.extensions.notify
@@ -18,10 +18,12 @@ class ChangePasswordViewModel @Inject constructor(
     private val userRepository: UserRepository,
 ) : ViewModel(), ViewModelExtensions {
 
-    val result: StateFlow<Result<User>> = MutableStateFlow(Result.Initial)
+    val result: StateFlow<Result<Unit>> = MutableStateFlow(Result.Initial)
 
-    fun changePassword(password: String, newPassword: String) {
-        userStore.getUsername().flatMapConcat { username ->
+    fun changePassword(password: String, newPassword: String, confirmNewPassword: String) {
+        userStore.getUsername().onStart {
+            check(newPassword == confirmNewPassword) { throw PasswordNotEqualsError() }
+        }.flatMapConcat { username ->
             userRepository.changePassword(username, password, newPassword)
         }.notify(stateFlow = result())
             .launchIn(viewModelScope)

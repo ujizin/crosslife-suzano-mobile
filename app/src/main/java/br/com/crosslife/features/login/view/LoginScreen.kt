@@ -113,6 +113,7 @@ fun NavController.LoginScreen(viewModel: LoginViewModel = hiltViewModel()) {
 
 @ExperimentalAnimationApi
 @Composable
-fun SnackBarError(state: Result.Error) { val message = ErrorHelper.getMessageFromState(LocalContext.current, state.error)
+fun SnackBarError(state: Result.Error) {
+    val message = ErrorHelper.getMessageFromState(LocalContext.current, state.error)
     SnackBar(message, SnackBar.TIME_LONG, SnackBar.Error)
 }

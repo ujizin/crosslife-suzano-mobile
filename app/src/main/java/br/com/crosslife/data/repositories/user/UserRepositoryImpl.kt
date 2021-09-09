@@ -30,11 +30,11 @@ class UserRepositoryImpl(
         username: String,
         password: String,
         newPassword: String,
-    ): Flow<User> = flow {
+    ): Flow<Unit> = flow {
         check(username.isNotEmpty() && password.isNotEmpty() && newPassword.isNotEmpty()) { throw EmptyError() }
         val userPayload = UserPayload(username, password, newPassword)
-        val userDto = userService.changePassword(userPayload)
-        emit(userDto.toDomain())
+        userService.changePassword(userPayload)
+        emit(Unit)
     }
 
     override fun fetchLogout() = flow {
