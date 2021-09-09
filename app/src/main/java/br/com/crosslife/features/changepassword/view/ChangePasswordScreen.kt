@@ -68,16 +68,23 @@ fun NavController.ChangePasswordScreen(viewModel: ChangePasswordViewModel = hilt
     }
     when (val result = changePasswordState) {
         is Result.Error -> SnackBarError(result)
-        is Result.Success -> ChangedPasswordSnackBar()
+        is Result.Success -> {
+            listOf(
+                oldPasswordState,
+                newPasswordState,
+                confirmNewPasswordState
+            ).clearAll()
+            SnackBarSuccess(R.string.changed_password)
+        }
         else -> Unit
     }
 }
 
 @ExperimentalAnimationApi
 @Composable
-fun ChangedPasswordSnackBar() {
+fun SnackBarSuccess(@StringRes stringRes: Int) {
     SnackBar(
-        text = stringResource(id = R.string.changed_password),
+        text = stringResource(id = stringRes),
         durationMillis = SnackBar.TIME_LONG
     )
 }
@@ -91,4 +98,8 @@ private fun ProfileTextField(state: MutableState<String>, @StringRes labelRes: I
         modifier = modifier,
         isPassword = true,
     )
+}
+
+fun List<MutableState<String>>.clearAll() = forEach {
+    it.value = ""
 }
