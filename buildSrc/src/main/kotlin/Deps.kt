@@ -4,6 +4,9 @@ import org.gradle.kotlin.dsl.DependencyHandlerScope
 object Deps {
 
     object Version {
+
+        const val KOTLIN = "1.5.10"
+
         // Compose
         const val COMPOSE = "1.0.0"
         const val ACTIVITY_COMPOSE = "1.3.0-alpha07"
@@ -33,6 +36,10 @@ object Deps {
         // jUnit
         const val ANDROID_TEST_JUNIT = "1.1.2"
         const val UNIT_TEST_JUNIT = "4.13.2"
+
+        const val COIL = "1.3.2"
+
+        const val SWIPE_REFRESH = "0.18.0"
     }
 
     private fun DependencyHandler.implementation(name: String) {
@@ -105,6 +112,8 @@ object Deps {
         implementation("com.google.accompanist:accompanist-pager:0.13.0")
         implementation("com.squareup.retrofit2:retrofit:${Version.RETROFIT}")
         implementation("com.squareup.retrofit2:converter-moshi:${Version.RETROFIT}")
-        implementation("org.jetbrains.kotlin:kotlin-reflect:1.5.10")
+        implementation("org.jetbrains.kotlin:kotlin-reflect:${Version.KOTLIN}")
+        implementation("io.coil-kt:coil-compose:${Version.COIL}")
+        implementation("com.google.accompanist:accompanist-swiperefresh:${Version.SWIPE_REFRESH}")
     }
 }
