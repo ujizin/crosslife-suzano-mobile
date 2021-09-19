@@ -1,12 +1,13 @@
 package br.com.crosslife.data
 
 import android.util.Log
+import br.com.crosslife.core.network.ServerError
 
 sealed class Result<out R> {
     data class Success<T>(val data: T) : Result<T>()
-    data class Error(val error: br.com.crosslife.core.network.Error) : Result<Nothing>() {
+    data class Error(val serverError: ServerError) : Result<Nothing>() {
         init {
-            Log.e(ERROR_NETWORK_LOG, error.error.message.orEmpty())
+            Log.e(ERROR_NETWORK_LOG, serverError.error.message.orEmpty())
         }
     }
 

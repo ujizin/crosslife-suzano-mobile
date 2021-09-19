@@ -60,7 +60,7 @@ fun NavController.ForgotPasswordScreen(viewModel: LoginViewModel = hiltViewModel
         }
     }
     when (val result = state) {
-        is Result.Error -> SnackBarError(result)
+        is Result.Error -> SnackBarError(result.serverError)
         is Result.Success -> SnackBarSuccess(R.string.forgot_password_sent)
         else -> Unit
     }

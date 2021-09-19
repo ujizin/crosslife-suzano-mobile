@@ -29,7 +29,8 @@ import br.com.crosslife.Screen
 import br.com.crosslife.components.Button
 import br.com.crosslife.components.input.TextField
 import br.com.crosslife.components.snackbar.SnackBar
-import br.com.crosslife.data.Result
+import br.com.crosslife.core.network.ServerError
+import br.com.crosslife.features.login.viewmodel.LoginUiState
 import br.com.crosslife.features.login.viewmodel.LoginViewModel
 import br.com.crosslife.navigate
 import br.com.crosslife.navigateAndPop
@@ -43,7 +44,7 @@ fun NavController.LoginScreen(viewModel: LoginViewModel = hiltViewModel()) {
     val passwordState = rememberSaveable { mutableStateOf("") }
     val state by viewModel.login.collectAsState()
     when (state) {
-        is Result.Success -> navigateAndPop(Screen.HomeRoot, Screen.Login, true)
+        is LoginUiState.Success -> navigateAndPop(Screen.HomeRoot, Screen.Login, true)
         else -> {
             Column(
                 modifier = Modifier
@@ -79,7 +80,7 @@ fun NavController.LoginScreen(viewModel: LoginViewModel = hiltViewModel()) {
                     modifier = Modifier
                         .padding(top = Space.XXS)
                         .fillMaxWidth(),
-                    isLoading = state is Result.Loading,
+                    isLoading = state is LoginUiState.Loading,
                     onClick = {
                         viewModel.fetchLogin(usernameState.value, passwordState.value)
                     },
@@ -106,14 +107,21 @@ fun NavController.LoginScreen(viewModel: LoginViewModel = hiltViewModel()) {
                     )
                 }
             }
-            if (state is Result.Error) SnackBarError(state as Result.Error)
+            when (val result = state) {
+                is LoginUiState.Error -> SnackBarError(result.error)
+                LoginUiState.InvalidAccount -> SnackBar(
+                    stringResource(id = R.string.invalid_account_or_password),
+                    SnackBar.TIME_LONG,
+                    SnackBar.Error)
+                else -> Unit
+            }
         }
     }
 }
 
 @ExperimentalAnimationApi
 @Composable
-fun SnackBarError(state: Result.Error) {
-    val message = ErrorHelper.getMessageFromState(LocalContext.current, state.error)
+fun SnackBarError(error: ServerError) {
+    val message = ErrorHelper.getMessageFromState(LocalContext.current, error)
     SnackBar(message, SnackBar.TIME_LONG, SnackBar.Error)
 }

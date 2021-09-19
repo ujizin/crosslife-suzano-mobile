@@ -67,7 +67,7 @@ fun NavController.ChangePasswordScreen(viewModel: ChangePasswordViewModel = hilt
         }
     }
     when (val result = changePasswordState) {
-        is Result.Error -> SnackBarError(result)
+        is Result.Error -> SnackBarError(result.serverError)
         is Result.Success -> {
             listOf(
                 oldPasswordState,
