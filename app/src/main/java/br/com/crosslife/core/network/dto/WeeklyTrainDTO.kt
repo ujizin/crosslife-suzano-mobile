@@ -11,4 +11,6 @@ data class WeeklyTrainDTO(
     val dayOfWeek: Int,
 //    @field:Json(name = "")
 //    val description: String,
+    @field:Json(name = "imagem_url")
+    val imageUrl: String,
 )

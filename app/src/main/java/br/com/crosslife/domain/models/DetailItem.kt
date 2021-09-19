@@ -8,4 +8,5 @@ data class DetailItem(
     val title: String,
     val subTitle: String,
     val description: String,
+    val imageUrl: String,
 ): Parcelable
