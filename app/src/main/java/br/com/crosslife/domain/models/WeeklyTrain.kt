@@ -8,11 +8,13 @@ data class WeeklyTrain(
     val title: String,
     val dayWeek: Int,
     val description: String,
+    val imageUrl: String,
 ) {
 
     fun toDetailItem(context: Context) = DetailItem(
         title = context.getString(DayOfWeek.getDay(dayWeek).stringRes),
         subTitle = title,
         description = description,
+        imageUrl = imageUrl
     )
 }
