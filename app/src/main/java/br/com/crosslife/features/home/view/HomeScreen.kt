@@ -24,6 +24,7 @@ import br.com.crosslife.ui.theme.Gray
 import br.com.crosslife.ui.theme.Space
 import com.google.accompanist.pager.*
 import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
 @ExperimentalPagerApi
@@ -31,6 +32,13 @@ import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 fun NavController.HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
     val isRefreshing by viewModel.isRefresh.collectAsState()
     SwipeRefresh(
+        indicator = { state, trigger ->
+            SwipeRefreshIndicator(
+                state, trigger,
+                backgroundColor = MaterialTheme.colors.primary,
+                contentColor = MaterialTheme.colors.onPrimary
+            )
+        },
         state = rememberSwipeRefreshState(isRefreshing),
         onRefresh = { viewModel.refresh() },
     ) {
