@@ -3,6 +3,7 @@ package br.com.crosslife.ui.components.topbar
 import androidx.annotation.StringRes
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -22,6 +23,7 @@ import br.com.crosslife.ui.components.animation.VerticalSlideAnimation
 @Composable
 fun NavController.ScaffoldTopbar(
     @StringRes titleRes: Int? = null,
+    actions: @Composable RowScope.() -> Unit = {},
     content: @Composable (PaddingValues) -> Unit,
 ) {
     Scaffold(
@@ -50,7 +52,8 @@ fun NavController.ScaffoldTopbar(
                         }
                     },
                     elevation = 0.dp,
-                    backgroundColor = Color.Transparent
+                    backgroundColor = Color.Transparent,
+                    actions = actions
                 )
             }
         },
