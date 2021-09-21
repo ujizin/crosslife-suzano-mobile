@@ -17,8 +17,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import br.com.crosslife.R
+import br.com.crosslife.Screen
+import br.com.crosslife.data.Result
 import br.com.crosslife.domain.models.WeeklyTrain
 import br.com.crosslife.extensions.capitalize
+import br.com.crosslife.extensions.navigate
 import br.com.crosslife.ui.theme.Space
 import br.com.crosslife.utils.DayOfWeek
 import br.com.crosslife.utils.Saver
@@ -28,9 +33,34 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerScope
 import com.google.accompanist.pager.PagerState
 
+
+@Composable
+@ExperimentalPagerApi
+fun NavController.WeeklyTrain(state: Result<List<WeeklyTrain>>) {
+    Text(
+        modifier = Modifier
+            .padding(top = Space.XS)
+            .padding(horizontal = Space.BORDER),
+        text = stringResource(id = R.string.weekly_train).capitalize(),
+        style = MaterialTheme.typography.h3,
+    )
+
+    when (state) {
+        Result.Initial, Result.Loading -> HomeLoading()
+        is Result.Error -> HomeLoading() // TODO handle error
+        is Result.Success -> WeeklyTrainUI(state.data) { weeklyTrain ->
+            currentBackStackEntry?.arguments?.putParcelable(
+                "detail_item",
+                weeklyTrain.toDetailItem(context)
+            )
+            navigate(Screen.WeeklyTrain)
+        }
+    }
+}
+
 @ExperimentalPagerApi
 @Composable
-fun WeeklyTrainComponent(
+private fun WeeklyTrainUI(
     weeklyTrains: List<WeeklyTrain>,
     onWeeklyTrainClick: (WeeklyTrain) -> Unit,
 ) {
