@@ -3,13 +3,9 @@ package br.com.crosslife.features.home.view
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -77,12 +73,12 @@ private fun NavController.WeeklyTrain(viewModel: HomeViewModel) {
 @Composable
 fun RenderWeeklyState(
     weeklyTrains: Result<List<WeeklyTrain>>,
-    onUpdate: (WeeklyTrain) -> Unit,
+    onWeeklyClick: (WeeklyTrain) -> Unit,
 ) {
     when (weeklyTrains) {
         Result.Initial, Result.Loading -> HomeLoading()
         is Result.Error -> HomeLoading() // TODO handle error
-        is Result.Success -> WeeklyTrainComponent(weeklyTrains.data, onUpdate)
+        is Result.Success -> WeeklyTrainComponent(weeklyTrains.data, onWeeklyClick)
     }
 }
 
