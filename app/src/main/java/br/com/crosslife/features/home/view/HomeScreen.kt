@@ -51,7 +51,8 @@ fun NavController.HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
 @Composable
 @ExperimentalPagerApi
 private fun NavController.WeeklyTrain(viewModel: HomeViewModel) {
-    val weeklyTrains by viewModel.weeklyTrains.collectAsState()
+    val weeklyTrainState by viewModel.weeklyTrains.collectAsState()
+
     Text(
         modifier = Modifier
             .padding(top = Space.XS)
@@ -60,7 +61,7 @@ private fun NavController.WeeklyTrain(viewModel: HomeViewModel) {
         style = MaterialTheme.typography.h3,
     )
 
-    RenderWeeklyState(weeklyTrains) { weeklyTrain ->
+    RenderWeeklyState(weeklyTrainState) { weeklyTrain ->
         currentBackStackEntry?.arguments?.putParcelable(
             "detail_item",
             weeklyTrain.toDetailItem(context)
@@ -72,14 +73,12 @@ private fun NavController.WeeklyTrain(viewModel: HomeViewModel) {
 @ExperimentalPagerApi
 @Composable
 fun RenderWeeklyState(
-    weeklyTrains: Result<List<WeeklyTrain>>,
+    state: Result<List<WeeklyTrain>>,
     onWeeklyClick: (WeeklyTrain) -> Unit,
-) {
-    when (weeklyTrains) {
-        Result.Initial, Result.Loading -> HomeLoading()
-        is Result.Error -> HomeLoading() // TODO handle error
-        is Result.Success -> WeeklyTrainComponent(weeklyTrains.data, onWeeklyClick)
-    }
+) = when (state) {
+    Result.Initial, Result.Loading -> HomeLoading()
+    is Result.Error -> HomeLoading() // TODO handle error
+    is Result.Success -> WeeklyTrainComponent(state.data, onWeeklyClick)
 }
 
 @Composable
