@@ -30,10 +30,10 @@ import br.com.crosslife.components.Button
 import br.com.crosslife.components.input.TextField
 import br.com.crosslife.components.snackbar.SnackBar
 import br.com.crosslife.core.network.ServerError
+import br.com.crosslife.extensions.navigate
+import br.com.crosslife.extensions.navigateAndPop
 import br.com.crosslife.features.login.viewmodel.LoginUiState
 import br.com.crosslife.features.login.viewmodel.LoginViewModel
-import br.com.crosslife.navigate
-import br.com.crosslife.navigateAndPop
 import br.com.crosslife.ui.theme.Space
 import br.com.crosslife.utils.ErrorHelper
 

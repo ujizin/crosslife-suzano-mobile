@@ -17,10 +17,10 @@ import androidx.navigation.NavController
 import br.com.crosslife.R
 import br.com.crosslife.Screen
 import br.com.crosslife.data.Result
+import br.com.crosslife.domain.models.WeeklyTrain
 import br.com.crosslife.extensions.capitalize
+import br.com.crosslife.extensions.navigate
 import br.com.crosslife.features.home.viewmodel.HomeViewModel
-import br.com.crosslife.navigate
-import br.com.crosslife.ui.theme.Gray
 import br.com.crosslife.ui.theme.Space
 import com.google.accompanist.pager.*
 import com.google.accompanist.swiperefresh.SwipeRefresh
@@ -44,48 +44,12 @@ fun NavController.HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
     ) {
         LazyColumn(Modifier.fillMaxSize()) {
             item { HomeLogo() }
-            item { TextFieldSearch(viewModel) }
+            item { SearchField(viewModel) }
             item { WeeklyTrain(viewModel) }
             Notices()
             item { Spacer(Modifier.height(Space.BOTTOM_NAVIGATION_MARGIN)) }
         }
     }
-}
-
-@Composable
-fun TextFieldSearch(viewModel: HomeViewModel) {
-    val searchState = rememberSaveable { mutableStateOf("") }
-    TextField(
-        value = searchState.value,
-        onValueChange = {
-            searchState.value = it
-        },
-        singleLine = true,
-        modifier = Modifier
-            .padding(top = Space.XXXS)
-            .padding(horizontal = Space.BORDER)
-            .fillMaxWidth(),
-        placeholder = {
-            Text(
-                text = stringResource(id = R.string.search).capitalize(),
-                color = Gray,
-                modifier = Modifier.alpha(0.4F),
-                style = MaterialTheme.typography.body1
-            )
-        },
-        colors = TextFieldDefaults.textFieldColors(
-            backgroundColor = MaterialTheme.colors.surface,
-            placeholderColor = Gray,
-        ),
-        shape = MaterialTheme.shapes.medium,
-        leadingIcon = {
-            Icon(
-                imageVector = Icons.Filled.Search,
-                contentDescription = stringResource(id = R.string.search),
-                modifier = Modifier.size(32.dp)
-            )
-        }
-    )
 }
 
 @Composable
@@ -99,16 +63,26 @@ private fun NavController.WeeklyTrain(viewModel: HomeViewModel) {
         text = stringResource(id = R.string.weekly_train).capitalize(),
         style = MaterialTheme.typography.h3,
     )
-    when (val state = weeklyTrains) {
+
+    RenderWeeklyState(weeklyTrains) { weeklyTrain ->
+        currentBackStackEntry?.arguments?.putParcelable(
+            "detail_item",
+            weeklyTrain.toDetailItem(context)
+        )
+        navigate(Screen.WeeklyTrain)
+    }
+}
+
+@ExperimentalPagerApi
+@Composable
+fun RenderWeeklyState(
+    weeklyTrains: Result<List<WeeklyTrain>>,
+    onUpdate: (WeeklyTrain) -> Unit,
+) {
+    when (weeklyTrains) {
         Result.Initial, Result.Loading -> HomeLoading()
-        is Result.Error -> HomeLoading()
-        is Result.Success -> WeeklyTrainComponent(state.data) { weeklyTrain ->
-            currentBackStackEntry?.arguments?.putParcelable(
-                "detail_item",
-                weeklyTrain.toDetailItem(context)
-            )
-            navigate(Screen.WeeklyTrain)
-        }
+        is Result.Error -> HomeLoading() // TODO handle error
+        is Result.Success -> WeeklyTrainComponent(weeklyTrains.data, onUpdate)
     }
 }
 

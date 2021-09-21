@@ -15,8 +15,8 @@ import br.com.crosslife.Screen
 import br.com.crosslife.components.Button
 import br.com.crosslife.data.Result
 import br.com.crosslife.extensions.capitalize
+import br.com.crosslife.extensions.navigateAndPop
 import br.com.crosslife.features.login.viewmodel.LoginViewModel
-import br.com.crosslife.navigateAndPop
 import br.com.crosslife.ui.theme.Space
 
 @Composable
