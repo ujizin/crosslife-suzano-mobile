@@ -6,5 +6,5 @@ import retrofit2.http.GET
 
 interface NoticeService {
     @GET("/noticias")
-    fun fetchNotices(): Flow<List<NoticeDTO>>
+    fun fetchNotices(): List<NoticeDTO>
 }

@@ -16,10 +16,10 @@ import br.com.crosslife.ui.theme.DarkGray
 import br.com.crosslife.ui.theme.Space
 import br.com.crosslife.R
 import br.com.crosslife.data.Result
-import br.com.crosslife.domain.models.WeeklyTrain
+import br.com.crosslife.domain.models.Notice
 import br.com.crosslife.extensions.capitalize
 
-fun LazyListScope.noticesItems(state: Result<WeeklyTrain>) {
+fun LazyListScope.noticesItems(state: Result<Notice>) {
     item {
         Text(
             modifier = Modifier

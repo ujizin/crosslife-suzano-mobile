@@ -1,11 +1,14 @@
 package br.com.crosslife.data.repositories
 
+import br.com.crosslife.core.network.services.NoticeService
 import br.com.crosslife.core.network.services.UserService
 import br.com.crosslife.core.network.services.WeeklyTrainService
+import br.com.crosslife.data.repositories.notice.NoticeRepositoryImpl
 import br.com.crosslife.domain.repositories.UserRepository
 import br.com.crosslife.data.repositories.user.UserRepositoryImpl
 import br.com.crosslife.data.repositories.weeklytrain.WeeklyTrainRepositoryImpl
 import br.com.crosslife.domain.preferences.UserStore
+import br.com.crosslife.domain.repositories.NoticeRepository
 import br.com.crosslife.domain.repositories.WeeklyTrainRepository
 import dagger.Module
 import dagger.Provides
@@ -30,4 +33,9 @@ object RepositoryModule {
         weeklyTrainService: WeeklyTrainService,
     ): WeeklyTrainRepository = WeeklyTrainRepositoryImpl(weeklyTrainService)
 
+    @ViewModelScoped
+    @Provides
+    fun provideNoticeRepository(
+        noticeService: NoticeService,
+    ): NoticeRepository = NoticeRepositoryImpl(noticeService)
 }

@@ -1,6 +1,6 @@
 package br.com.crosslife.domain.models
 
-data class Notices(
+data class Notice(
     val id: Int,
     val title: String,
     val subtitle: String,

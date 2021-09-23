@@ -1,6 +1,7 @@
 package br.com.crosslife.core.network
 
 import br.com.crosslife.BuildConfig
+import br.com.crosslife.core.network.services.NoticeService
 import br.com.crosslife.core.network.services.UserService
 import br.com.crosslife.core.network.services.WeeklyTrainService
 import br.com.crosslife.domain.preferences.UserStore
@@ -51,4 +52,8 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideWeeklyTrainService(retrofit: Retrofit): WeeklyTrainService = newInstance(retrofit)
+
+    @Singleton
+    @Provides
+    fun provideNoticeService(retrofit: Retrofit): NoticeService = newInstance(retrofit)
 }
