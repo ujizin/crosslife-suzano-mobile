@@ -1,16 +1,20 @@
 package br.com.crosslife.features.home.view
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import br.com.crosslife.ui.theme.DarkGray
 import br.com.crosslife.ui.theme.Space
@@ -18,8 +22,9 @@ import br.com.crosslife.R
 import br.com.crosslife.data.Result
 import br.com.crosslife.domain.models.Notice
 import br.com.crosslife.extensions.capitalize
+import coil.compose.rememberImagePainter
 
-fun LazyListScope.noticesItems(state: Result<Notice>) {
+fun LazyListScope.noticesItems(state: Result<List<Notice>>) {
     item {
         Text(
             modifier = Modifier
@@ -29,13 +34,16 @@ fun LazyListScope.noticesItems(state: Result<Notice>) {
             style = MaterialTheme.typography.h3,
         )
     }
-    items(10) {
-        NoticeItem()
+
+    when (state) {
+        Result.Initial, Result.Loading -> item { HomeLoading() }
+        is Result.Error -> item { HomeLoading() } // TODO handle error
+        is Result.Success -> items(state.data) { notice -> NoticeItem(notice) }
     }
 }
 
 @Composable
-fun NoticeItem() {
+fun NoticeItem(notice: Notice) {
     Row(
         Modifier
             .fillMaxWidth()
@@ -48,10 +56,14 @@ fun NoticeItem() {
             }
             .padding(Space.S),
     ) {
-        Box(
-            Modifier
+        Image(
+            painter = rememberImagePainter(notice.imageUrl),
+            contentDescription = notice.subtitle,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
                 .size(120.dp, 80.dp)
                 .background(MaterialTheme.colors.surface, MaterialTheme.shapes.medium)
+                .clip(MaterialTheme.shapes.small)
         )
         Column(
             Modifier
@@ -60,17 +72,19 @@ fun NoticeItem() {
             verticalArrangement = Arrangement.SpaceEvenly
         ) {
             Text(
-                text = "Título",
+                text = notice.title,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
                 fontWeight = FontWeight.Bold,
                 style = MaterialTheme.typography.body1,
             )
             Text(
-                text = "de: Lucas Yuji Yoshimine",
+                text = stringResource(R.string.from_author, notice.author),
                 style = MaterialTheme.typography.body2,
                 color = DarkGray,
             )
             Text(
-                text = "16/04/2021 - hoje",
+                text = notice.date,
                 style = MaterialTheme.typography.body2,
                 color = DarkGray,
             )

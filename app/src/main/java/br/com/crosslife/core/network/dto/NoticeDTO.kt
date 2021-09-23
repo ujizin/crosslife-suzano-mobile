@@ -7,7 +7,7 @@ data class NoticeDTO(
     @field:Json(name = "titulo")
     val title: String,
     @field:Json(name = "subtitulo")
-    val subtitle: String,
+    val subtitle: String?,
     @field:Json(name = "corpo")
     val content: String,
     @field:Json(name = "categoria")

@@ -54,4 +54,6 @@
     <string name="default_error_message">ops, parece que houve um erro, tente novamente</string>
     <string name="invalid_account_or_password">Usuário ou senha incorretos</string>
 
+    <string name="from_author">de: %s</string>
+
 </resources>

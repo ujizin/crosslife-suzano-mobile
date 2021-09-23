@@ -24,7 +24,7 @@ class HomeViewModel @Inject constructor(
 
     val weeklyTrains: StateFlow<Result<List<WeeklyTrain>>> = MutableStateFlow(Result.Initial)
 
-    val notices: StateFlow<Result<Notice>> = MutableStateFlow(Result.Initial)
+    val notices: StateFlow<Result<List<Notice>>> = MutableStateFlow(Result.Initial)
 
     init {
         viewModelScope.launch {

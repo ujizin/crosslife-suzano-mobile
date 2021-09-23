@@ -3,7 +3,7 @@ package br.com.crosslife.domain.models
 data class Notice(
     val id: Int,
     val title: String,
-    val subtitle: String,
+    val subtitle: String?,
     val content: String,
     val category: String,
     val author: String,
