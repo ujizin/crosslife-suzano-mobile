@@ -26,7 +26,6 @@ fun NavController.ChatScreen() {
         Modifier
             .fillMaxHeight()
             .padding(horizontal = Space.BORDER)
-            .padding(bottom = Space.BOTTOM_NAVIGATION)
             .verticalScroll(rememberScrollState())
     ) {
         ChatHeader()

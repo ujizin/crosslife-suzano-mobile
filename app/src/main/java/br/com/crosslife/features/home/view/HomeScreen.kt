@@ -30,7 +30,7 @@ fun NavController.HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
             item { SearchField(viewModel) }
             item { WeeklyTrain(weeklyTrainState) }
             noticesItems(noticesState)
-            item { Spacer(Modifier.height(Space.BOTTOM_NAVIGATION_MARGIN)) }
+            item { Spacer(Modifier.height(Space.BORDER)) }
         }
     }
 }

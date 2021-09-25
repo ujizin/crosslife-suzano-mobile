@@ -18,6 +18,4 @@ object Space {
     val BORDER = 20.dp
 
     val BOTTOM_NAVIGATION = 56.dp
-
-    val BOTTOM_NAVIGATION_MARGIN = BOTTOM_NAVIGATION + BORDER
 }

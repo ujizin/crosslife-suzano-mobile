@@ -17,9 +17,7 @@ fun BottomBox(
     content: @Composable ColumnScope.() -> Unit,
 ) {
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(bottom = Space.BOTTOM_NAVIGATION).then(modifier),
+        modifier = Modifier.fillMaxSize().then(modifier),
         contentAlignment = Alignment.BottomCenter,
     ) {
         Column(Modifier.fillMaxWidth()) {
