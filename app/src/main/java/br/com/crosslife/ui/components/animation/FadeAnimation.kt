@@ -10,10 +10,10 @@ import androidx.compose.ui.Modifier
 @ExperimentalAnimationApi
 @Composable
 fun FadeAnimation(
+    modifier: Modifier = Modifier,
     visible: Boolean = true,
     durationMillis: Int = 500,
     delay: Boolean = false,
-    modifier: Modifier = Modifier,
     content: @Composable AnimatedVisibilityScope.() -> Unit,
 ) {
     val visibleState = remember { MutableTransitionState(false) }
