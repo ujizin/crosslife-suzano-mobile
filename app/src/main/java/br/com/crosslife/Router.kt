@@ -31,18 +31,22 @@ interface Router {
         @ExperimentalFoundationApi
         @ExperimentalPagerApi
         @Composable
-        fun Init() {
-            val navController = rememberNavController()
+        fun Init(navController: NavController, startDestination: String) {
             navController.apply {
                 TabBar {
-                    NavHost(navController = this, startDestination = Screen.Root.route) {
+                    NavHost(
+                        navController = this as NavHostController,
+                        startDestination = startDestination,
+                    ) {
                         navigation(
                             route = Screen.Root.route,
                             startDestination = Screen.Splash.route
                         ) {
                             route(Screen.Splash) { SplashScreen() }
                             route(Screen.Login) { LoginScreen() }
-                            route(Screen.ForgotPassword) { ForgotPasswordScreen() }
+                            route(Screen.ForgotPassword, deepLinks = listOf(
+                                navDeepLink { uriPattern = "https://www.crosslife.com.br/"}
+                            )) { ForgotPasswordScreen() }
                         }
                         navigation(
                             route = Screen.HomeRoot.route,
