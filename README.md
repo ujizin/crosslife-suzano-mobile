@@ -24,7 +24,6 @@ Foram utilizadas bibliotecas mais recentes do Android, como:
 - LiveData
 - Flow
 - Material IO
-- Modules
 - Entre outros
 
 ## Layout
