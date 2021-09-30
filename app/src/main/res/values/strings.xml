@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Cross Life</string>
+    <string name="host">www.crosslife.com.br</string>
+
     <string name="label_email">usuário</string>
     <string name="label_password">senha</string>
     <string name="enter">entrar</string>
