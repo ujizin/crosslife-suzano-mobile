@@ -1,4 +1,4 @@
-package br.com.crosslife.features.weeklytrain
+package br.com.crosslife.features.detailscreen
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.Image

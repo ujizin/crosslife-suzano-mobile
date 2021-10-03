@@ -17,7 +17,7 @@ import br.com.crosslife.features.profile.view.DetailProfileScreen
 import br.com.crosslife.features.profile.view.ProfileScreen
 import br.com.crosslife.features.search.view.SearchScreen
 import br.com.crosslife.features.splash.view.SplashScreen
-import br.com.crosslife.features.weeklytrain.DetailScreen
+import br.com.crosslife.features.detailscreen.DetailScreen
 import br.com.crosslife.ui.components.animation.FadeAnimation
 import br.com.crosslife.ui.components.tabbar.TabBar
 import com.google.accompanist.pager.ExperimentalPagerApi
