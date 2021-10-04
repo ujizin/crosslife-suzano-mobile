@@ -17,13 +17,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import br.com.crosslife.R
-import br.com.crosslife.Screen
 import br.com.crosslife.data.Result
 import br.com.crosslife.domain.models.WeeklyTrain
 import br.com.crosslife.extensions.capitalize
-import br.com.crosslife.extensions.navigate
 import br.com.crosslife.ui.theme.Space
 import br.com.crosslife.utils.DayOfWeek
 import br.com.crosslife.utils.Saver
@@ -33,12 +30,11 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerScope
 import com.google.accompanist.pager.PagerState
 
-
 @Composable
 @ExperimentalPagerApi
-fun NavController.WeeklyTrain(
+fun WeeklyTrain(
     state: Result<List<WeeklyTrain>>,
-    onWeeklyTrainClick: (WeeklyTrain) -> Unit,
+    onWeeklyTrainClick: OnWeeklyTrainClick,
 ) {
     Text(
         modifier = Modifier
@@ -59,7 +55,7 @@ fun NavController.WeeklyTrain(
 @Composable
 private fun WeeklyTrainUI(
     weeklyTrains: List<WeeklyTrain>,
-    onWeeklyTrainClick: (WeeklyTrain) -> Unit,
+    onWeeklyTrainClick: OnWeeklyTrainClick,
 ) {
     val pagerState = rememberSaveable(saver = Saver.getPagerState(7, true)) {
         PagerState(
@@ -85,7 +81,7 @@ private fun WeeklyTrainUI(
 @Composable
 fun PagerScope.WeeklyTrainItem(
     weeklyTrain: WeeklyTrain,
-    onWeeklyTrainClick: (WeeklyTrain) -> Unit,
+    onWeeklyTrainClick: OnWeeklyTrainClick,
 ) {
     Card(
         Modifier
@@ -122,3 +118,5 @@ fun PagerScope.WeeklyTrainItem(
         }
     }
 }
+
+typealias OnWeeklyTrainClick = (WeeklyTrain) -> Unit

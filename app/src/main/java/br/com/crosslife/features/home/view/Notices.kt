@@ -16,18 +16,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import br.com.crosslife.ui.theme.DarkGray
-import br.com.crosslife.ui.theme.Space
 import br.com.crosslife.R
-import br.com.crosslife.Screen
 import br.com.crosslife.data.Result
 import br.com.crosslife.domain.models.Notice
 import br.com.crosslife.extensions.capitalize
-import br.com.crosslife.extensions.navigate
+import br.com.crosslife.ui.theme.DarkGray
+import br.com.crosslife.ui.theme.Space
 import coil.compose.rememberImagePainter
 
-fun LazyListScope.noticesItems(state: Result<List<Notice>>, onNoticeClick: (Notice) -> Unit) {
+fun LazyListScope.noticesItems(state: Result<List<Notice>>, onNoticeClick: OnNoticeClick) {
     item {
         Text(
             modifier = Modifier
@@ -46,7 +43,7 @@ fun LazyListScope.noticesItems(state: Result<List<Notice>>, onNoticeClick: (Noti
 }
 
 @Composable
-fun NoticeItem(notice: Notice, onNoticeClick: (Notice) -> Unit) {
+fun NoticeItem(notice: Notice, onNoticeClick: OnNoticeClick) {
     Row(
         Modifier
             .fillMaxWidth()
@@ -94,3 +91,5 @@ fun NoticeItem(notice: Notice, onNoticeClick: (Notice) -> Unit) {
         }
     }
 }
+
+typealias OnNoticeClick = (Notice) -> Unit
