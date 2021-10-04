@@ -36,7 +36,10 @@ import com.google.accompanist.pager.PagerState
 
 @Composable
 @ExperimentalPagerApi
-fun NavController.WeeklyTrain(state: Result<List<WeeklyTrain>>) {
+fun NavController.WeeklyTrain(
+    state: Result<List<WeeklyTrain>>,
+    onWeeklyTrainClick: (WeeklyTrain) -> Unit,
+) {
     Text(
         modifier = Modifier
             .padding(top = Space.XS)
@@ -48,13 +51,7 @@ fun NavController.WeeklyTrain(state: Result<List<WeeklyTrain>>) {
     when (state) {
         Result.Initial, Result.Loading -> HomeLoading()
         is Result.Error -> HomeLoading() // TODO handle error
-        is Result.Success -> WeeklyTrainUI(state.data) { weeklyTrain ->
-            currentBackStackEntry?.arguments?.putParcelable(
-                "detail_item",
-                weeklyTrain.toDetailItem(context)
-            )
-            navigate(Screen.WeeklyTrain)
-        }
+        is Result.Success -> WeeklyTrainUI(state.data, onWeeklyTrainClick)
     }
 }
 

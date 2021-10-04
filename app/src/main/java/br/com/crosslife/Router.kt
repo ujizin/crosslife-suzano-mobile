@@ -54,7 +54,7 @@ interface Router {
                         ) {
                             route(Screen.Home) { HomeScreen() }
                             route(
-                                screen = Screen.WeeklyTrain
+                                screen = Screen.DetailItem
                             ) {
                                 val detailItem = previousBackStackEntry
                                     ?.arguments?.getParcelable<DetailItem>("detail_item")

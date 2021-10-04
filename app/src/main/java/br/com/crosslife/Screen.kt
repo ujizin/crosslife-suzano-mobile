@@ -21,7 +21,7 @@ sealed class Screen(val route: String, val tabItem: Tab = Tab.Home) {
     object ProfileRoot : Screen(PROFILE_ROOT_PATH)
     object ChatRoot : Screen(CHAT_ROOT_PATH)
 
-    object WeeklyTrain : Screen("$WEEKLY_TRAIN_PATH/detail", Tab.None)
+    object DetailItem : Screen(DETAIL_ITEM_PATH, Tab.None)
 
     object Logout : Screen(LOGOUT_PATH, Tab.Profile)
 
@@ -39,7 +39,7 @@ sealed class Screen(val route: String, val tabItem: Tab = Tab.Home) {
         private const val PROFILE_ROOT_PATH = "profile_root"
         // End Tabs
 
-        private const val WEEKLY_TRAIN_PATH = "weekly_train"
+        private const val DETAIL_ITEM_PATH = "detail_item"
 
         private const val HOME_PATH = "home"
         private const val SEARCH_PATH = "search"
