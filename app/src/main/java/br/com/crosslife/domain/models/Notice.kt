@@ -9,4 +9,12 @@ data class Notice(
     val author: String,
     val date: String, // TODO add an adapter to Date
     val imageUrl: String,
-)
+) {
+
+    fun toDetailItem() = DetailItem(
+        title = title,
+        subTitle = title,
+        description = content,
+        imageUrl = imageUrl
+    )
+}
