@@ -6,8 +6,15 @@ import br.com.crosslife.Screen
 
 fun NavController.navigate(
     screen: Screen,
+    newTask: Boolean = false,
 ) {
-    navigate(screen.route)
+    navigate(screen.route) {
+        if (newTask) {
+            currentDestination?.route?.let { destinationRoute ->
+                popUpTo(destinationRoute) { inclusive = true }
+            }
+        }
+    }
 }
 
 fun NavController.navigate(
