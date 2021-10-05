@@ -1,12 +1,34 @@
 package br.com.crosslife
 
+import androidx.navigation.NavDeepLink
+import androidx.navigation.NavType
+import androidx.navigation.compose.NamedNavArgument
+import androidx.navigation.compose.navArgument
+import androidx.navigation.navDeepLink
+import br.com.crosslife.Screen.RecoveryPassword.TOKEN_ARG
 import br.com.crosslife.ui.components.bottomnavigation.Tab
 
 
-sealed class Screen(val route: String, val tabItem: Tab = Tab.Home) {
+sealed class Screen(
+    val route: String,
+    val tabItem: Tab = Tab.Home,
+    val arguments: List<NamedNavArgument> = listOf(),
+    val deepLinks: List<NavDeepLink> = listOf(),
+) {
     object Splash : Screen(SPLASH_PATH, Tab.None)
     object Login : Screen(LOGIN_PATH, Tab.None)
     object ForgotPassword : Screen(FORGOT_PASSWORD_PATH, Tab.None)
+    object RecoveryPassword : Screen(
+        route = RECOVERY_PASSWORD_PATH,
+        tabItem = Tab.None,
+        arguments = listOf(navArgument("token") { type = NavType.StringType }),
+        deepLinks = listOf(navDeepLink {
+            uriPattern = "$BASE_DEEPLINK/$RECOVERY_PASSWORD_PATH/{$TOKEN_ARG}"
+        })
+    ) {
+        const val TOKEN_ARG = "token"
+    }
+
 
     object Home : Screen(HOME_PATH, Tab.Home)
     object Search : Screen(SEARCH_PATH, Tab.Search)
@@ -26,10 +48,15 @@ sealed class Screen(val route: String, val tabItem: Tab = Tab.Home) {
     object Logout : Screen(LOGOUT_PATH, Tab.Profile)
 
     companion object {
+        // TODO set url on build config
+        private const val BASE_DEEPLINK = "https://www.crosslife.com.br"
+
         private const val SPLASH_PATH = "splash"
         private const val LOGIN_PATH = "login"
         private const val FORGOT_PASSWORD_PATH = "forgot_password"
+
         private const val LOGOUT_PATH = "logout"
+        private const val RECOVERY_PASSWORD_PATH = "recovery_password/$TOKEN_ARG"
 
         // Tabs
         private const val ROOT_PATH = "root"

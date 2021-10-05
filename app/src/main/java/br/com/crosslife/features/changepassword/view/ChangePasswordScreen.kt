@@ -31,16 +31,57 @@ fun NavController.ChangePasswordScreen(viewModel: ChangePasswordViewModel = hilt
     val confirmNewPasswordState = rememberSaveable { mutableStateOf("") }
     val changePasswordState by viewModel.result.collectAsState()
 
+    ChangePasswordUI(
+        oldPasswordState = oldPasswordState,
+        newPasswordState = newPasswordState,
+        confirmNewPasswordState = confirmNewPasswordState,
+        isLoading = changePasswordState is Result.Loading,
+        resetFields = changePasswordState is Result.Success,
+        onChangePasswordClick = {
+            viewModel.changePassword(
+                oldPasswordState.value,
+                newPasswordState.value,
+                confirmNewPasswordState.value,
+            )
+        }
+    )
+
+    SnackBarByState(changePasswordState)
+}
+
+@ExperimentalAnimationApi
+@Composable
+fun SnackBarByState(state: Result<*>) {
+    when (val result: Result<*> = state) {
+        is Result.Error -> SnackBarError(result.serverError)
+        is Result.Success -> SnackBarSuccess(R.string.changed_password)
+        else -> Unit
+    }
+}
+
+@ExperimentalAnimationApi
+@Composable
+fun NavController.ChangePasswordUI(
+    oldPasswordState: MutableState<String>? = null,
+    newPasswordState: MutableState<String>,
+    confirmNewPasswordState: MutableState<String>,
+    isLoading: Boolean,
+    resetFields: Boolean,
+    onChangePasswordClick: () -> Unit,
+) {
     ScaffoldTopbar(titleRes = R.string.change_password) {
         Column(
             modifier = Modifier
                 .padding(horizontal = Space.BORDER)
                 .verticalScroll(rememberScrollState()),
         ) {
-            ProfileTextField(
-                labelRes = R.string.old_password,
-                state = oldPasswordState,
-            )
+
+            oldPasswordState?.let {
+                ProfileTextField(
+                    labelRes = R.string.old_password,
+                    state = oldPasswordState,
+                )
+            }
             ProfileTextField(
                 labelRes = R.string.new_password,
                 state = newPasswordState,
@@ -55,28 +96,18 @@ fun NavController.ChangePasswordScreen(viewModel: ChangePasswordViewModel = hilt
                     .padding(top = Space.XXS)
                     .padding(bottom = Space.XXS)
                     .fillMaxWidth(),
-                onClick = {
-                    viewModel.changePassword(
-                        oldPasswordState.value,
-                        newPasswordState.value,
-                        confirmNewPasswordState.value,
-                    )
-                },
-                isLoading = changePasswordState is Result.Loading
+                onClick = onChangePasswordClick,
+                isLoading = isLoading
             )
         }
     }
-    when (val result = changePasswordState) {
-        is Result.Error -> SnackBarError(result.serverError)
-        is Result.Success -> {
-            listOf(
-                oldPasswordState,
-                newPasswordState,
-                confirmNewPasswordState
-            ).clearAll()
-            SnackBarSuccess(R.string.changed_password)
-        }
-        else -> Unit
+
+    if (resetFields) {
+        listOf(
+            oldPasswordState,
+            newPasswordState,
+            confirmNewPasswordState
+        ).clearAll()
     }
 }
 
@@ -100,6 +131,6 @@ private fun ProfileTextField(state: MutableState<String>, @StringRes labelRes: I
     )
 }
 
-fun List<MutableState<String>>.clearAll() = forEach {
-    it.value = ""
+fun List<MutableState<String>?>.clearAll() = forEach {
+    it?.value = ""
 }

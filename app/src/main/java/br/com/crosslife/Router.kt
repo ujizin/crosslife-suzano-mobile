@@ -18,6 +18,7 @@ import br.com.crosslife.features.profile.view.ProfileScreen
 import br.com.crosslife.features.search.view.SearchScreen
 import br.com.crosslife.features.splash.view.SplashScreen
 import br.com.crosslife.features.detailscreen.DetailScreen
+import br.com.crosslife.features.recoverypassword.RecoveryPasswordScreen
 import br.com.crosslife.ui.components.animation.FadeAnimation
 import br.com.crosslife.ui.components.tabbar.TabBar
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -44,9 +45,8 @@ interface Router {
                         ) {
                             route(Screen.Splash) { SplashScreen() }
                             route(Screen.Login) { LoginScreen() }
-                            route(Screen.ForgotPassword, deepLinks = listOf(
-                                navDeepLink { uriPattern = "https://www.crosslife.com.br/"}
-                            )) { ForgotPasswordScreen() }
+                            route(Screen.ForgotPassword) { ForgotPasswordScreen() }
+                            route(Screen.RecoveryPassword) { RecoveryPasswordScreen() }
                         }
                         navigation(
                             route = Screen.HomeRoot.route,
@@ -90,11 +90,9 @@ interface Router {
         @ExperimentalAnimationApi
         private fun NavGraphBuilder.route(
             screen: Screen,
-            arguments: List<NamedNavArgument> = emptyList(),
-            deepLinks: List<NavDeepLink> = emptyList(),
             content: @Composable (NavBackStackEntry) -> Unit,
         ) {
-            composable(screen.route, arguments, deepLinks) {
+            composable(screen.route, screen.arguments, screen.deepLinks) {
                 FadeAnimation {
                     content(it)
                 }
