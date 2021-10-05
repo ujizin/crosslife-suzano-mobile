@@ -7,5 +7,6 @@ interface UserRepository {
     fun fetchLogin(username: String, password: String): Flow<User>
     fun fetchLogout(): Flow<Unit>
     fun changePassword(username: String, password: String, newPassword: String): Flow<Unit>
+    fun changePasswordWithToken(token: String, newPassword: String): Flow<Unit>
     fun fetchPassword(username: String): Flow<Unit>
 }

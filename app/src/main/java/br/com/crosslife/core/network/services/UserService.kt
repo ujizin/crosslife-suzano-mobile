@@ -2,6 +2,7 @@ package br.com.crosslife.core.network.services
 
 import br.com.crosslife.core.network.dto.UserDTO
 import br.com.crosslife.core.network.payload.UserPayload
+import br.com.crosslife.core.network.payload.PasswordPayload
 import retrofit2.http.*
 
 interface UserService {
@@ -17,4 +18,7 @@ interface UserService {
 
     @POST("/recuperar-senha")
     suspend fun forgotPassword(@Body userPayload: UserPayload)
+
+    @POST("/mudar-senha")
+    fun changePasswordWithToken(@Body passwordPayload: PasswordPayload)
 }

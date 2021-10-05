@@ -1,6 +1,7 @@
 package br.com.crosslife.data.repositories.user
 
 import br.com.crosslife.core.network.payload.UserPayload
+import br.com.crosslife.core.network.payload.PasswordPayload
 import br.com.crosslife.core.network.services.UserService
 import br.com.crosslife.data.errors.EmptyError
 import br.com.crosslife.domain.models.User
@@ -34,6 +35,17 @@ class UserRepositoryImpl(
         check(username.isNotEmpty() && password.isNotEmpty() && newPassword.isNotEmpty()) { throw EmptyError() }
         val userPayload = UserPayload(username, password, newPassword)
         userService.changePassword(userPayload)
+        emit(Unit)
+    }
+
+    override fun changePasswordWithToken(
+        token: String,
+        newPassword: String,
+    ): Flow<Unit> = flow {
+        check(newPassword.isNotEmpty()) { throw EmptyError() }
+        val userTokenPayload = PasswordPayload(newPassword)
+        userStore.setToken(token)
+        userService.changePasswordWithToken(userTokenPayload)
         emit(Unit)
     }
 
