@@ -5,12 +5,14 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import br.com.crosslife.R
 import br.com.crosslife.Screen
 import br.com.crosslife.data.Result
 import br.com.crosslife.extensions.navigate
 import br.com.crosslife.features.changepassword.view.ChangePasswordUI
 import br.com.crosslife.features.changepassword.view.SnackBarByState
 import br.com.crosslife.features.recoverypassword.viewmodel.RecoveryPasswordViewModel
+import br.com.crosslife.ui.components.snackbar.SnackBarByState
 
 @ExperimentalAnimationApi
 @Composable
@@ -31,7 +33,7 @@ fun NavController.RecoveryPasswordScreen(
         }
     )
 
-    SnackBarByState(state)
+    SnackBarByState(state, R.string.changed_password)
 
     if (state is Result.Success) {
         LaunchedEffect(true) {

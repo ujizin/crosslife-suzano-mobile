@@ -20,6 +20,7 @@ import br.com.crosslife.components.snackbar.SnackBar
 import br.com.crosslife.data.Result
 import br.com.crosslife.features.changepassword.viewmodel.ChangePasswordViewModel
 import br.com.crosslife.features.login.view.SnackBarError
+import br.com.crosslife.ui.components.snackbar.SnackBarByState
 import br.com.crosslife.ui.components.topbar.ScaffoldTopbar
 import br.com.crosslife.ui.theme.Space
 
@@ -46,17 +47,7 @@ fun NavController.ChangePasswordScreen(viewModel: ChangePasswordViewModel = hilt
         }
     )
 
-    SnackBarByState(changePasswordState)
-}
-
-@ExperimentalAnimationApi
-@Composable
-fun SnackBarByState(state: Result<*>) {
-    when (val result: Result<*> = state) {
-        is Result.Error -> SnackBarError(result.serverError)
-        is Result.Success -> SnackBarSuccess(R.string.changed_password)
-        else -> Unit
-    }
+    SnackBarByState(changePasswordState, R.string.changed_password)
 }
 
 @ExperimentalAnimationApi
