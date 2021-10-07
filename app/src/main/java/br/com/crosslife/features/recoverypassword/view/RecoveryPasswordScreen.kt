@@ -1,4 +1,4 @@
-package br.com.crosslife.features.recoverypassword
+package br.com.crosslife.features.recoverypassword.view
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.*
@@ -10,7 +10,6 @@ import br.com.crosslife.Screen
 import br.com.crosslife.data.Result
 import br.com.crosslife.extensions.navigate
 import br.com.crosslife.features.changepassword.view.ChangePasswordUI
-import br.com.crosslife.features.changepassword.view.SnackBarByState
 import br.com.crosslife.features.recoverypassword.viewmodel.RecoveryPasswordViewModel
 import br.com.crosslife.ui.components.snackbar.SnackBarByState
 

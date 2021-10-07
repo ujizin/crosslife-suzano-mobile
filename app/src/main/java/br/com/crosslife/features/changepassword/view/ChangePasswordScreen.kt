@@ -19,7 +19,6 @@ import br.com.crosslife.components.input.TextField
 import br.com.crosslife.components.snackbar.SnackBar
 import br.com.crosslife.data.Result
 import br.com.crosslife.features.changepassword.viewmodel.ChangePasswordViewModel
-import br.com.crosslife.features.login.view.SnackBarError
 import br.com.crosslife.ui.components.snackbar.SnackBarByState
 import br.com.crosslife.ui.components.topbar.ScaffoldTopbar
 import br.com.crosslife.ui.theme.Space
