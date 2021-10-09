@@ -23,7 +23,7 @@ sealed class Screen(
         tabItem = Tab.None,
         arguments = listOf(navArgument("token") { type = NavType.StringType }),
         deepLinks = listOf(navDeepLink {
-            uriPattern = "$BASE_DEEPLINK/$RECOVERY_PASSWORD_PATH/{$TOKEN_ARG}"
+            uriPattern = "$BASE_DEEPLINK/$RECOVERY_PASSWORD_PATH"
         })
     ) {
         const val TOKEN_ARG = "token"
