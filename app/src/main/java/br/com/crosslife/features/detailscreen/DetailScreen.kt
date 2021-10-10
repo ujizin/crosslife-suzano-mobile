@@ -16,8 +16,10 @@ import br.com.crosslife.domain.models.DetailItem
 import br.com.crosslife.ui.components.bottombox.BottomBox
 import br.com.crosslife.ui.components.topbar.ScaffoldTopbar
 import br.com.crosslife.ui.theme.Space
+import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 
+@ExperimentalCoilApi
 @ExperimentalAnimationApi
 @Composable
 fun NavController.DetailScreen(detail: DetailItem?) {
@@ -29,30 +31,32 @@ fun NavController.DetailScreen(detail: DetailItem?) {
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(0.6F),
+                .fillMaxHeight(0.7F),
         )
-        Column {
-            Box(
-                modifier = Modifier
-                    .background(brush = Brush.verticalGradient(
-                        colors = listOf(Color.Black.copy(alpha = 0.5F), Color.Transparent),
-                        startY = 0.4f,
-                    ))
-                    .fillMaxWidth()
-                    .fillMaxHeight(0.6F)
-
-            )
-            BottomBox(title = item.title, modifier = Modifier.fillMaxHeight()) {
+        Box(
+            modifier = Modifier
+                .background(brush = Brush.verticalGradient(
+                    colors = listOf(
+                        Color.Black.copy(alpha = 0.5F),
+                        Color.Black.copy(alpha = 0.25F),
+                    ),
+                    startY = 0.4f,
+                ))
+                .fillMaxWidth()
+                .fillMaxHeight(0.7F)
+        )
+        BottomBox(title = item.title, modifier = Modifier.fillMaxHeight(0.45F)) {
+            item.subTitle?.let { subTitle ->
                 Text(
-                    text = item.subTitle,
+                    text = subTitle,
                     style = MaterialTheme.typography.h3,
                     modifier = Modifier.padding(vertical = Space.XXXS),
                 )
-                Text(
-                    text = item.description,
-                    style = MaterialTheme.typography.body2,
-                )
             }
+            Text(
+                text = item.description,
+                style = MaterialTheme.typography.body1,
+            )
         }
     }
 }
