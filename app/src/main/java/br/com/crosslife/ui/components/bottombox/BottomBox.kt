@@ -12,32 +12,33 @@ import br.com.crosslife.ui.theme.Space
 
 @Composable
 fun BottomBox(
-    title: String,
     modifier: Modifier = Modifier,
+    title: String,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     Box(
-        modifier = Modifier.fillMaxSize().then(modifier),
+        modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.BottomCenter,
     ) {
         Column(Modifier.fillMaxWidth()) {
             Text(
                 text = title,
                 style = MaterialTheme.typography.h2,
+                maxLines = 3,
                 modifier = Modifier.padding(horizontal = Space.BORDER),
             )
             Card(
                 Modifier
                     .fillMaxWidth()
                     .wrapContentHeight()
+                    .then(modifier)
                     .padding(top = Space.XXS),
                 shape = RoundedCornerShape(topStart = Space.XXXS, topEnd = Space.XXXS),
                 backgroundColor = MaterialTheme.colors.background,
             ) {
                 Column(
-                    Modifier
-                        .padding(Space.BORDER)
-                        .wrapContentHeight(),
+                    Modifier.padding(Space.BORDER),
+                    verticalArrangement = Arrangement.Top,
                     content = content,
                 )
             }
