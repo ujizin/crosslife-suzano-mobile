@@ -13,7 +13,6 @@ data class Notice(
 
     fun toDetailItem() = DetailItem(
         title = title,
-        subTitle = title,
         description = content,
         imageUrl = imageUrl
     )
