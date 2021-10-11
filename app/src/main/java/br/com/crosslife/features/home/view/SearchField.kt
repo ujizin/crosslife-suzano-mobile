@@ -48,6 +48,7 @@ fun SearchField(viewModel: HomeViewModel) {
         leadingIcon = {
             Icon(
                 imageVector = Icons.Filled.Search,
+                tint = Gray,
                 contentDescription = stringResource(id = R.string.search),
                 modifier = Modifier.size(32.dp)
             )
