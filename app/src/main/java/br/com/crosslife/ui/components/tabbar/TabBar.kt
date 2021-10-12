@@ -1,5 +1,6 @@
 package br.com.crosslife.ui.components.tabbar
 
+import android.graphics.Rect
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
@@ -26,8 +27,11 @@ fun keyboardAsState(): State<Keyboard> {
     val view = LocalView.current
     DisposableEffect(true) {
         val onGlobalListener = ViewTreeObserver.OnGlobalLayoutListener {
-            val heightDiff = view.rootView.height - view.height
-            keyboardState.value = if (heightDiff > 100) {
+            val rect = Rect()
+            view.getWindowVisibleDisplayFrame(rect)
+            val screenHeight = view.rootView.height
+            val keypadHeight = screenHeight - rect.bottom
+            keyboardState.value = if (keypadHeight > screenHeight * 0.15) {
                 Keyboard.Opened
             } else {
                 Keyboard.Closed
