@@ -15,6 +15,19 @@ import br.com.crosslife.ui.components.animation.VerticalSlideAnimation
 import br.com.crosslife.ui.components.bottomnavigation.BottomNavigation
 import br.com.crosslife.ui.components.bottomnavigation.Tab
 import android.view.ViewTreeObserver
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.material.ScaffoldState
+import androidx.compose.material.Text
+import androidx.compose.material.rememberScaffoldState
+import androidx.compose.ui.platform.LocalContext
+import br.com.crosslife.R
+import br.com.crosslife.extensions.navigate
+import br.com.crosslife.features.home.view.HomeLogo
+import br.com.crosslife.ui.theme.Space
+import kotlinx.coroutines.launch
 
 
 enum class Keyboard {
@@ -25,7 +38,7 @@ enum class Keyboard {
 fun keyboardAsState(): State<Keyboard> {
     val keyboardState = remember { mutableStateOf(Keyboard.Closed) }
     val view = LocalView.current
-        DisposableEffect(view) {
+    DisposableEffect(view) {
         val onGlobalListener = ViewTreeObserver.OnGlobalLayoutListener {
             val rect = Rect()
             view.getWindowVisibleDisplayFrame(rect)
@@ -53,11 +66,12 @@ fun keyboardAsState(): State<Keyboard> {
 fun NavController.TabBar(content: @Composable () -> Unit) {
     val currentTab by currentTabAsState()
     val isKeyboardOpen by keyboardAsState()
-    val isTabNone = currentTab != Tab.None && isKeyboardOpen != Keyboard.Opened
-
+    val notHasTab = currentTab != Tab.None && isKeyboardOpen != Keyboard.Opened
+    val scaffoldState = rememberScaffoldState()
     Scaffold(
+        scaffoldState = scaffoldState,
         bottomBar = {
-            VerticalSlideAnimation(visible = isTabNone) {
+            VerticalSlideAnimation(visible = notHasTab) {
                 BottomNavigation(currentTab) { screen ->
                     navigate(screen.route) {
                         launchSingleTop = true
@@ -72,6 +86,33 @@ fun NavController.TabBar(content: @Composable () -> Unit) {
 
                     }
                 }
+            }
+        },
+        drawerGesturesEnabled = notHasTab,
+        drawerContent = {
+            with(LocalContext.current) {
+                HomeLogo()
+                Spacer(Modifier.height(Space.BORDER))
+                NavigationAction(
+                    scaffoldState,
+                    getString(R.string.menu_item_home),
+                    Screen.HomeRoot
+                )
+                NavigationAction(
+                    scaffoldState,
+                    getString(R.string.menu_item_search),
+                    Screen.SearchRoot
+                )
+                NavigationAction(
+                    scaffoldState,
+                    getString(R.string.menu_item_chat),
+                    Screen.ChatRoot
+                )
+                NavigationAction(
+                    scaffoldState,
+                    getString(R.string.menu_item_profile),
+                    Screen.ProfileRoot
+                )
             }
         },
         content = { innerPadding ->
@@ -100,4 +141,21 @@ private fun NavController.currentTabAsState(): State<Tab> {
     }
 
     return selectedItem
+}
+
+@Composable
+fun NavController.NavigationAction(scaffoldState: ScaffoldState, label: String, screen: Screen) {
+    val coroutineScope = rememberCoroutineScope()
+    Text(
+        text = label,
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable {
+                coroutineScope.launch {
+                    scaffoldState.drawerState.close()
+                }
+                navigate(screen)
+            }
+            .padding(vertical = Space.XXXS, horizontal = Space.XXS)
+    )
 }
