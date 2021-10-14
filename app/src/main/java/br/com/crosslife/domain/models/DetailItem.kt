@@ -9,4 +9,5 @@ data class DetailItem(
     val subTitle: String? = null,
     val description: String,
     val imageUrl: String,
+    val videoUrl: String? = null,
 ): Parcelable
