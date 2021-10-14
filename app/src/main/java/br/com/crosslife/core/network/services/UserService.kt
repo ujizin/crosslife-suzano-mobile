@@ -20,6 +20,6 @@ interface UserService {
     @POST("/recuperar-senha")
     suspend fun forgotPassword(@Body userPayload: UserPayload): Response<Unit>
 
-    @POST("/mudar-senha")
+    @PUT("/mudar-senha")
     suspend fun changePasswordWithToken(@Body passwordPayload: PasswordPayload)
 }
