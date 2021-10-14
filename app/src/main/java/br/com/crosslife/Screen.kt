@@ -56,7 +56,7 @@ sealed class Screen(
         private const val FORGOT_PASSWORD_PATH = "forgot_password"
 
         private const val LOGOUT_PATH = "logout"
-        private const val RECOVERY_PASSWORD_PATH = "recovery_password/$TOKEN_ARG"
+        private const val RECOVERY_PASSWORD_PATH = "recovery_password?token={$TOKEN_ARG}"
 
         // Tabs
         private const val ROOT_PATH = "root"
