@@ -43,6 +43,8 @@
     <string name="forgot_password">esqueci a senha</string>
     <string name="forgot_password_sent">enviado um email com sucesso!</string>
 
+    <string name="video">video</string>
+    <string name="play">play</string>
 
     <string name="sunday">domingo</string>
     <string name="monday">segunda-feira</string>
