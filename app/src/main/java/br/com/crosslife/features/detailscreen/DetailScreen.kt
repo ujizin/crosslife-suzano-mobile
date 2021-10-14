@@ -57,7 +57,7 @@ fun NavController.DetailScreen(detail: DetailItem?) {
                 .fillMaxWidth()
                 .fillMaxHeight(0.7F)
         )
-        BottomBox(title = item.title, modifier = Modifier.fillMaxHeight(0.45F)) {
+        BottomBox(title = item.title, modifier = Modifier.fillMaxHeight(0.5F)) {
             DetailSubTitle(item.subTitle)
             Text(item.description, style = MaterialTheme.typography.body1)
             VideoButton(item.videoUrl)
