@@ -5,10 +5,12 @@ object Deps {
 
     object Version {
 
-        const val KOTLIN = "1.5.10"
+        // Kotlin
+        const val KOTLIN = "1.5.30"
+        const val COROUTINES = "1.5.0"
 
         // Compose
-        const val COMPOSE = "1.0.0"
+        const val COMPOSE = "1.0.3"
         const val ACTIVITY_COMPOSE = "1.3.0-alpha07"
         const val NAVIGATION_COMPOSE = "2.4.0-alpha04"
 
@@ -19,10 +21,11 @@ object Deps {
         const val ANDROID_CORE = "1.3.2"
         const val ANDROID_APP_COMPAT = "1.2.0"
         const val ANDROID_MATERIAL = "1.3.0"
+        const val DATA_STORE = "1.0.0"
 
         // Android Compose Lifecycle
 
-        const val COMPOSE_LIFECYCLE = "1.0.0-alpha04"
+        const val COMPOSE_LIFECYCLE = "1.0.0-alpha07"
 
         // Retrofit
         const val RETROFIT = "2.9.0"
@@ -32,14 +35,15 @@ object Deps {
 
         // Espresso
         const val ESPRESSO = "3.3.0"
-
         // jUnit
         const val ANDROID_TEST_JUNIT = "1.1.2"
         const val UNIT_TEST_JUNIT = "4.13.2"
 
+        // Google accompanist
         const val COIL = "1.3.2"
-
         const val SWIPE_REFRESH = "0.18.0"
+        const val PAGER = "0.13.0"
+        const val FLOW_LAYOUT = "0.19.0"
     }
 
     private fun DependencyHandler.implementation(name: String) {
@@ -106,11 +110,11 @@ object Deps {
     }
 
     fun DependencyHandlerScope.generalDependencies() {
-        implementation("androidx.datastore:datastore-preferences:1.0.0-beta01")
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3")
-        implementation("com.google.accompanist:accompanist-pager:0.13.0")
-        implementation("com.google.accompanist:accompanist-flowlayout:0.19.0")
+        implementation("androidx.datastore:datastore-preferences:${Version.DATA_STORE}")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Version.COROUTINES}")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${Version.COROUTINES}")
+        implementation("com.google.accompanist:accompanist-pager:${Version.PAGER}")
+        implementation("com.google.accompanist:accompanist-flowlayout:${Version.FLOW_LAYOUT}")
         implementation("com.squareup.retrofit2:retrofit:${Version.RETROFIT}")
         implementation("com.squareup.retrofit2:converter-moshi:${Version.RETROFIT}")
         implementation("org.jetbrains.kotlin:kotlin-reflect:${Version.KOTLIN}")
