@@ -15,6 +15,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import br.com.crosslife.R
@@ -27,7 +28,6 @@ import br.com.crosslife.utils.Saver
 import coil.compose.rememberImagePainter
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.PagerScope
 import com.google.accompanist.pager.PagerState
 
 @Composable
@@ -81,7 +81,7 @@ private fun WeeklyTrainUI(
                 .defaultMinSize(minHeight = 200.dp)
                 .aspectRatio(1.5F),
             weeklyTrain,
-            onWeeklyTrainClick
+            onWeeklyTrainClick = onWeeklyTrainClick
         )
     }
 }
@@ -90,6 +90,9 @@ private fun WeeklyTrainUI(
 fun WeeklyTrainItem(
     modifier: Modifier = Modifier,
     weeklyTrain: WeeklyTrain,
+    titleStyle: TextStyle = MaterialTheme.typography.h3,
+    subTitleStyle: TextStyle = MaterialTheme.typography.body1,
+    innerModifier: Modifier = Modifier.padding(start = Space.XXS, bottom = Space.XXS),
     onWeeklyTrainClick: OnWeeklyTrainClick,
 ) {
     Card(
@@ -110,15 +113,15 @@ fun WeeklyTrainItem(
             verticalArrangement = Arrangement.Bottom,
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.Black.copy(0.25F))
-                .padding(start = Space.XXS, bottom = Space.XXS)
+                .background(Color.Black.copy(0.5F))
+                .then(innerModifier)
         ) {
             val dayOfWeekRes = DayOfWeek.getDay(weeklyTrain.dayWeek).stringRes
-            Text(stringResource(dayOfWeekRes).capitalize(), style = MaterialTheme.typography.h3)
+            Text(stringResource(dayOfWeekRes).capitalize(), style = titleStyle)
             Text(
                 weeklyTrain.title,
                 fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.body1,
+                style = subTitleStyle,
             )
         }
     }

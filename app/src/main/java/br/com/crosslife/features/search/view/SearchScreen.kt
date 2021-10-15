@@ -10,6 +10,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight.Companion.Bold
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import br.com.crosslife.R
@@ -58,8 +59,10 @@ private fun SearchWeeklyTrain(
     )
 
     when (state) {
-        Result.Initial, Result.Loading -> {}
-        is Result.Error -> {}
+        Result.Initial, Result.Loading -> {
+        }
+        is Result.Error -> {
+        }
         is Result.Success -> WeeklyTrainUI(
             Modifier.padding(top = Space.XXS),
             state.data,
@@ -84,11 +87,20 @@ private fun WeeklyTrainUI(
             crossAxisSpacing = Space.XS,
         ) {
             weeklyTrains.forEach { item ->
+                val (width, titleStyle, subTitleStyle) = with(MaterialTheme.typography) {
+                    when (item.isFirstDayOfTheWeek) {
+                        true -> Triple(1F, h3, body1)
+                        false -> Triple(0.485F, body1.copy(fontWeight = Bold), body2)
+                    }
+                }
                 WeeklyTrainItem(
                     modifier = Modifier
-                        .fillMaxWidth(if (item.isFirstDayOfTheWeek) 1F else 0.485F)
+                        .fillMaxWidth(width)
                         .aspectRatio(2F),
                     weeklyTrain = item,
+                    innerModifier = Modifier.padding(start = Space.XS, bottom = Space.XS),
+                    titleStyle = titleStyle,
+                    subTitleStyle = subTitleStyle,
                     onWeeklyTrainClick = onWeeklyTrainClick
                 )
             }
