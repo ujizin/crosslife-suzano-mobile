@@ -73,23 +73,28 @@ private fun WeeklyTrainUI(
         state = pagerState,
     ) { page ->
         val weeklyTrain = weeklyTrains[page]
-        WeeklyTrainItem(weeklyTrain, onWeeklyTrainClick)
+        WeeklyTrainItem(
+            Modifier
+                .padding(start = Space.BORDER)
+                .align(Alignment.CenterStart)
+                .fillMaxWidth(0.8F)
+                .defaultMinSize(minHeight = 200.dp)
+                .aspectRatio(1.5F),
+            weeklyTrain,
+            onWeeklyTrainClick
+        )
     }
 }
 
-@ExperimentalPagerApi
 @Composable
-fun PagerScope.WeeklyTrainItem(
+fun WeeklyTrainItem(
+    modifier: Modifier = Modifier,
     weeklyTrain: WeeklyTrain,
     onWeeklyTrainClick: OnWeeklyTrainClick,
 ) {
     Card(
         Modifier
-            .align(Alignment.CenterStart)
-            .padding(start = Space.BORDER)
-            .fillMaxWidth(0.8F)
-            .defaultMinSize(minHeight = 200.dp)
-            .aspectRatio(1.5F)
+            .then(modifier)
             .clip(MaterialTheme.shapes.large)
             .clickable(onClick = { onWeeklyTrainClick(weeklyTrain) }),
         backgroundColor = MaterialTheme.colors.surface,
