@@ -15,12 +15,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import br.com.crosslife.R
 import br.com.crosslife.extensions.capitalize
-import br.com.crosslife.features.home.viewmodel.HomeViewModel
 import br.com.crosslife.ui.theme.Gray
 import br.com.crosslife.ui.theme.Space
 
 @Composable
-fun SearchField(viewModel: HomeViewModel) {
+fun SearchField() {
     val searchState = rememberSaveable { mutableStateOf("") }
     TextField(
         value = searchState.value,
