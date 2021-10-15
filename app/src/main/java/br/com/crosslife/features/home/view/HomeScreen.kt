@@ -10,9 +10,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import br.com.crosslife.Screen
-import br.com.crosslife.domain.models.DetailItem
-import br.com.crosslife.extensions.navigate
+import br.com.crosslife.features.detailscreen.navigateToDetailItem
 import br.com.crosslife.features.home.viewmodel.HomeViewModel
 import br.com.crosslife.ui.components.swiperefresh.SwipeRefresh
 import br.com.crosslife.ui.theme.Space
@@ -30,7 +28,7 @@ fun NavController.HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
     ) {
         LazyColumn(Modifier.fillMaxSize()) {
             item { HomeLogo() }
-            item { SearchField(viewModel) }
+            item { SearchField() }
             item {
                 WeeklyTrain(weeklyTrainState) { weeklyTrain ->
                     navigateToDetailItem(weeklyTrain.toDetailItem(context))
@@ -42,9 +40,4 @@ fun NavController.HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
             item { Spacer(Modifier.height(Space.BORDER)) }
         }
     }
-}
-
-private fun NavController.navigateToDetailItem(detailItem: DetailItem) {
-    currentBackStackEntry?.arguments?.putParcelable("detail_item", detailItem)
-    navigate(Screen.DetailItem)
 }

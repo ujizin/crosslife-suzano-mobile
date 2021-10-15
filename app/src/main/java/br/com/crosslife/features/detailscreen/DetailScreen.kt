@@ -27,6 +27,8 @@ import br.com.crosslife.domain.models.DetailItem
 import br.com.crosslife.ui.components.bottombox.BottomBox
 import br.com.crosslife.ui.components.topbar.ScaffoldTopbar
 import br.com.crosslife.R
+import br.com.crosslife.Screen
+import br.com.crosslife.extensions.navigate
 import br.com.crosslife.ui.theme.Space
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
@@ -99,4 +101,9 @@ private fun VideoButton(videoUrl: String?) {
             )
         }
     }
+}
+
+fun NavController.navigateToDetailItem(detailItem: DetailItem) {
+    currentBackStackEntry?.arguments?.putParcelable("detail_item", detailItem)
+    navigate(Screen.DetailItem)
 }
