@@ -12,6 +12,8 @@ data class WeeklyTrain(
     val videoUrl: String,
 ) {
 
+    val isFirstDayOfTheWeek = dayWeek == 0
+
     fun toDetailItem(context: Context) = DetailItem(
         title = context.getString(DayOfWeek.getDay(dayWeek).stringRes),
         subTitle = title,
