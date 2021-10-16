@@ -59,5 +59,12 @@
     <string name="invalid_account_or_password">Usuário ou senha incorretos</string>
 
     <string name="from_author">de: %s</string>
+    <string name="fat_mass">massa grossa</string>
+    <string name="slim_mass">massa fina</string>
+    <string name="muscle_mass">massa muscular</string>
+    <string name="hydration">hidratação</string>
+    <string name="bone_density">densidade óssea</string>
+    <string name="visceral_fat">gordura visceral</string>
+    <string name="basal_metabolism">metabolismo basal</string>
 
 </resources>
