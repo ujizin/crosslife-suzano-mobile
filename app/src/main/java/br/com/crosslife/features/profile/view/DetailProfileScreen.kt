@@ -8,16 +8,17 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import br.com.crosslife.R
+import br.com.crosslife.features.profile.viewmodel.DetailProfileViewModel
 import br.com.crosslife.ui.components.topbar.ScaffoldTopbar
 
 @ExperimentalAnimationApi
 @Composable
-fun NavController.DetailProfileScreen() {
+fun NavController.DetailProfileScreen(viewModel: DetailProfileViewModel = hiltViewModel()) {
+
     ScaffoldTopbar(titleRes = R.string.advanced_profile) {
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            Text(text = "Em construção", style = MaterialTheme.typography.h3)
-        }
+
     }
 }
