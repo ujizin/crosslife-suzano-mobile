@@ -4,10 +4,12 @@ import br.com.crosslife.core.network.payload.UserPayload
 import br.com.crosslife.core.network.payload.PasswordPayload
 import br.com.crosslife.core.network.services.UserService
 import br.com.crosslife.data.errors.EmptyError
+import br.com.crosslife.domain.models.DetailProfile
 import br.com.crosslife.domain.models.User
 import br.com.crosslife.domain.preferences.UserStore
 import br.com.crosslife.domain.repositories.UserRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 
 class UserRepositoryImpl(
@@ -62,5 +64,12 @@ class UserRepositoryImpl(
         val userPayload = UserPayload(username)
         userService.forgotPassword(userPayload)
         emit(Unit)
+    }
+
+    override fun fetchDetailProfile(): Flow<DetailProfile> = flow {
+        userStore.getUsername().collect { user ->
+            val detailProfile = userService.fetchDetailProfile(user)
+            emit(detailProfile.toDomain())
+        }
     }
 }

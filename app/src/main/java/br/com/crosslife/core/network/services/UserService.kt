@@ -1,8 +1,10 @@
 package br.com.crosslife.core.network.services
 
+import br.com.crosslife.core.network.dto.DetailProfileDTO
 import br.com.crosslife.core.network.dto.UserDTO
 import br.com.crosslife.core.network.payload.UserPayload
 import br.com.crosslife.core.network.payload.PasswordPayload
+import br.com.crosslife.domain.models.DetailProfile
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -22,4 +24,7 @@ interface UserService {
 
     @PUT("/mudar-senha")
     suspend fun changePasswordWithToken(@Body passwordPayload: PasswordPayload)
+
+    @GET("/avaliacao-aluno/{username}")
+    suspend fun fetchDetailProfile(@Path("username") username: String): DetailProfileDTO
 }
