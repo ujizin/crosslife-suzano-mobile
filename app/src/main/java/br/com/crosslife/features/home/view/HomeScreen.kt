@@ -27,19 +27,20 @@ fun NavController.HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
         isRefreshing = isRefreshing,
         onRefresh = { viewModel.refresh() },
     ) {
-        LazyColumn(Modifier.fillMaxSize()) {
-            item { HomeLogo() }
-            searchComponentItem(searchFieldState) {
-                item {
-                    WeeklyTrain(weeklyTrainState) { weeklyTrain ->
-                        navigateToDetailItem(weeklyTrain.toDetailItem(context))
-                    }
-                }
-                noticesItems(noticesState) { notice ->
-                    navigateToDetailItem(notice.toDetailItem())
-                }
-                item { Spacer(Modifier.height(Space.BORDER)) }
+        SearchLazyColumn(searchFieldState,
+            header = {
+                item { HomeLogo() }
             }
+        ) {
+            item {
+                WeeklyTrain(weeklyTrainState) { weeklyTrain ->
+                    navigateToDetailItem(weeklyTrain.toDetailItem(context))
+                }
+            }
+            noticesItems(noticesState) { notice ->
+                navigateToDetailItem(notice.toDetailItem())
+            }
+            item { Spacer(Modifier.height(Space.BORDER)) }
         }
     }
 }
