@@ -22,22 +22,25 @@ fun NavController.HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
     val isRefreshing by viewModel.isRefresh.collectAsState()
     val weeklyTrainState by viewModel.weeklyTrains.collectAsState()
     val noticesState by viewModel.notices.collectAsState()
+    val searchFieldState = rememberSearchState()
     SwipeRefresh(
         isRefreshing = isRefreshing,
         onRefresh = { viewModel.refresh() },
     ) {
         LazyColumn(Modifier.fillMaxSize()) {
             item { HomeLogo() }
-            item { SearchField() }
-            item {
-                WeeklyTrain(weeklyTrainState) { weeklyTrain ->
-                    navigateToDetailItem(weeklyTrain.toDetailItem(context))
+            item { SearchField(searchFieldState) }
+            if (searchFieldState.value == SearchState.Unfocused) {
+                item {
+                    WeeklyTrain(weeklyTrainState) { weeklyTrain ->
+                        navigateToDetailItem(weeklyTrain.toDetailItem(context))
+                    }
                 }
+                noticesItems(noticesState) { notice ->
+                    navigateToDetailItem(notice.toDetailItem())
+                }
+                item { Spacer(Modifier.height(Space.BORDER)) }
             }
-            noticesItems(noticesState) { notice ->
-                navigateToDetailItem(notice.toDetailItem())
-            }
-            item { Spacer(Modifier.height(Space.BORDER)) }
         }
     }
 }

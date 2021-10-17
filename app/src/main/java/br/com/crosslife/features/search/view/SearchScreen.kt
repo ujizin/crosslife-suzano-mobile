@@ -30,18 +30,20 @@ import com.google.accompanist.flowlayout.SizeMode
 fun NavController.SearchScreen(viewModel: SearchViewModel = hiltViewModel()) {
     val weeklyTrainState by viewModel.weeklyTrains.collectAsState()
     val noticeState by viewModel.notices.collectAsState()
-
+    val searchFieldState = rememberSearchState()
     LazyColumn {
-        item { SearchField() }
-        item {
-            SearchWeeklyTrain(weeklyTrainState) {
-                navigateToDetailItem(it.toDetailItem(context))
+        item { SearchField(searchFieldState) }
+        if (searchFieldState.value == SearchState.Unfocused) {
+            item {
+                SearchWeeklyTrain(weeklyTrainState) {
+                    navigateToDetailItem(it.toDetailItem(context))
+                }
             }
+            noticesItems(noticeState) {
+                navigateToDetailItem(it.toDetailItem())
+            }
+            item { Spacer(Modifier.height(Space.BORDER)) }
         }
-        noticesItems(noticeState) {
-            navigateToDetailItem(it.toDetailItem())
-        }
-        item { Spacer(Modifier.height(Space.BORDER)) }
     }
 }
 
