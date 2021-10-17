@@ -8,7 +8,16 @@ import kotlinx.coroutines.flow.flow
 
 class NoticeRepositoryImpl(private val noticeService: NoticeService) : NoticeRepository {
 
-    override fun fetchNotices(): Flow<List<Notice>> = flow {
-        emit(noticeService.fetchNotices().toDomain())
+    private var notices: List<Notice> = listOf()
+
+    override fun fetchNotices(sentence: String?): Flow<List<Notice>> = flow {
+        val notices = when {
+            !sentence.isNullOrBlank() -> noticeService.fetchNotices(sentence).toDomain()
+            notices.isEmpty() -> noticeService.fetchNotices().toDomain().also { list ->
+                notices = list
+            }
+            else -> notices
+        }
+        emit(notices)
     }
 }
