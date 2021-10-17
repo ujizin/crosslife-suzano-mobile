@@ -7,8 +7,9 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.stringResource
@@ -18,13 +19,29 @@ import br.com.crosslife.extensions.capitalize
 import br.com.crosslife.ui.theme.Gray
 import br.com.crosslife.ui.theme.Space
 
+sealed class SearchState {
+    object Unfocused : SearchState()
+    data class Focused(val text: String) : SearchState()
+}
+
 @Composable
-fun SearchField() {
-    val searchState = rememberSaveable { mutableStateOf("") }
+fun rememberSearchState(): MutableState<SearchState> = remember {
+    mutableStateOf(SearchState.Unfocused)
+}
+
+@Composable
+fun SearchField(searchState: MutableState<SearchState>) {
+    val textState = remember { mutableStateOf("") }
+    // TODO: check focus state either
+    val focusState = remember { mutableStateOf(false) }
     TextField(
-        value = searchState.value,
+        value = textState.value,
         onValueChange = {
-            searchState.value = it
+            textState.value = it
+            searchState.value = when {
+                it != "" -> SearchState.Focused(it)
+                else -> SearchState.Unfocused
+            }
         },
         singleLine = true,
         modifier = Modifier
