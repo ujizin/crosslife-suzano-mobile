@@ -21,7 +21,6 @@ Foram utilizadas bibliotecas mais recentes do Android, como:
 - Kotlin gradle DSL (KTS)
 - Hilt DI
 - DataStore
-- LiveData
 - Flow
 - Material IO
 - Entre outros
