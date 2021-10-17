@@ -29,8 +29,7 @@ fun NavController.HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
     ) {
         LazyColumn(Modifier.fillMaxSize()) {
             item { HomeLogo() }
-            item { SearchField(searchFieldState) }
-            if (searchFieldState.value == SearchState.Unfocused) {
+            searchComponentItem(searchFieldState) {
                 item {
                     WeeklyTrain(weeklyTrainState) { weeklyTrain ->
                         navigateToDetailItem(weeklyTrain.toDetailItem(context))

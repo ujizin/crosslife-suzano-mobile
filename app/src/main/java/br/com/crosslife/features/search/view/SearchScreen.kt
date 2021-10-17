@@ -32,8 +32,7 @@ fun NavController.SearchScreen(viewModel: SearchViewModel = hiltViewModel()) {
     val noticeState by viewModel.notices.collectAsState()
     val searchFieldState = rememberSearchState()
     LazyColumn {
-        item { SearchField(searchFieldState) }
-        if (searchFieldState.value == SearchState.Unfocused) {
+        searchComponentItem(searchFieldState) {
             item {
                 SearchWeeklyTrain(weeklyTrainState) {
                     navigateToDetailItem(it.toDetailItem(context))

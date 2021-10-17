@@ -3,6 +3,7 @@ package br.com.crosslife.features.home.view
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -27,6 +28,15 @@ sealed class SearchState {
 @Composable
 fun rememberSearchState(): MutableState<SearchState> = remember {
     mutableStateOf(SearchState.Unfocused)
+}
+
+fun LazyListScope.searchComponentItem(
+    searchState: MutableState<SearchState>,
+    block: LazyListScope.() -> Unit,
+) {
+    // TODO fetch notices endpoint
+    item { SearchField(searchState = searchState) }
+    if (searchState.value == SearchState.Unfocused) block()
 }
 
 @Composable
