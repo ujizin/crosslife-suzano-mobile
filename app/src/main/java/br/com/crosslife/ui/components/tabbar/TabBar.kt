@@ -25,7 +25,7 @@ enum class Keyboard {
 fun keyboardAsState(): State<Keyboard> {
     val keyboardState = remember { mutableStateOf(Keyboard.Closed) }
     val view = LocalView.current
-        DisposableEffect(view) {
+    DisposableEffect(view) {
         val onGlobalListener = ViewTreeObserver.OnGlobalLayoutListener {
             val rect = Rect()
             view.getWindowVisibleDisplayFrame(rect)
@@ -52,8 +52,8 @@ fun keyboardAsState(): State<Keyboard> {
 @Composable
 fun NavController.TabBar(content: @Composable () -> Unit) {
     val currentTab by currentTabAsState()
-    val isKeyboardOpen by keyboardAsState()
-    val isTabNone = currentTab != Tab.None && isKeyboardOpen != Keyboard.Opened
+    val keyboardState by keyboardAsState()
+    val isTabNone = currentTab != Tab.None && keyboardState != Keyboard.Opened
 
     Scaffold(
         bottomBar = {
