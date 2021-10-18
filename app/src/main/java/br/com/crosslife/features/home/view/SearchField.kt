@@ -60,8 +60,6 @@ fun SearchField(
     onValueChanged: (String) -> Unit,
 ) {
     val textState = remember { mutableStateOf("") }
-    // TODO: check focus state either
-    val focusState = remember { mutableStateOf(false) }
     TextField(
         value = textState.value,
         onValueChange = {
