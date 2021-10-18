@@ -8,7 +8,6 @@ interface NoticeService {
     @GET("/noticias")
     suspend fun fetchNotices(): List<NoticeDTO>
 
-    // TODO fetch right endpoint
     @GET("/noticias")
-    suspend fun fetchNotices(@Query("search") sentence: String): List<NoticeDTO>
+    suspend fun fetchNotices(@Query("titulo") sentence: String): List<NoticeDTO>
 }
