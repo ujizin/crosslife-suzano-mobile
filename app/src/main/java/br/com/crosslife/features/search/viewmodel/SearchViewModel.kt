@@ -10,9 +10,10 @@ import br.com.crosslife.domain.repositories.WeeklyTrainRepository
 import br.com.crosslife.extensions.notify
 import br.com.crosslife.extensions.viewmodel.ViewModelExtensions
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,6 +21,8 @@ class SearchViewModel @Inject constructor(
     private val weeklyTrainRepository: WeeklyTrainRepository,
     private val noticeRepository: NoticeRepository,
 ) : ViewModel(), ViewModelExtensions {
+
+    private var job: Job? = null
 
     val notices: StateFlow<Result<List<Notice>>> = MutableStateFlow(Result.Initial)
     val weeklyTrains: StateFlow<Result<List<WeeklyTrain>>> = MutableStateFlow(Result.Initial)
@@ -35,13 +38,16 @@ class SearchViewModel @Inject constructor(
     }
 
     fun getNotices(sentence: String? = null) {
-        noticeRepository.fetchNotices(sentence)
-            .debounce(if (sentence != null) DEBOUNCE_DELAY else NO_DELAY)
-            .notify(viewModelScope, notices())
+        job?.cancel()
+        job = viewModelScope.launch {
+            noticeRepository.fetchNotices(sentence)
+                .onStart { if (!sentence.isNullOrBlank()) delay(DEBOUNCE_DELAY) }
+                .notify(stateFlow = notices())
+                .collect()
+        }
     }
 
     companion object {
         private const val DEBOUNCE_DELAY = 300L
-        private const val NO_DELAY = 0L
     }
 }

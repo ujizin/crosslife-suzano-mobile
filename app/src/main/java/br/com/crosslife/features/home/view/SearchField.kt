@@ -52,7 +52,6 @@ fun NavController.SearchLazyColumn(
         }
 
     }
-    // TODO fetch notices endpoint
 }
 
 @Composable
