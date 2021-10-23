@@ -47,9 +47,9 @@ fun NoticeItem(notice: Notice, onNoticeClick: OnNoticeClick) {
     Row(
         Modifier
             .fillMaxWidth()
+            .height(IntrinsicSize.Min)
             .padding(horizontal = Space.BORDER)
             .padding(top = Space.XS)
-            .wrapContentHeight()
             .clip(MaterialTheme.shapes.small)
             .clickable {
                 onNoticeClick(notice)
@@ -61,7 +61,8 @@ fun NoticeItem(notice: Notice, onNoticeClick: OnNoticeClick) {
             contentDescription = notice.subtitle,
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                .size(125.dp, 90.dp)
+                .width(125.dp)
+                .fillMaxHeight()
                 .background(MaterialTheme.colors.surface, MaterialTheme.shapes.medium)
                 .clip(MaterialTheme.shapes.small)
         )
@@ -74,7 +75,7 @@ fun NoticeItem(notice: Notice, onNoticeClick: OnNoticeClick) {
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
                 fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.body1,
+                style = MaterialTheme.typography.body2,
             )
             Text(
                 text = stringResource(R.string.from_author, notice.author),
