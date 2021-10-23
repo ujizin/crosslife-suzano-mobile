@@ -5,9 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface NoticeService {
-    @GET("/noticias")
-    suspend fun fetchNotices(): List<NoticeDTO>
 
     @GET("/noticias")
-    suspend fun fetchNotices(@Query("titulo") sentence: String): List<NoticeDTO>
+    suspend fun fetchNotices(@Query("titulo") sentence: String?): List<NoticeDTO>
 }

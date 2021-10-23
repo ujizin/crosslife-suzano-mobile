@@ -61,14 +61,12 @@ fun NoticeItem(notice: Notice, onNoticeClick: OnNoticeClick) {
             contentDescription = notice.subtitle,
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                .size(120.dp, 80.dp)
+                .size(125.dp, 90.dp)
                 .background(MaterialTheme.colors.surface, MaterialTheme.shapes.medium)
                 .clip(MaterialTheme.shapes.small)
         )
         Column(
-            Modifier
-                .padding(start = Space.XXS)
-                .height(80.dp),
+            Modifier.padding(start = Space.XXS),
             verticalArrangement = Arrangement.SpaceEvenly
         ) {
             Text(
