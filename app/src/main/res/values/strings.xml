@@ -66,5 +66,6 @@
     <string name="bone_density">densidade óssea</string>
     <string name="visceral_fat">gordura visceral</string>
     <string name="basal_metabolism">metabolismo basal</string>
+    <string name="empty_notices">nenhuma noticia encontrada :(</string>
 
 </resources>

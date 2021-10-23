@@ -14,6 +14,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import br.com.crosslife.R
@@ -38,7 +39,19 @@ fun LazyListScope.noticesItems(state: Result<List<Notice>>, onNoticeClick: OnNot
     when (state) {
         Result.Initial, Result.Loading -> item { HomeLoading() }
         is Result.Error -> item { HomeLoading() } // TODO handle error
-        is Result.Success -> items(state.data) { notice -> NoticeItem(notice, onNoticeClick) }
+        is Result.Success -> if (state.data.isNotEmpty()) {
+            items(state.data) { notice -> NoticeItem(notice, onNoticeClick) }
+        } else {
+            item {
+                Text(
+                    text = stringResource(id = R.string.empty_notices),
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = Space.XXXS)
+                )
+            }
+        }
     }
 }
 
