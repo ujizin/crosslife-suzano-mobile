@@ -16,12 +16,12 @@ plugins {
 }
 
 android {
-    compileSdk = 30
+    compileSdk = 31
     buildToolsVersion = "30.0.3"
     defaultConfig {
         applicationId = "br.com.crosslife"
         minSdk = 21
-        targetSdk = 30
+        targetSdk = 31
         versionCode = 1
         versionName = "1.0"
         buildConfigField("String", "BASE_URL", "\"https://crosslifeapi.herokuapp.com/\"")
