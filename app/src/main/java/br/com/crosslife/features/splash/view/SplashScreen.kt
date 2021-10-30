@@ -14,12 +14,14 @@ import androidx.navigation.NavController
 import br.com.crosslife.R
 import br.com.crosslife.Screen
 import br.com.crosslife.extensions.navigateAndPop
-import br.com.crosslife.features.splash.viewmodel.SplashResult
+import br.com.crosslife.extensions.rememberFlowWithLifecycle
+import br.com.crosslife.features.splash.viewmodel.SplashStateUi
 import br.com.crosslife.features.splash.viewmodel.SplashViewModel
 
 @Composable
 fun NavController.SplashScreen(viewModel: SplashViewModel = hiltViewModel()) {
-    val isAuthenticated by viewModel.isAuthenticated.collectAsState()
+    val isAuthenticated by rememberFlowWithLifecycle(viewModel.isAuthenticated)
+        .collectAsState(initial = SplashStateUi.Initial)
 
     Column(
         verticalArrangement = Arrangement.Center,
@@ -38,10 +40,10 @@ fun NavController.SplashScreen(viewModel: SplashViewModel = hiltViewModel()) {
     redirect(isAuthenticated)
 }
 
-private fun NavController.redirect(isAuthenticated: SplashResult) {
+private fun NavController.redirect(isAuthenticated: SplashStateUi) {
     when (isAuthenticated) {
-        SplashResult.Initial -> return
-        SplashResult.Authenticated -> navigateAndPop(Screen.HomeRoot, Screen.Splash, true)
-        SplashResult.NotAuthenticated -> navigateAndPop(Screen.Login, Screen.Splash)
+        SplashStateUi.Initial -> return
+        SplashStateUi.Authenticated -> navigateAndPop(Screen.HomeRoot, Screen.Splash, true)
+        SplashStateUi.NotAuthenticated -> navigateAndPop(Screen.Login, Screen.Splash)
     }
 }

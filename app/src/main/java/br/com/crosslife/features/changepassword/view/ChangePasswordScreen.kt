@@ -18,6 +18,7 @@ import br.com.crosslife.components.Button
 import br.com.crosslife.components.input.TextField
 import br.com.crosslife.components.snackbar.SnackBar
 import br.com.crosslife.data.Result
+import br.com.crosslife.extensions.rememberFlowWithLifecycle
 import br.com.crosslife.features.changepassword.viewmodel.ChangePasswordViewModel
 import br.com.crosslife.ui.components.snackbar.SnackBarByState
 import br.com.crosslife.ui.components.topbar.ScaffoldTopbar
@@ -29,7 +30,8 @@ fun NavController.ChangePasswordScreen(viewModel: ChangePasswordViewModel = hilt
     val oldPasswordState = rememberSaveable { mutableStateOf("") }
     val newPasswordState = rememberSaveable { mutableStateOf("") }
     val confirmNewPasswordState = rememberSaveable { mutableStateOf("") }
-    val changePasswordState by viewModel.result.collectAsState()
+    val changePasswordState by rememberFlowWithLifecycle(viewModel.result)
+        .collectAsState(initial = Result.Initial)
 
     ChangePasswordUI(
         oldPasswordState = oldPasswordState,

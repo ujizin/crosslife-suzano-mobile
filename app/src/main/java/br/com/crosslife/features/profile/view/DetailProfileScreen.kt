@@ -16,18 +16,20 @@ import br.com.crosslife.R
 import br.com.crosslife.data.Result
 import br.com.crosslife.domain.models.DetailProfile
 import br.com.crosslife.extensions.capitalize
+import br.com.crosslife.extensions.rememberFlowWithLifecycle
 import br.com.crosslife.features.home.view.HomeLoading
 import br.com.crosslife.features.profile.viewmodel.DetailProfileViewModel
 import br.com.crosslife.ui.components.topbar.ScaffoldTopbar
 import br.com.crosslife.ui.theme.Space
-import br.com.crosslife.utils.BioimpedanceUtil.format
 import br.com.crosslife.utils.BioimpedanceUtil.Format.Kilos
 import br.com.crosslife.utils.BioimpedanceUtil.Format.Milliliters
+import br.com.crosslife.utils.BioimpedanceUtil.format
 
 @ExperimentalAnimationApi
 @Composable
 fun NavController.DetailProfileScreen(viewModel: DetailProfileViewModel = hiltViewModel()) {
-    val detailProfileState by viewModel.profileState.collectAsState()
+    val detailProfileState by rememberFlowWithLifecycle(viewModel.profileState)
+        .collectAsState(initial = Result.Initial)
 
     ScaffoldTopbar(titleRes = R.string.advanced_profile) {
         when (val state: Result<DetailProfile> = detailProfileState) {

@@ -13,8 +13,8 @@ class SplashViewModel @Inject constructor(
     userStore: UserStore,
 ) : ViewModel() {
 
-    private val _isAuthenticated = MutableStateFlow(SplashResult.Initial)
-    val isAuthenticated: StateFlow<SplashResult> get() = _isAuthenticated
+    private val _isAuthenticated = MutableStateFlow(SplashStateUi.Initial)
+    val isAuthenticated: StateFlow<SplashStateUi> get() = _isAuthenticated
 
     init {
         userStore.getToken()
@@ -22,7 +22,7 @@ class SplashViewModel @Inject constructor(
                 delay(SPLASH_DELAY)
             }
             .onEach {
-                _isAuthenticated.value = SplashResult.getResult(it)
+                _isAuthenticated.value = SplashStateUi.getResult(it)
             }
             .launchIn(viewModelScope)
     }
@@ -33,7 +33,7 @@ class SplashViewModel @Inject constructor(
     }
 }
 
-enum class SplashResult {
+enum class SplashStateUi {
     Initial, Authenticated, NotAuthenticated;
 
     companion object {

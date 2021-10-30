@@ -16,7 +16,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import br.com.crosslife.R
+import br.com.crosslife.data.Result
 import br.com.crosslife.extensions.capitalize
+import br.com.crosslife.extensions.rememberFlowWithLifecycle
 import br.com.crosslife.features.detailscreen.navigateToDetailItem
 import br.com.crosslife.features.search.viewmodel.SearchViewModel
 import br.com.crosslife.ui.theme.Gray
@@ -39,7 +41,8 @@ fun NavController.SearchLazyColumn(
     searchViewModel: SearchViewModel = hiltViewModel(),
     content: LazyListScope.() -> Unit,
 ) {
-    val noticeState by searchViewModel.notices.collectAsState()
+    val noticeState by rememberFlowWithLifecycle(searchViewModel.notices)
+        .collectAsState(initial = Result.Initial)
     LazyColumn(Modifier.fillMaxWidth()) {
         header()
         item { SearchField(searchState = searchState, searchViewModel::getNotices)  }

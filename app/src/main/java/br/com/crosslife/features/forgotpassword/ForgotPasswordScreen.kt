@@ -19,6 +19,7 @@ import br.com.crosslife.components.Button
 import br.com.crosslife.components.input.TextField
 import br.com.crosslife.data.Result
 import br.com.crosslife.extensions.capitalize
+import br.com.crosslife.extensions.rememberFlowWithLifecycle
 import br.com.crosslife.features.changepassword.view.SnackBarSuccess
 import br.com.crosslife.features.login.view.SnackBarError
 import br.com.crosslife.features.login.viewmodel.LoginViewModel
@@ -29,7 +30,8 @@ import br.com.crosslife.ui.theme.Space
 @Composable
 fun NavController.ForgotPasswordScreen(viewModel: LoginViewModel = hiltViewModel()) {
     val forgotPasswordState = rememberSaveable { mutableStateOf("") }
-    val state by viewModel.forgotPassword.collectAsState()
+    val state by rememberFlowWithLifecycle(viewModel.forgotPassword)
+        .collectAsState(initial = Result.Initial)
     ScaffoldTopbar(titleRes = R.string.forgot_password) {
         Column(
             Modifier
