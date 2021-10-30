@@ -9,6 +9,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import br.com.crosslife.data.Result
+import br.com.crosslife.extensions.rememberFlowWithLifecycle
 import br.com.crosslife.features.detailscreen.navigateToDetailItem
 import br.com.crosslife.features.home.viewmodel.HomeViewModel
 import br.com.crosslife.ui.components.swiperefresh.SwipeRefresh
@@ -18,9 +20,12 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 @ExperimentalPagerApi
 @Composable
 fun NavController.HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
-    val isRefreshing by viewModel.isRefresh.collectAsState()
-    val weeklyTrainState by viewModel.weeklyTrains.collectAsState()
-    val noticesState by viewModel.notices.collectAsState()
+    val isRefreshing by rememberFlowWithLifecycle(viewModel.isRefresh)
+        .collectAsState(initial = false)
+    val weeklyTrainState by rememberFlowWithLifecycle(viewModel.weeklyTrains)
+        .collectAsState(initial = Result.Initial)
+    val noticesState by rememberFlowWithLifecycle(viewModel.notices)
+        .collectAsState(initial = Result.Initial)
     val searchFieldState = rememberSearchState()
     SwipeRefresh(
         isRefreshing = isRefreshing,

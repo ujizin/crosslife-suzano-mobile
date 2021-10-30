@@ -16,12 +16,14 @@ import br.com.crosslife.components.Button
 import br.com.crosslife.data.Result
 import br.com.crosslife.extensions.capitalize
 import br.com.crosslife.extensions.navigateAndPop
+import br.com.crosslife.extensions.rememberFlowWithLifecycle
 import br.com.crosslife.features.login.viewmodel.LoginViewModel
 import br.com.crosslife.ui.theme.Space
 
 @Composable
 fun NavController.LogoutDialog(userViewModel: LoginViewModel = hiltViewModel()) {
-    val state by userViewModel.logout.collectAsState()
+    val state by rememberFlowWithLifecycle(userViewModel.logout)
+        .collectAsState(initial = Result.Initial)
     when (state) {
         Result.Initial, Result.Loading -> LogoutScreen(userViewModel)
         else -> navigateAndPop(Screen.Login, Screen.Home, true)

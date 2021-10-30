@@ -32,6 +32,7 @@ import br.com.crosslife.components.snackbar.SnackBar
 import br.com.crosslife.core.network.ServerError
 import br.com.crosslife.extensions.navigate
 import br.com.crosslife.extensions.navigateAndPop
+import br.com.crosslife.extensions.rememberFlowWithLifecycle
 import br.com.crosslife.features.login.viewmodel.LoginUiState
 import br.com.crosslife.features.login.viewmodel.LoginViewModel
 import br.com.crosslife.ui.theme.Space
@@ -42,7 +43,9 @@ import br.com.crosslife.utils.ErrorHelper
 fun NavController.LoginScreen(viewModel: LoginViewModel = hiltViewModel()) {
     val usernameState = rememberSaveable { mutableStateOf("") }
     val passwordState = rememberSaveable { mutableStateOf("") }
-    val state by viewModel.login.collectAsState()
+    val state by rememberFlowWithLifecycle(viewModel.login)
+        .collectAsState(initial = LoginUiState.Initial)
+
     when (state) {
         is LoginUiState.Success -> navigateAndPop(Screen.HomeRoot, Screen.Login, true)
         else -> {

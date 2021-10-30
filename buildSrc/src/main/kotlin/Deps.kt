@@ -22,6 +22,7 @@ object Deps {
         const val ANDROID_APP_COMPAT = "1.2.0"
         const val ANDROID_MATERIAL = "1.3.0"
         const val DATA_STORE = "1.0.0"
+        const val ANDROID_LIFECYCLE = "2.4.0"
 
         // Android Compose Lifecycle
 
@@ -102,6 +103,8 @@ object Deps {
 
     fun DependencyHandler.implementLifecycle() {
         implementation("androidx.lifecycle:lifecycle-viewmodel-compose:${Version.COMPOSE_LIFECYCLE}")
+        implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Version.ANDROID_LIFECYCLE}")
+        implementation("androidx.lifecycle:lifecycle-runtime-ktx:${Version.ANDROID_LIFECYCLE}")
     }
 
     fun DependencyHandlerScope.implementRoom() {

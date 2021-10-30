@@ -2,7 +2,6 @@ package br.com.crosslife.features.search.view
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -17,6 +16,7 @@ import br.com.crosslife.R
 import br.com.crosslife.data.Result
 import br.com.crosslife.domain.models.WeeklyTrain
 import br.com.crosslife.extensions.capitalize
+import br.com.crosslife.extensions.rememberFlowWithLifecycle
 import br.com.crosslife.features.detailscreen.navigateToDetailItem
 import br.com.crosslife.features.home.view.*
 import br.com.crosslife.features.search.viewmodel.SearchViewModel
@@ -28,8 +28,10 @@ import com.google.accompanist.flowlayout.SizeMode
 @ExperimentalFoundationApi
 @Composable
 fun NavController.SearchScreen(viewModel: SearchViewModel = hiltViewModel()) {
-    val weeklyTrainState by viewModel.weeklyTrains.collectAsState()
-    val noticeState by viewModel.notices.collectAsState()
+    val weeklyTrainState by rememberFlowWithLifecycle(viewModel.weeklyTrains)
+        .collectAsState(initial = Result.Initial)
+    val noticeState by rememberFlowWithLifecycle(viewModel.notices)
+        .collectAsState(initial = Result.Initial)
     val searchFieldState = rememberSearchState()
     SearchLazyColumn(searchFieldState) {
         item {
