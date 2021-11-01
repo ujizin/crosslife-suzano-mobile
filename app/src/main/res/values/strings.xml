@@ -2,16 +2,23 @@
     <string name="app_name">Cross Life</string>
     <string name="host">www.crosslife.com.br</string>
 
-    <string name="label_email">usuário</string>
-    <string name="label_password">senha</string>
+    <!--  General  -->
+    <string name="error_logo">error logo</string>
+    <string name="username">usuário</string>
+    <string name="password">senha</string>
     <string name="enter">entrar</string>
     <string name="send">enviar</string>
+    <string name="try_again">tentar novamente</string>
+    <string name="video">video</string>
+    <string name="play">play</string>
+
     <!--  Menu  -->
     <string name="menu_item_home">home</string>
     <string name="menu_item_search">buscar</string>
     <string name="menu_item_chat">chat</string>
     <string name="menu_item_profile">perfil</string>
     <string name="search">pesquisar</string>
+    <string name="empty_notices">nenhuma noticia encontrada.</string>
 
     <!-- Home -->
     <string name="weekly_train">treino da semana</string>
@@ -43,9 +50,7 @@
     <string name="forgot_password">esqueci a senha</string>
     <string name="forgot_password_sent">enviado um email com sucesso!</string>
 
-    <string name="video">video</string>
-    <string name="play">play</string>
-
+    <!--  Dates  -->
     <string name="sunday">domingo</string>
     <string name="monday">segunda-feira</string>
     <string name="tuesday">terça-feira</string>
@@ -58,6 +63,7 @@
     <string name="default_error_message">ops, parece que houve um erro, tente novamente</string>
     <string name="invalid_account_or_password">Usuário ou senha incorretos</string>
 
+    <!-- Advanced profile  -->
     <string name="from_author">de: %s</string>
     <string name="fat_mass">massa grossa</string>
     <string name="slim_mass">massa fina</string>
@@ -66,7 +72,5 @@
     <string name="bone_density">densidade óssea</string>
     <string name="visceral_fat">gordura visceral</string>
     <string name="basal_metabolism">metabolismo basal</string>
-    <string name="empty_notices">nenhuma noticia encontrada.</string>
-    <string name="try_again">tentar novamente</string>
 
 </resources>

@@ -22,6 +22,7 @@ import br.com.crosslife.R
 import br.com.crosslife.data.Result
 import br.com.crosslife.domain.models.WeeklyTrain
 import br.com.crosslife.extensions.capitalize
+import br.com.crosslife.ui.components.error.Error
 import br.com.crosslife.ui.theme.Space
 import br.com.crosslife.utils.DayOfWeek
 import br.com.crosslife.utils.Saver
@@ -34,6 +35,7 @@ import com.google.accompanist.pager.PagerState
 @ExperimentalPagerApi
 fun WeeklyTrain(
     state: Result<List<WeeklyTrain>>,
+    onRetryClick: () -> Unit,
     onWeeklyTrainClick: OnWeeklyTrainClick,
 ) {
     Text(
@@ -45,8 +47,8 @@ fun WeeklyTrain(
     )
 
     when (state) {
-        Result.Initial, Result.Loading -> HomeLoading()
-        is Result.Error -> HomeLoading() // TODO handle error
+        Result.Initial, Result.Loading -> Loading()
+        is Result.Error -> Error(onClick = { onRetryClick() })
         is Result.Success -> WeeklyTrainUI(state.data, onWeeklyTrainClick)
     }
 }

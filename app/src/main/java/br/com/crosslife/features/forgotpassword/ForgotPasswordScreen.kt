@@ -46,7 +46,7 @@ fun NavController.ForgotPasswordScreen(viewModel: LoginViewModel = hiltViewModel
             )
             TextField(
                 state = forgotPasswordState,
-                label = stringResource(id = R.string.label_email),
+                label = stringResource(id = R.string.username),
                 modifier = Modifier.padding(top = Space.XXS),
             )
             Button(

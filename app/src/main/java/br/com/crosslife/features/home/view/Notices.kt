@@ -21,11 +21,16 @@ import br.com.crosslife.R
 import br.com.crosslife.data.Result
 import br.com.crosslife.domain.models.Notice
 import br.com.crosslife.extensions.capitalize
+import br.com.crosslife.ui.components.error.Error
 import br.com.crosslife.ui.theme.DarkGray
 import br.com.crosslife.ui.theme.Space
 import coil.compose.rememberImagePainter
 
-fun LazyListScope.noticesItems(state: Result<List<Notice>>, onNoticeClick: OnNoticeClick) {
+fun LazyListScope.noticesItems(
+    state: Result<List<Notice>>,
+    onRetryClick: () -> Unit,
+    onNoticeClick: OnNoticeClick,
+) {
     item {
         Text(
             modifier = Modifier
@@ -37,8 +42,8 @@ fun LazyListScope.noticesItems(state: Result<List<Notice>>, onNoticeClick: OnNot
     }
 
     when (state) {
-        Result.Initial, Result.Loading -> item { HomeLoading() }
-        is Result.Error -> item { HomeLoading() } // TODO handle error
+        Result.Initial, Result.Loading -> item { Loading() }
+        is Result.Error -> item { Error { onRetryClick() } }
         is Result.Success -> if (state.data.isNotEmpty()) {
             items(state.data) { notice -> NoticeItem(notice, onNoticeClick) }
         } else {

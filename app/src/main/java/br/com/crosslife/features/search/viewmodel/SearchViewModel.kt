@@ -12,7 +12,10 @@ import br.com.crosslife.extensions.viewmodel.ViewModelExtensions
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -32,7 +35,7 @@ class SearchViewModel @Inject constructor(
         getNotices()
     }
 
-    private fun getWeeklyTrains() {
+    fun getWeeklyTrains() {
         weeklyTrainRepository.fetchWeeklyTrains()
             .notify(viewModelScope, weeklyTrains())
     }

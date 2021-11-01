@@ -66,13 +66,13 @@ fun NavController.LoginScreen(viewModel: LoginViewModel = hiltViewModel()) {
                         .height(150.dp)
                 )
                 TextField(
-                    label = stringResource(id = R.string.label_email),
+                    label = stringResource(id = R.string.username),
                     state = usernameState,
                     modifier = Modifier
                         .fillMaxWidth(),
                 )
                 TextField(
-                    label = stringResource(id = R.string.label_password),
+                    label = stringResource(id = R.string.password),
                     state = passwordState,
                     modifier = Modifier
                         .padding(top = Space.XS)

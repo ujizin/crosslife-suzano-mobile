@@ -17,7 +17,7 @@ import br.com.crosslife.data.Result
 import br.com.crosslife.domain.models.DetailProfile
 import br.com.crosslife.extensions.capitalize
 import br.com.crosslife.extensions.rememberFlowWithLifecycle
-import br.com.crosslife.features.home.view.HomeLoading
+import br.com.crosslife.features.home.view.Loading
 import br.com.crosslife.features.profile.viewmodel.DetailProfileViewModel
 import br.com.crosslife.ui.components.topbar.ScaffoldTopbar
 import br.com.crosslife.ui.theme.Space
@@ -33,8 +33,8 @@ fun NavController.DetailProfileScreen(viewModel: DetailProfileViewModel = hiltVi
 
     ScaffoldTopbar(titleRes = R.string.advanced_profile) {
         when (val state: Result<DetailProfile> = detailProfileState) {
-            Result.Initial, Result.Loading -> HomeLoading()
-            is Result.Error -> HomeLoading()
+            Result.Initial, Result.Loading -> Loading()
+            is Result.Error -> Loading()
             is Result.Success -> DetailProfileUI(state.data)
         }
     }

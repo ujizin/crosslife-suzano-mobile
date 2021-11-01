@@ -20,6 +20,7 @@ import br.com.crosslife.extensions.rememberFlowWithLifecycle
 import br.com.crosslife.features.detailscreen.navigateToDetailItem
 import br.com.crosslife.features.home.view.*
 import br.com.crosslife.features.search.viewmodel.SearchViewModel
+import br.com.crosslife.ui.components.error.Error
 import br.com.crosslife.ui.theme.Space
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.MainAxisAlignment
@@ -35,11 +36,19 @@ fun NavController.SearchScreen(viewModel: SearchViewModel = hiltViewModel()) {
     val searchFieldState = rememberSearchState()
     SearchLazyColumn(searchFieldState) {
         item {
-            SearchWeeklyTrain(weeklyTrainState) {
+            SearchWeeklyTrain(
+                state = weeklyTrainState,
+                onRetryClick = {
+                    viewModel.getWeeklyTrains()
+                }
+            ) {
                 navigateToDetailItem(it.toDetailItem(context))
             }
         }
-        noticesItems(noticeState) {
+        noticesItems(
+            state = noticeState,
+            onRetryClick = { viewModel.getNotices() }
+        ) {
             navigateToDetailItem(it.toDetailItem())
         }
         item { Spacer(Modifier.height(Space.BORDER)) }
@@ -49,6 +58,7 @@ fun NavController.SearchScreen(viewModel: SearchViewModel = hiltViewModel()) {
 @Composable
 private fun SearchWeeklyTrain(
     state: Result<List<WeeklyTrain>>,
+    onRetryClick: () -> Unit,
     onWeeklyTrainClick: OnWeeklyTrainClick,
 ) {
     Text(
@@ -60,10 +70,8 @@ private fun SearchWeeklyTrain(
     )
 
     when (state) {
-        Result.Initial, Result.Loading -> {
-        }
-        is Result.Error -> {
-        }
+        Result.Initial, Result.Loading -> Loading()
+        is Result.Error -> Error { onRetryClick() }
         is Result.Success -> WeeklyTrainUI(
             Modifier.padding(top = Space.XXS),
             state.data,

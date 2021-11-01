@@ -45,11 +45,17 @@ fun NavController.SearchLazyColumn(
         .collectAsState(initial = Result.Initial)
     LazyColumn(Modifier.fillMaxWidth()) {
         header()
-        item { SearchField(searchState = searchState, searchViewModel::getNotices)  }
+        item { SearchField(searchState = searchState, searchViewModel::getNotices) }
         if (searchState.value == SearchState.Unfocused) {
             content()
         } else {
-            noticesItems(noticeState) {
+            noticesItems(
+                state = noticeState,
+                onRetryClick = {
+                    val sentence = (searchState.value as? SearchState.Focused)?.text
+                    searchViewModel.getNotices(sentence)
+                }
+            ) {
                 navigateToDetailItem(it.toDetailItem())
             }
         }

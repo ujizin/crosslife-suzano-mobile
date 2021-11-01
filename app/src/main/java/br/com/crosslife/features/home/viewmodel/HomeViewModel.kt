@@ -41,10 +41,10 @@ class HomeViewModel @Inject constructor(
         getNotices()
     }
 
-    private fun getWeeklyTrains() = weeklyTrainRepository.fetchWeeklyTrains()
+    fun getWeeklyTrains() = weeklyTrainRepository.fetchWeeklyTrains()
         .notify(viewModelScope, weeklyTrains())
 
-    private fun getNotices() = noticeRepository.fetchNotices()
+    fun getNotices() = noticeRepository.fetchNotices()
         .notify(viewModelScope, notices())
 
     fun refresh() {

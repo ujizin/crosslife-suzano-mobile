@@ -37,11 +37,21 @@ fun NavController.HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
             }
         ) {
             item {
-                WeeklyTrain(weeklyTrainState) { weeklyTrain ->
+                WeeklyTrain(
+                    state = weeklyTrainState,
+                    onRetryClick = {
+                        viewModel.getWeeklyTrains()
+                    },
+                ) { weeklyTrain ->
                     navigateToDetailItem(weeklyTrain.toDetailItem(context))
                 }
             }
-            noticesItems(noticesState) { notice ->
+            noticesItems(
+                state = noticesState,
+                onRetryClick = {
+                    viewModel.getNotices()
+                }
+            ) { notice ->
                 navigateToDetailItem(notice.toDetailItem())
             }
             item { Spacer(Modifier.height(Space.BORDER)) }
