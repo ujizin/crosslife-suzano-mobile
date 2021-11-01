@@ -23,12 +23,15 @@ import br.com.crosslife.ui.components.animation.VerticalSlideAnimation
 @ExperimentalAnimationApi
 @Composable
 fun NavController.ScaffoldTopbar(
+    modifier: Modifier = Modifier,
     @StringRes titleRes: Int? = null,
     overlapTopBar: Boolean = false,
     actions: @Composable RowScope.() -> Unit = {},
     content: @Composable () -> Unit,
 ) {
-    Box {
+    Box(
+        modifier = modifier,
+    ) {
         VerticalSlideAnimation(
             anim = Slide.UpToDown,
         ) {

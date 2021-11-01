@@ -8,6 +8,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import br.com.crosslife.ui.theme.Space
 
 @Composable
@@ -17,7 +18,9 @@ fun BottomBox(
     content: @Composable ColumnScope.() -> Unit,
 ) {
     Box(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .then(modifier),
         contentAlignment = Alignment.BottomCenter,
     ) {
         Column(Modifier.fillMaxWidth()) {
@@ -30,8 +33,7 @@ fun BottomBox(
             Card(
                 Modifier
                     .fillMaxWidth()
-                    .wrapContentHeight()
-                    .then(modifier)
+                    .defaultMinSize(minHeight = 250.dp)
                     .padding(top = Space.XXS),
                 shape = RoundedCornerShape(topStart = Space.XXXS, topEnd = Space.XXXS),
                 backgroundColor = MaterialTheme.colors.background,
