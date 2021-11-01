@@ -67,5 +67,6 @@
     <string name="visceral_fat">gordura visceral</string>
     <string name="basal_metabolism">metabolismo basal</string>
     <string name="empty_notices">nenhuma noticia encontrada.</string>
+    <string name="try_again">tentar novamente</string>
 
 </resources>

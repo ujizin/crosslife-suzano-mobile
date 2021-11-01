@@ -75,6 +75,6 @@ private fun NavController.TopBar(
 }
 
 @Composable
-fun ColumnIf(isColumn: Boolean, block: @Composable () -> Unit) {
-    if (isColumn) Column(content = { block() }) else block()
+fun ColumnIf(condition: Boolean, block: @Composable () -> Unit) {
+    if (condition) Column(content = { block() }) else block()
 }
