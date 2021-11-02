@@ -36,6 +36,7 @@ object Deps {
 
         // Espresso
         const val ESPRESSO = "3.3.0"
+
         // jUnit
         const val ANDROID_TEST_JUNIT = "1.1.2"
         const val UNIT_TEST_JUNIT = "4.13.2"
@@ -112,16 +113,20 @@ object Deps {
         kapt("androidx.room:room-compiler:${Version.ROOM}")
     }
 
+    fun DependencyHandlerScope.implementRetrofit() {
+        implementation("com.squareup.retrofit2:retrofit:${Version.RETROFIT}")
+        implementation("com.squareup.retrofit2:converter-moshi:${Version.RETROFIT}")
+    }
+
     fun DependencyHandlerScope.generalDependencies() {
         implementation("androidx.datastore:datastore-preferences:${Version.DATA_STORE}")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Version.COROUTINES}")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${Version.COROUTINES}")
         implementation("com.google.accompanist:accompanist-pager:${Version.PAGER}")
         implementation("com.google.accompanist:accompanist-flowlayout:${Version.FLOW_LAYOUT}")
-        implementation("com.squareup.retrofit2:retrofit:${Version.RETROFIT}")
-        implementation("com.squareup.retrofit2:converter-moshi:${Version.RETROFIT}")
         implementation("org.jetbrains.kotlin:kotlin-reflect:${Version.KOTLIN}")
         implementation("io.coil-kt:coil-compose:${Version.COIL}")
         implementation("com.google.accompanist:accompanist-swiperefresh:${Version.SWIPE_REFRESH}")
+        implementRetrofit()
     }
 }

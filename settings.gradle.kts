@@ -8,3 +8,5 @@ dependencyResolutionManagement {
 rootProject.name = "Cross Life"
 
 include(":app")
+include(":network")
+include(":domain")
