@@ -1,3 +1,4 @@
+import Deps.implementHilt
 import Deps.implementRetrofit
 
 plugins {
@@ -9,4 +10,5 @@ apply("../config-android")
 
 dependencies {
     implementRetrofit()
+    implementHilt()
 }
