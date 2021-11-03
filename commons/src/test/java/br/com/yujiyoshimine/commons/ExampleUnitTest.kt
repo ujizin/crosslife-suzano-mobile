@@ -1,4 +1,4 @@
-package br.com.yujiyoshimine.network
+package br.com.yujiyoshimine.commons
 
 import org.junit.Test
 

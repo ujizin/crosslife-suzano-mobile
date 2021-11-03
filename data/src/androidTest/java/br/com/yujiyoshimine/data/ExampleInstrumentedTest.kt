@@ -1,4 +1,4 @@
-package br.com.yujiyoshimine.network
+package br.com.yujiyoshimine.data
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("br.com.yujiyoshimine.network.test", appContext.packageName)
+        assertEquals("br.com.yujiyoshimine.data.test", appContext.packageName)
     }
 }
