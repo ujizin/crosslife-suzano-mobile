@@ -3,4 +3,4 @@ plugins {
     id("kotlin-android")
 }
 
-apply("../config-android")
+apply from: "../config-android.gradle"
