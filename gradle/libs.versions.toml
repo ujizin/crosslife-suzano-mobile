@@ -1,5 +1,7 @@
 [versions]
+android-core = "1.7.0"
 kotlin = "1.5.30"
+corroutines = "1.5.0"
 coil = "1.3.2"
 retrofit = "2.9.0"
 room = "2.3.0"
@@ -11,12 +13,14 @@ nav-hilt-compose = "1.0.0-alpha03"
 navigation-compose = "2.4.0-alpha04"
 accompanist = "0.19.0"
 pager-accompanist = "0.13.0" # FIXME change to accompanist version
-
 hilt = "2.36"
 androidx-hilt = "1.0.0"
 viewmodel-hilt = "1.0.0-alpha03"
 
 [libraries]
+
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
+androidx-core = { module = "androidx.core:core-ktx", version.ref = "android-core" }
 
 accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanist" }
 accompanist-coil = { module = "com.google.accompanist:accompanist-coil", version.ref = "accompanist" }
@@ -32,15 +36,46 @@ compose-nav-hilt = { module = "androidx.hilt:hilt-navigation-compose", version.r
 
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "app-compat" }
 
-data-store = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
+datastore-datastore = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
 
 coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 
-retrofit-factory = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
 
-hilt-android-runtime = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hilt-hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
 hilt-androidx-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "androidx-hilt" }
 hilt-viewmodel = { module = "androidx.hilt:hilt-lifecycle-viewmodel", version.ref = "viewmodel-hilt" }
+
+corroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "corroutines" }
+corroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "corroutines" }
+
+room-room = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-kapt = { module = "androidx.room:room-compiler", version.ref = "room" }
+
+[bundles]
+androidx-accompanist = [
+    "accompanist-swiperefresh",
+    "accompanist-coil",
+    "coil"
+]
+androidx-compose = [
+    "compose-ui-ui",
+    "compose-ui-tooling",
+    "compose-material-material",
+    "compose-material-icons",
+    "compose-runtime",
+    "androidx-activity-compose"
+]
+
+androidx-hilt-compose = [
+    "compose-nav-hilt",
+    "hilt-viewmodel"
+]
+
+androidx-corroutines = [
+    "corroutines-core",
+    "corroutines-android"
+]
