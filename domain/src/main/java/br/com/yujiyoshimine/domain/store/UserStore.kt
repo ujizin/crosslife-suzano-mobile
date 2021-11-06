@@ -1,4 +1,4 @@
-package br.com.crosslife.domain.preferences
+package br.com.yujiyoshimine.domain.store
 
 import kotlinx.coroutines.flow.Flow
 
