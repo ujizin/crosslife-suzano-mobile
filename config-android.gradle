@@ -18,3 +18,9 @@ android {
         jvmTarget = "1.8"
     }
 }
+
+dependencies {
+    implementation libs.kotlin.stdlib
+    implementation libs.androidx.core
+    implementation libs.bundles.androidx.corroutines
+}
