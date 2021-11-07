@@ -1,10 +1,10 @@
-package br.com.crosslife.utils
+package br.com.yujiyoshimine.commons.utils
 
 import android.content.Context
-import br.com.crosslife.R
-import br.com.crosslife.core.network.ServerError
-import br.com.crosslife.data.errors.EmptyError
-import br.com.crosslife.data.errors.PasswordNotEqualsError
+import br.com.yujiyoshimine.commons.R
+import br.com.yujiyoshimine.domain.model.EmptyError
+import br.com.yujiyoshimine.domain.model.PasswordNotEqualsError
+import br.com.yujiyoshimine.domain.model.ServerError
 
 object ErrorHelper {
 
