@@ -1,10 +1,9 @@
 package br.com.yujiyoshimine.network
 
-import br.com.crosslife.BuildConfig
+import br.com.yujiyoshimine.domain.store.UserStore
 import br.com.yujiyoshimine.network.services.NoticeService
 import br.com.yujiyoshimine.network.services.UserService
 import br.com.yujiyoshimine.network.services.WeeklyTrainService
-import br.com.yujiyoshimine.domain.store.UserStore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
