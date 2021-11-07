@@ -9,12 +9,15 @@ import br.com.yujiyoshimine.commons.utils.NetworkUtils.toApiError
 import br.com.yujiyoshimine.domain.model.Result
 import br.com.yujiyoshimine.domain.model.ServerError
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
+
+private const val DEBOUNCE_DELAY = 300L
 
 fun <T> Flow<T>.catchNetwork(block: (ServerError) -> Unit) = catch { block(it.toApiError()) }
 
 fun <T> Flow<T>.notify(
-    scope: CoroutineScope? = null,
+    scope: CoroutineScope,
     stateFlow: MutableStateFlow<Result<T>>,
     finallyBlock: () -> Unit = {},
 ) =
@@ -26,10 +29,11 @@ fun <T> Flow<T>.notify(
     }.onEach {
         stateFlow.value = Result.Success(it)
         finallyBlock()
-    }.apply {
-        val coroutineScope = scope ?: return@apply
-        launchIn(coroutineScope)
-    }
+    }.launchIn(scope)
+
+fun <T> Flow<T>.onSentenceDelay(text: String?) = onStart {
+    if (!text.isNullOrBlank()) delay(DEBOUNCE_DELAY)
+}
 
 @Composable
 fun <T> rememberFlowWithLifecycle(
