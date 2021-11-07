@@ -1,9 +1,9 @@
-package br.com.crosslife.utils
+package br.com.yujiyoshimine.commons.utils
 
+import android.content.Context
 import androidx.annotation.StringRes
-import br.com.crosslife.R
+import br.com.yujiyoshimine.commons.R
 import java.util.*
-
 
 enum class DayOfWeek(@StringRes val stringRes: Int) {
     Sunday(R.string.sunday),
@@ -18,6 +18,7 @@ enum class DayOfWeek(@StringRes val stringRes: Int) {
         fun getCurrentDay(): Int = Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 1
 
         fun getDay(dayOfWeek: Int) = values().first { it.ordinal == dayOfWeek }
-    }
 
+        fun getNameDay(context: Context) = context.getString(getDay(getCurrentDay()).stringRes)
+    }
 }

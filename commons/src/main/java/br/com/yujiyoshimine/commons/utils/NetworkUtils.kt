@@ -1,8 +1,7 @@
-package br.com.yujiyoshimine.network.utils
+package br.com.yujiyoshimine.commons.utils
 
-import br.com.yujiyoshimine.network.ServerError
-import br.com.yujiyoshimine.network.Status
-import retrofit2.HttpException
+import br.com.yujiyoshimine.domain.model.ServerError
+import br.com.yujiyoshimine.domain.model.Status
 
 object NetworkUtils {
 
@@ -12,7 +11,7 @@ object NetworkUtils {
 
     fun Throwable.toApiError(): ServerError {
         val code = when (this) {
-            is HttpException -> code()
+//            is HttpException -> code() // FIXME get http exception interface
             else -> Status.NO_NETWORK.code
         }
 
