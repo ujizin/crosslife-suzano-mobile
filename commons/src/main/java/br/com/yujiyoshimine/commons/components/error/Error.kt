@@ -1,4 +1,4 @@
-package br.com.crosslife.ui.components.error
+package br.com.yujiyoshimine.commons.components.error
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -10,9 +10,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import br.com.crosslife.R
-import br.com.crosslife.components.Button
-import br.com.crosslife.ui.theme.Space
+import br.com.yujiyoshimine.commons.R
+import br.com.yujiyoshimine.commons.components.Button
+import br.com.yujiyoshimine.commons.theme.Space
 
 @Composable
 fun Error(

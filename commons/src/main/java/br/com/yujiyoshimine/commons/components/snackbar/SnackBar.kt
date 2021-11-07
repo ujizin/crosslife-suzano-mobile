@@ -1,18 +1,21 @@
-package br.com.crosslife.components.snackbar
+package br.com.yujiyoshimine.commons.components.snackbar
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Snackbar
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.Stable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import br.com.crosslife.ui.components.animation.Slide
-import br.com.crosslife.ui.components.animation.VerticalSlideAnimation
-import br.com.crosslife.ui.theme.Green
-import br.com.crosslife.ui.theme.Red
-import br.com.crosslife.ui.theme.Yellow
+import br.com.yujiyoshimine.commons.components.animation.Slide
+import br.com.yujiyoshimine.commons.components.animation.VerticalSlideAnimation
+import br.com.yujiyoshimine.commons.theme.Green
+import br.com.yujiyoshimine.commons.theme.Red
+import br.com.yujiyoshimine.commons.theme.Yellow
 import kotlinx.coroutines.delay
 
 @ExperimentalAnimationApi

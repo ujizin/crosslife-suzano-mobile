@@ -1,4 +1,4 @@
-package br.com.crosslife.ui.components.animation
+package br.com.yujiyoshimine.commons.components.animation
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.MutableTransitionState

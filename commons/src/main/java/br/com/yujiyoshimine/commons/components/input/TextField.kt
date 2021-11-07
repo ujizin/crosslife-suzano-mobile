@@ -1,4 +1,4 @@
-package br.com.crosslife.components.input
+package br.com.yujiyoshimine.commons.components.input
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border

@@ -1,4 +1,4 @@
-package br.com.crosslife.features.home.view
+package br.com.yujiyoshimine.commons.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
