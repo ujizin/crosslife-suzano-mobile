@@ -1,4 +1,4 @@
-package br.com.crosslife.features.changepassword.view
+package br.com.yujiyoshimine.commons.components.form
 
 import androidx.annotation.StringRes
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -7,53 +7,20 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import br.com.crosslife.R
-import br.com.crosslife.components.Button
-import br.com.crosslife.components.input.TextField
-import br.com.crosslife.components.snackbar.SnackBar
-import br.com.crosslife.data.Result
-import br.com.crosslife.extensions.rememberFlowWithLifecycle
-import br.com.crosslife.features.changepassword.viewmodel.ChangePasswordViewModel
-import br.com.crosslife.ui.components.snackbar.SnackBarByState
-import br.com.crosslife.ui.components.topbar.ScaffoldTopbar
-import br.com.crosslife.ui.theme.Space
+import br.com.yujiyoshimine.commons.components.topbar.ScaffoldTopbar
+import br.com.yujiyoshimine.commons.R
+import br.com.yujiyoshimine.commons.components.Button
+import br.com.yujiyoshimine.commons.components.input.TextField
+import br.com.yujiyoshimine.commons.theme.Space
 
 @ExperimentalAnimationApi
 @Composable
-fun NavController.ChangePasswordScreen(viewModel: ChangePasswordViewModel = hiltViewModel()) {
-    val oldPasswordState = rememberSaveable { mutableStateOf("") }
-    val newPasswordState = rememberSaveable { mutableStateOf("") }
-    val confirmNewPasswordState = rememberSaveable { mutableStateOf("") }
-    val changePasswordState by rememberFlowWithLifecycle(viewModel.result)
-        .collectAsState(initial = Result.Initial)
-
-    ChangePasswordUI(
-        oldPasswordState = oldPasswordState,
-        newPasswordState = newPasswordState,
-        confirmNewPasswordState = confirmNewPasswordState,
-        isLoading = changePasswordState is Result.Loading,
-        resetFields = changePasswordState is Result.Success,
-        onChangePasswordClick = {
-            viewModel.changePassword(
-                oldPasswordState.value,
-                newPasswordState.value,
-                confirmNewPasswordState.value,
-            )
-        }
-    )
-
-    SnackBarByState(changePasswordState, R.string.changed_password)
-}
-
-@ExperimentalAnimationApi
-@Composable
-fun NavController.ChangePasswordUI(
+fun NavController.PasswordUI(
     oldPasswordState: MutableState<String>? = null,
     newPasswordState: MutableState<String>,
     confirmNewPasswordState: MutableState<String>,
@@ -101,15 +68,6 @@ fun NavController.ChangePasswordUI(
             confirmNewPasswordState
         ).clearAll()
     }
-}
-
-@ExperimentalAnimationApi
-@Composable
-fun SnackBarSuccess(@StringRes stringRes: Int) {
-    SnackBar(
-        text = stringResource(id = stringRes),
-        durationMillis = SnackBar.TIME_LONG
-    )
 }
 
 @Composable

@@ -1,4 +1,4 @@
-package br.com.crosslife.features.home.view
+package br.com.yujiyoshimine.commons.components.notices
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -17,13 +17,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import br.com.crosslife.R
-import br.com.crosslife.data.Result
-import br.com.crosslife.domain.models.Notice
-import br.com.crosslife.extensions.capitalize
-import br.com.crosslife.ui.components.error.Error
-import br.com.crosslife.ui.theme.DarkGray
-import br.com.crosslife.ui.theme.Space
+import br.com.yujiyoshimine.commons.R
+import br.com.yujiyoshimine.commons.components.Loading
+import br.com.yujiyoshimine.commons.components.error.Error
+import br.com.yujiyoshimine.commons.extensions.capitalize
+import br.com.yujiyoshimine.commons.theme.DarkGray
+import br.com.yujiyoshimine.commons.theme.Space
+import br.com.yujiyoshimine.commons.utils.OnNoticeClick
+import br.com.yujiyoshimine.domain.model.Notice
+import br.com.yujiyoshimine.domain.model.Result
 import coil.compose.rememberImagePainter
 
 fun LazyListScope.noticesItems(
@@ -108,5 +110,3 @@ fun NoticeItem(notice: Notice, onNoticeClick: OnNoticeClick) {
         }
     }
 }
-
-typealias OnNoticeClick = (Notice) -> Unit
