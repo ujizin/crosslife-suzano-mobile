@@ -6,11 +6,16 @@ plugins {
 
 apply from: "../config-android.gradle"
 
+android {
+    defaultConfig {
+        buildConfigField("String", "BASE_URL", "\"https://crosslifeapi.herokuapp.com/\"")
+    }
+}
+
 dependencies {
+    // FIXME remove domain module, get token instead userStore
     implementation project(":domain")
 
-    implementation libs.retrofit.retrofit
+    api libs.retrofit.retrofit
     implementation libs.retrofit.moshi
-    implementation libs.hilt.hilt
-    kapt libs.hilt.compiler
 }
