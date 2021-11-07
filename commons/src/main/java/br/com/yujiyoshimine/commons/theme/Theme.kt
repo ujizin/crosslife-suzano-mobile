@@ -1,4 +1,4 @@
-package br.com.crosslife.ui.theme
+package br.com.yujiyoshimine.commons.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
