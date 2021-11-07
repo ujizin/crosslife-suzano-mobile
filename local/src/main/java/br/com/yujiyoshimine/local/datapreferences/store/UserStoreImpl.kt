@@ -1,9 +1,8 @@
-package br.com.crosslife.data.stores.user
+package br.com.yujiyoshimine.local.datapreferences.store
 
 import androidx.datastore.preferences.core.stringPreferencesKey
-import br.com.crosslife.core.local.datapreferences.DataPreferences
-import br.com.crosslife.domain.models.User
-import br.com.crosslife.domain.preferences.UserStore
+import br.com.yujiyoshimine.domain.store.UserStore
+import br.com.yujiyoshimine.local.datapreferences.DataPreferences
 import kotlinx.coroutines.flow.Flow
 
 class UserStoreImpl(private val dataStore: DataPreferences) : UserStore {
