@@ -1,4 +1,4 @@
-package br.com.crosslife.core.network
+package br.com.yujiyoshimine.domain.model
 
 data class ServerError(
     val error: Throwable,
