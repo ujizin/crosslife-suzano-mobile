@@ -4,3 +4,11 @@ plugins {
 }
 
 apply from: "../config-android.gradle"
+apply from: "../config-compose.gradle"
+
+dependencies {
+    implementation project(":domain")
+    implementation project(":navigation")
+
+    implementation libs.material.material
+}
