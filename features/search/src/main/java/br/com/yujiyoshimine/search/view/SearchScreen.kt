@@ -2,28 +2,27 @@ package br.com.yujiyoshimine.search.view
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyListScope
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.runtime.*
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight.Companion.Bold
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import br.com.yujiyoshimine.commons.R
 import br.com.yujiyoshimine.commons.components.Loading
 import br.com.yujiyoshimine.commons.components.error.Error
 import br.com.yujiyoshimine.commons.components.notices.noticesItems
+import br.com.yujiyoshimine.commons.components.search.SearchLazyColumn
+import br.com.yujiyoshimine.commons.components.search.currentText
+import br.com.yujiyoshimine.commons.components.search.rememberSearchState
 import br.com.yujiyoshimine.commons.components.weeklytrain.WeeklyTrainItem
 import br.com.yujiyoshimine.commons.extensions.capitalize
 import br.com.yujiyoshimine.commons.extensions.navigateToDetailItem
 import br.com.yujiyoshimine.commons.extensions.rememberFlowWithLifecycle
-import br.com.yujiyoshimine.commons.theme.Gray
 import br.com.yujiyoshimine.commons.theme.Space
 import br.com.yujiyoshimine.commons.utils.DayOfWeek
 import br.com.yujiyoshimine.commons.utils.OnWeeklyTrainClick
@@ -42,7 +41,16 @@ fun NavController.SearchScreen(viewModel: SearchViewModel = hiltViewModel()) {
     val noticeState by rememberFlowWithLifecycle(viewModel.notices)
         .collectAsState(initial = Result.Initial)
     val searchFieldState = rememberSearchState()
-    SearchLazyColumn(searchFieldState) {
+    SearchLazyColumn(
+        searchState = searchFieldState,
+        noticeResult = noticeState,
+        onValueChanged = {
+            viewModel.getNotices(it)
+        },
+        onRetryClick = {
+            viewModel.getNotices(searchFieldState.currentText)
+        },
+    ) {
         item {
             SearchWeeklyTrain(
                 state = weeklyTrainState,
@@ -64,89 +72,6 @@ fun NavController.SearchScreen(viewModel: SearchViewModel = hiltViewModel()) {
     }
 }
 
-sealed class SearchState {
-    object Unfocused : SearchState()
-    data class Focused(val text: String) : SearchState()
-}
-
-@Composable
-fun rememberSearchState(): MutableState<SearchState> = remember {
-    mutableStateOf(SearchState.Unfocused)
-}
-
-@Composable
-fun NavController.SearchLazyColumn(
-    searchState: MutableState<SearchState>,
-    header: LazyListScope.() -> Unit = {},
-    searchViewModel: SearchViewModel = hiltViewModel(),
-    content: LazyListScope.() -> Unit,
-) {
-    val noticeState by rememberFlowWithLifecycle(searchViewModel.notices)
-        .collectAsState(initial = Result.Initial)
-    LazyColumn(Modifier.fillMaxWidth()) {
-        header()
-        item { SearchField(searchState = searchState, searchViewModel::getNotices) }
-        if (searchState.value == SearchState.Unfocused) {
-            content()
-        } else {
-            noticesItems(
-                state = noticeState,
-                onRetryClick = {
-                    val sentence = (searchState.value as? SearchState.Focused)?.text
-                    searchViewModel.getNotices(sentence)
-                }
-            ) {
-                navigateToDetailItem(it.toDetailItem())
-            }
-        }
-
-    }
-}
-
-@Composable
-fun SearchField(
-    searchState: MutableState<SearchState>,
-    onValueChanged: (String) -> Unit,
-) {
-    val textState = remember { mutableStateOf("") }
-    TextField(
-        value = textState.value,
-        onValueChange = {
-            textState.value = it
-            onValueChanged(it)
-            searchState.value = when {
-                it != "" -> SearchState.Focused(it)
-                else -> SearchState.Unfocused
-            }
-        },
-        singleLine = true,
-        modifier = Modifier
-            .padding(top = Space.XXXS)
-            .padding(horizontal = Space.BORDER)
-            .fillMaxWidth(),
-        placeholder = {
-            Text(
-                text = stringResource(id = R.string.search).capitalize(),
-                color = Gray,
-                modifier = Modifier.alpha(0.4F),
-                style = MaterialTheme.typography.body1
-            )
-        },
-        colors = TextFieldDefaults.textFieldColors(
-            backgroundColor = MaterialTheme.colors.surface,
-            placeholderColor = Gray,
-        ),
-        shape = MaterialTheme.shapes.medium,
-        leadingIcon = {
-            Icon(
-                imageVector = Icons.Filled.Search,
-                tint = Gray,
-                contentDescription = stringResource(id = R.string.search),
-                modifier = Modifier.size(32.dp)
-            )
-        }
-    )
-}
 
 @Composable
 private fun SearchWeeklyTrain(

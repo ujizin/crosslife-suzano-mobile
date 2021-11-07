@@ -3,6 +3,7 @@ package br.com.yujiyoshimine.search.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.yujiyoshimine.commons.extensions.notify
+import br.com.yujiyoshimine.commons.extensions.onSentenceDelay
 import br.com.yujiyoshimine.commons.extensions.viewmodel.ViewModelExtensions
 import br.com.yujiyoshimine.domain.model.Notice
 import br.com.yujiyoshimine.domain.model.Result
@@ -11,11 +12,8 @@ import br.com.yujiyoshimine.domain.repository.NoticeRepository
 import br.com.yujiyoshimine.domain.repository.WeeklyTrainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.onStart
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -41,14 +39,9 @@ class SearchViewModel @Inject constructor(
 
     fun getNotices(sentence: String? = null) {
         job?.cancel()
-        job = viewModelScope.launch {
-            noticeRepository.fetchNotices(sentence)
-                .onStart { if (!sentence.isNullOrBlank()) delay(DEBOUNCE_DELAY) }
-                .notify(stateFlow = notices())
-        }
-    }
-
-    companion object {
-        private const val DEBOUNCE_DELAY = 300L
+        noticeRepository.fetchNotices(sentence)
+            .onSentenceDelay(sentence)
+            .notify(viewModelScope, notices())
+            .apply { job = this }
     }
 }
