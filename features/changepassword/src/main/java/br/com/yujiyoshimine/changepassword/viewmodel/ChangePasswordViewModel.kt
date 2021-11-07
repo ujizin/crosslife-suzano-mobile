@@ -8,7 +8,10 @@ import br.com.yujiyoshimine.domain.model.PasswordNotEqualsError
 import br.com.yujiyoshimine.domain.model.Result
 import br.com.yujiyoshimine.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flatMapConcat
+import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,7 +26,6 @@ class ChangePasswordViewModel @Inject constructor(
             check(newPassword == confirmNewPassword) { throw PasswordNotEqualsError() }
         }.flatMapConcat { username ->
             userRepository.changePassword(username, password, newPassword)
-        }.notify(stateFlow = result())
-            .launchIn(viewModelScope)
+        }.notify(viewModelScope, result())
     }
 }
