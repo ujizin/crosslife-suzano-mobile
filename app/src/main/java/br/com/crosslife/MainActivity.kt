@@ -7,16 +7,15 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.navigation.compose.rememberNavController
-import br.com.yujiyoshimine.commons.theme.CrossLifeTheme
-import br.com.yujiyoshimine.navigation.Screen
+import br.com.crosslife.ui.theme.CrossLifeTheme
 import com.google.accompanist.pager.ExperimentalPagerApi
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 @ExperimentalFoundationApi
+@ExperimentalPagerApi
+@AndroidEntryPoint
 @ExperimentalMaterialApi
 @ExperimentalAnimationApi
-@ExperimentalPagerApi
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

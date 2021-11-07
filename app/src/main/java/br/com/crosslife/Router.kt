@@ -5,35 +5,32 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.*
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.dialog
-import br.com.yujiyoshimine.changepassword.view.ChangePasswordScreen
-import br.com.yujiyoshimine.chat.view.ChatScreen
-import br.com.yujiyoshimine.commons.components.animation.FadeAnimation
-import br.com.yujiyoshimine.commons.components.tabbar.TabBar
-import br.com.yujiyoshimine.detail.DetailScreen
-import br.com.yujiyoshimine.domain.model.DetailItem
-import br.com.yujiyoshimine.forgotpassword.view.ForgotPasswordScreen
-import br.com.yujiyoshimine.home.view.HomeScreen
-import br.com.yujiyoshimine.login.view.LoginScreen
-import br.com.yujiyoshimine.logout.view.LogoutDialog
-import br.com.yujiyoshimine.navigation.Screen
-import br.com.yujiyoshimine.profile.view.DetailProfileScreen
-import br.com.yujiyoshimine.profile.view.ProfileScreen
-import br.com.yujiyoshimine.recoverypassword.view.RecoveryPasswordScreen
-import br.com.yujiyoshimine.search.view.SearchScreen
-import br.com.yujiyoshimine.splash.view.SplashScreen
+import androidx.navigation.compose.*
+import br.com.crosslife.domain.models.DetailItem
+import br.com.crosslife.features.changepassword.view.ChangePasswordScreen
+import br.com.crosslife.features.chat.view.ChatScreen
+import br.com.crosslife.features.forgotpassword.ForgotPasswordScreen
+import br.com.crosslife.features.home.view.HomeScreen
+import br.com.crosslife.features.login.view.LoginScreen
+import br.com.crosslife.features.logout.LogoutDialog
+import br.com.crosslife.features.profile.view.DetailProfileScreen
+import br.com.crosslife.features.profile.view.ProfileScreen
+import br.com.crosslife.features.search.view.SearchScreen
+import br.com.crosslife.features.splash.view.SplashScreen
+import br.com.crosslife.features.detailscreen.DetailScreen
+import br.com.crosslife.features.recoverypassword.view.RecoveryPasswordScreen
+import br.com.crosslife.ui.components.animation.FadeAnimation
+import br.com.crosslife.ui.components.tabbar.TabBar
 import com.google.accompanist.pager.ExperimentalPagerApi
 
 interface Router {
 
     companion object {
 
-        @ExperimentalPagerApi
         @ExperimentalMaterialApi
         @ExperimentalAnimationApi
         @ExperimentalFoundationApi
+        @ExperimentalPagerApi
         @Composable
         fun Init(navController: NavController, startDestination: String) {
             navController.apply {
