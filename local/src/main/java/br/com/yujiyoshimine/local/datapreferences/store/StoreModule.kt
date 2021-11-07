@@ -1,7 +1,7 @@
-package br.com.yujiyoshimine.data.stores
+package br.com.yujiyoshimine.local.datapreferences.store
 
-import br.com.crosslife.data.stores.user.UserStoreImpl
 import br.com.yujiyoshimine.domain.store.UserStore
+import br.com.yujiyoshimine.local.datapreferences.DataPreferences
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
