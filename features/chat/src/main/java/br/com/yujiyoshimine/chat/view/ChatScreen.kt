@@ -1,4 +1,4 @@
-package br.com.crosslife.features.chat.view
+package br.com.yujiyoshimine.chat.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -15,10 +15,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import br.com.crosslife.R
-import br.com.crosslife.components.Button
-import br.com.crosslife.extensions.capitalize
-import br.com.crosslife.ui.theme.Space
+import br.com.yujiyoshimine.commons.R
+import br.com.yujiyoshimine.commons.components.Button
+import br.com.yujiyoshimine.commons.extensions.capitalize
+import br.com.yujiyoshimine.commons.theme.Space
 
 @Composable
 fun NavController.ChatScreen() {
