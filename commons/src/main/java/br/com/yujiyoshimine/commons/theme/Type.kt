@@ -1,4 +1,4 @@
-package br.com.crosslife.ui.theme
+package br.com.yujiyoshimine.commons.theme
 
 import androidx.compose.material.Colors
 import androidx.compose.material.Typography
@@ -7,7 +7,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import br.com.crosslife.R
+import br.com.yujiyoshimine.commons.R
 
 val PoppinsFamily = FontFamily(
     Font(R.font.poppinsbold, weight = FontWeight.Bold),
