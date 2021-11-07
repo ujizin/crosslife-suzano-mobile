@@ -9,9 +9,8 @@ android {
 }
 
 dependencies {
-    implementation libs.compose.ui.ui
-    implementation libs.compose.ui.tooling
-    implementation libs.compose.material.material
-    implementation libs.compose.material.icons
-    implementation libs.compose.runtime
+    implementation libs.bundles.androidx.compose
+    implementation libs.bundles.androidx.accompanist
+    implementation libs.bundles.androidx.hilt.compose
+    implementation libs.lifecycle.runtime
 }
