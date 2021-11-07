@@ -1,4 +1,4 @@
-package br.com.crosslife.extensions.viewmodel
+package br.com.yujiyoshimine.commons.extensions.viewmodel
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

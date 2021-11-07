@@ -1,8 +1,9 @@
-package br.com.crosslife.extensions
+package br.com.yujiyoshimine.commons.extensions
 
 import androidx.navigation.NavController
 import androidx.navigation.NavOptionsBuilder
-import br.com.crosslife.Screen
+import br.com.yujiyoshimine.domain.model.DetailItem
+import br.com.yujiyoshimine.navigation.Screen
 
 fun NavController.navigate(
     screen: Screen,
@@ -35,4 +36,9 @@ fun NavController.navigateAndPop(
             graph.setStartDestination(screen.route)
         }
     }
+}
+
+fun NavController.navigateToDetailItem(detailItem: DetailItem) {
+    currentBackStackEntry?.arguments?.putParcelable("detail_item", detailItem)
+    navigate(Screen.DetailItem)
 }
