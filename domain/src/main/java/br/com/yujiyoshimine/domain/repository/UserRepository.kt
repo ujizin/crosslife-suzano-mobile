@@ -5,6 +5,8 @@ import br.com.yujiyoshimine.domain.model.User
 import kotlinx.coroutines.flow.Flow
 
 interface UserRepository {
+    fun getToken(): Flow<String>
+    fun getUsername(): Flow<String>
     fun fetchLogin(username: String, password: String): Flow<User>
     fun fetchLogout(): Flow<Unit>
     fun changePassword(username: String, password: String, newPassword: String): Flow<Unit>

@@ -1,7 +1,6 @@
-package br.com.crosslife.data
+package br.com.yujiyoshimine.domain.model
 
 import android.util.Log
-import br.com.crosslife.core.network.ServerError
 
 sealed class Result<out R> {
     data class Success<T>(val data: T) : Result<T>()
