@@ -1,13 +1,13 @@
-package br.com.crosslife.extensions
+package br.com.yujiyoshimine.commons.extensions
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
-import br.com.crosslife.core.network.ServerError
-import br.com.crosslife.core.network.utils.NetworkUtils.toApiError
-import br.com.crosslife.data.Result
+import br.com.yujiyoshimine.commons.utils.NetworkUtils.toApiError
+import br.com.yujiyoshimine.domain.model.Result
+import br.com.yujiyoshimine.domain.model.ServerError
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.*
 
