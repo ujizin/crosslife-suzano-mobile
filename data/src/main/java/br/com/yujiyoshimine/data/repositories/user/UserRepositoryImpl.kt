@@ -1,7 +1,7 @@
 package br.com.yujiyoshimine.data.repositories.user
 
-import br.com.yujiyoshimine.data.errors.EmptyError
 import br.com.yujiyoshimine.domain.model.DetailProfile
+import br.com.yujiyoshimine.domain.model.EmptyError
 import br.com.yujiyoshimine.domain.model.User
 import br.com.yujiyoshimine.domain.repository.UserRepository
 import br.com.yujiyoshimine.domain.store.UserStore
@@ -73,4 +73,8 @@ class UserRepositoryImpl(
             emit(detailProfile.toDomain())
         }.collect()
     }
+
+    override fun getToken() = userStore.getToken()
+
+    override fun getUsername() = userStore.getUsername()
 }
