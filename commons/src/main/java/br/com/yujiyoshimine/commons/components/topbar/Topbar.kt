@@ -1,4 +1,4 @@
-package br.com.crosslife.ui.components.topbar
+package br.com.yujiyoshimine.commons.components.topbar
 
 import androidx.annotation.StringRes
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -14,11 +14,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
-import br.com.crosslife.R
-import br.com.crosslife.extensions.capitalize
-import br.com.crosslife.ui.components.animation.FadeAnimation
-import br.com.crosslife.ui.components.animation.Slide
-import br.com.crosslife.ui.components.animation.VerticalSlideAnimation
+import br.com.yujiyoshimine.commons.R
+import br.com.yujiyoshimine.commons.components.animation.FadeAnimation
+import br.com.yujiyoshimine.commons.components.animation.Slide
+import br.com.yujiyoshimine.commons.components.animation.VerticalSlideAnimation
+import br.com.yujiyoshimine.commons.extensions.capitalize
 
 @ExperimentalAnimationApi
 @Composable

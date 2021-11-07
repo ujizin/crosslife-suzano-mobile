@@ -1,4 +1,4 @@
-package br.com.crosslife.ui.components.bottombox
+package br.com.yujiyoshimine.commons.components.bottombox
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import br.com.crosslife.ui.theme.Space
+import br.com.yujiyoshimine.commons.theme.Space
 
 @Composable
 fun BottomBox(

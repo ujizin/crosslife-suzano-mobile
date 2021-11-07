@@ -1,11 +1,9 @@
-package br.com.crosslife.ui.components.snackbar
+package br.com.yujiyoshimine.commons.components.snackbar
 
 import androidx.annotation.StringRes
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
-import br.com.crosslife.features.changepassword.view.SnackBarSuccess
-import br.com.crosslife.features.login.view.SnackBarError
-import br.com.crosslife.data.Result
+import br.com.yujiyoshimine.domain.model.Result
 
 @ExperimentalAnimationApi
 @Composable

@@ -1,6 +1,7 @@
-package br.com.crosslife.ui.components.tabbar
+package br.com.yujiyoshimine.commons.components.tabbar
 
 import android.graphics.Rect
+import android.view.ViewTreeObserver
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
@@ -9,12 +10,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalView
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
-import br.com.crosslife.Screen
-import br.com.crosslife.ui.components.animation.FadeAnimation
-import br.com.crosslife.ui.components.animation.VerticalSlideAnimation
-import br.com.crosslife.ui.components.bottomnavigation.BottomNavigation
-import br.com.crosslife.ui.components.bottomnavigation.Tab
-import android.view.ViewTreeObserver
+import br.com.yujiyoshimine.commons.components.animation.FadeAnimation
+import br.com.yujiyoshimine.commons.components.animation.VerticalSlideAnimation
+import br.com.yujiyoshimine.commons.components.bottomnavigation.BottomNavigation
+import br.com.yujiyoshimine.navigation.Screen
+import br.com.yujiyoshimine.navigation.Tab
 
 
 enum class Keyboard {

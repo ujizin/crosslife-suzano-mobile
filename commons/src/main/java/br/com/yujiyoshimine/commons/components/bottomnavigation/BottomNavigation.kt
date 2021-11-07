@@ -1,4 +1,4 @@
-package br.com.crosslife.ui.components.bottomnavigation
+package br.com.yujiyoshimine.commons.components.bottomnavigation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -8,12 +8,13 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Gray
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import br.com.crosslife.Screen
-import br.com.crosslife.extensions.capitalize
-import br.com.crosslife.ui.theme.Gray
+import br.com.yujiyoshimine.commons.extensions.capitalize
+import br.com.yujiyoshimine.navigation.Screen
+import br.com.yujiyoshimine.navigation.Tab
 
 @Composable
 fun BottomNavigation(currentTab: Tab, onTabItemClicked: (Screen) -> Unit) {
