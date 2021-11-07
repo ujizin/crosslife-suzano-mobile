@@ -1,4 +1,4 @@
-package br.com.yujiyoshimine.data.errors
+package br.com.yujiyoshimine.domain.model
 
 class EmptyError: Throwable()
 

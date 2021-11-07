@@ -1,4 +1,4 @@
-package br.com.crosslife.utils
+package br.com.yujiyoshimine.commons.utils
 
 object BioimpedanceUtil {
 
