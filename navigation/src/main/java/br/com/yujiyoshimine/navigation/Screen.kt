@@ -1,12 +1,11 @@
-package br.com.crosslife
+package br.com.yujiyoshimine.navigation
 
 import androidx.navigation.NavDeepLink
 import androidx.navigation.NavType
 import androidx.navigation.compose.NamedNavArgument
 import androidx.navigation.compose.navArgument
 import androidx.navigation.navDeepLink
-import br.com.crosslife.Screen.RecoveryPassword.TOKEN_ARG
-import br.com.crosslife.ui.components.bottomnavigation.Tab
+import br.com.yujiyoshimine.navigation.Screen.RecoveryPassword.TOKEN_ARG
 
 
 sealed class Screen(
