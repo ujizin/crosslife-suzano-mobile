@@ -1,0 +1,16 @@
+android {
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.get()
+    }
+}
+
+dependencies {
+    implementation libs.bundles.androidx.compose
+    implementation libs.bundles.androidx.accompanist
+    implementation libs.bundles.androidx.hilt.compose
+    implementation libs.lifecycle.runtime
+}

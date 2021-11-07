@@ -1,0 +1,23 @@
+rootProject.name = "Cross Life"
+
+include ":app"
+include ":network"
+include ":domain"
+include ":data"
+include ':local'
+include ":commons"
+include ":navigation"
+
+include ':features:changepassword'
+include ':features:detail'
+include ':features:forgotpassword'
+include ':features:home'
+include ':features:login'
+include ':features:logout'
+include ':features:profile'
+include ':features:recoverypassword'
+include ':features:search'
+include ':features:chat'
+include ':features:splash'
+
+enableFeaturePreview("VERSION_CATALOGS")
