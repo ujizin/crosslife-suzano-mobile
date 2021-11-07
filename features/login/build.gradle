@@ -1,0 +1,13 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+
+apply from: '../../config-android.gradle'
+apply from: '../../config-compose.gradle'
+
+dependencies {
+    implementation project(':navigation')
+    implementation project(':commons')
+    implementation project(path: ':domain')
+}
