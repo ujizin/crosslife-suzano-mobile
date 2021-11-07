@@ -4,3 +4,13 @@ plugins {
 }
 
 apply from: "../config-android.gradle"
+apply from: "../config-compose.gradle"
+
+dependencies {
+    implementation project(':domain')
+
+    implementation libs.kotlin.reflect
+
+    api libs.compose.navigation
+    api libs.compose.nav.hilt
+}
