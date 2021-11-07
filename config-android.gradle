@@ -1,3 +1,6 @@
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
+
 android {
     compileSdkVersion 31
     buildToolsVersion "30.0.3"
@@ -23,4 +26,8 @@ dependencies {
     implementation libs.kotlin.stdlib
     implementation libs.androidx.core
     implementation libs.bundles.androidx.corroutines
+    implementation libs.hilt.hilt
+    kapt libs.hilt.compiler
+    kapt libs.hilt.android.compiler
+    kapt libs.hilt.androidx.compiler
 }
