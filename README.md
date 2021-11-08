@@ -18,7 +18,7 @@ Foram utilizadas bibliotecas mais recentes do Android, como:
 
 - Compose
 - Navigator Compose
-- Kotlin gradle DSL (KTS)
+- Groovy Gradle (7.1) 
 - Hilt DI
 - DataStore
 - Flow
