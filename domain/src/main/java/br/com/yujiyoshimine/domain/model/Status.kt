@@ -7,4 +7,8 @@ enum class Status(val code: Int) {
     INTERNAL_ERROR(500),
     UNKNOWN(-1),
     NO_NETWORK(-2);
+
+    companion object {
+        fun getStatus(code: Int) = values().firstOrNull { it.code == code } ?: UNKNOWN
+    }
 }

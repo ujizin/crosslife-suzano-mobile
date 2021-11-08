@@ -1,5 +1,7 @@
 package br.com.yujiyoshimine.domain.model
 
-class EmptyError: Throwable()
+abstract class GenericError: Throwable()
 
-class PasswordNotEqualsError: Throwable()
+class EmptyError: GenericError()
+
+class PasswordNotEqualsError: GenericError()

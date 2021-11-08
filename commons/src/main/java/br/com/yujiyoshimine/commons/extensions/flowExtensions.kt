@@ -5,16 +5,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
-import br.com.yujiyoshimine.commons.utils.NetworkUtils.toApiError
 import br.com.yujiyoshimine.domain.model.Result
 import br.com.yujiyoshimine.domain.model.ServerError
+import br.com.yujiyoshimine.domain.model.Status
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 
 private const val DEBOUNCE_DELAY = 300L
 
-fun <T> Flow<T>.catchNetwork(block: (ServerError) -> Unit) = catch { block(it.toApiError()) }
+fun <T> Flow<T>.catchNetwork(block: (ServerError) -> Unit) = catch {
+    block(it as? ServerError ?: ServerError(it, Status.UNKNOWN))
+}
 
 fun <T> Flow<T>.notify(
     scope: CoroutineScope,

@@ -1,5 +1,6 @@
 package br.com.yujiyoshimine.data.repositories.user
 
+import br.com.yujiyoshimine.data.repositories.networkFlow
 import br.com.yujiyoshimine.domain.model.DetailProfile
 import br.com.yujiyoshimine.domain.model.EmptyError
 import br.com.yujiyoshimine.domain.model.User
@@ -18,7 +19,7 @@ class UserRepositoryImpl(
     private val userStore: UserStore,
 ) : UserRepository {
 
-    override fun fetchLogin(username: String, password: String): Flow<User> = flow {
+    override fun fetchLogin(username: String, password: String): Flow<User> = networkFlow {
         check(username.isNotEmpty() && password.isNotEmpty()) { throw EmptyError() }
         val userPayload = UserPayload(username, password)
         val userDto = userService.fetchLogin(userPayload)
@@ -34,7 +35,7 @@ class UserRepositoryImpl(
         username: String,
         password: String,
         newPassword: String,
-    ): Flow<Unit> = flow {
+    ): Flow<Unit> = networkFlow {
         check(username.isNotEmpty() && password.isNotEmpty() && newPassword.isNotEmpty()) { throw EmptyError() }
         val userPayload = UserPayload(username, password, newPassword)
         userService.changePassword(userPayload)
