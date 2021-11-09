@@ -1,4 +1,4 @@
-package br.com.yujiyoshimine.domain.store
+package br.com.yujiyoshimine.local.datapreferences.store
 
 import kotlinx.coroutines.flow.Flow
 

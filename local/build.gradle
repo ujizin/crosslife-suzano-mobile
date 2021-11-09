@@ -11,8 +11,5 @@ dependencies {
     implementation libs.room.room
     kapt libs.room.kapt
 
-    // FIXME REMOVE AFTER
-    implementation project(':domain')
-
     implementation libs.datastore.datastore
 }

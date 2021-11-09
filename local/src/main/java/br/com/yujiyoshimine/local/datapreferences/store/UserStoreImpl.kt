@@ -1,11 +1,10 @@
 package br.com.yujiyoshimine.local.datapreferences.store
 
 import androidx.datastore.preferences.core.stringPreferencesKey
-import br.com.yujiyoshimine.domain.store.UserStore
 import br.com.yujiyoshimine.local.datapreferences.DataPreferences
 import kotlinx.coroutines.flow.Flow
 
-class UserStoreImpl(private val dataStore: DataPreferences) : UserStore {
+class   UserStoreImpl(private val dataStore: DataPreferences) : UserStore {
 
     private val tokenKey = stringPreferencesKey(USER_TOKEN_KEY)
     private val usernameKey = stringPreferencesKey(USERNAME_KEY)
