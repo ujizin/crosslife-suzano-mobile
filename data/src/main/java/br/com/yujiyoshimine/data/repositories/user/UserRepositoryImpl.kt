@@ -5,12 +5,11 @@ import br.com.yujiyoshimine.domain.model.DetailProfile
 import br.com.yujiyoshimine.domain.model.EmptyError
 import br.com.yujiyoshimine.domain.model.User
 import br.com.yujiyoshimine.domain.repository.UserRepository
-import br.com.yujiyoshimine.domain.store.UserStore
+import br.com.yujiyoshimine.local.datapreferences.store.UserStore
 import br.com.yujiyoshimine.network.payload.PasswordPayload
 import br.com.yujiyoshimine.network.payload.UserPayload
 import br.com.yujiyoshimine.network.services.UserService
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 
@@ -72,7 +71,7 @@ class UserRepositoryImpl(
         userStore.getUsername().map { user ->
             val detailProfile = userService.fetchDetailProfile(user)
             emit(detailProfile.toDomain())
-        }.collect()
+        }
     }
 
     override fun getToken() = userStore.getToken()

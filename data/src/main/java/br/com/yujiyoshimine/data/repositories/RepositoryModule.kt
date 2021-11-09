@@ -6,7 +6,7 @@ import br.com.yujiyoshimine.data.repositories.weeklytrain.WeeklyTrainRepositoryI
 import br.com.yujiyoshimine.domain.repository.NoticeRepository
 import br.com.yujiyoshimine.domain.repository.UserRepository
 import br.com.yujiyoshimine.domain.repository.WeeklyTrainRepository
-import br.com.yujiyoshimine.domain.store.UserStore
+import br.com.yujiyoshimine.local.datapreferences.store.UserStore
 import br.com.yujiyoshimine.network.services.NoticeService
 import br.com.yujiyoshimine.network.services.UserService
 import br.com.yujiyoshimine.network.services.WeeklyTrainService

@@ -8,6 +8,7 @@ apply from: "../config-android.gradle"
 
 dependencies {
     implementation project(":network")
+    implementation project(":local")
     implementation project(":domain")
     implementation libs.hilt.hilt
     kapt libs.hilt.compiler
