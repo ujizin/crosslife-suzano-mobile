@@ -13,8 +13,6 @@ android {
 }
 
 dependencies {
-    // FIXME remove domain module, get token instead userStore
-    implementation project(":domain")
 
     api libs.retrofit.retrofit
     implementation libs.retrofit.moshi
