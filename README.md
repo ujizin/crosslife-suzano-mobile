@@ -23,7 +23,7 @@ Foram utilizadas bibliotecas mais recentes do Android, como:
 - DataStore
 - Flow
 - Material IO
-- Modularization (WIP)
+- Modularization
 - Entre outros
 
 ## Layout
