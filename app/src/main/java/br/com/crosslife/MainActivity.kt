@@ -7,8 +7,8 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.navigation.compose.rememberNavController
-import br.com.yujiyoshimine.commons.theme.CrossLifeTheme
-import br.com.yujiyoshimine.navigation.Screen
+import br.com.crosslife.commons.theme.CrossLifeTheme
+import br.com.crosslife.navigation.Screen
 import com.google.accompanist.pager.ExperimentalPagerApi
 import dagger.hilt.android.AndroidEntryPoint
 
