@@ -5,7 +5,7 @@ import br.com.crosslife.domain.model.DetailProfile
 import br.com.crosslife.domain.model.EmptyError
 import br.com.crosslife.domain.model.User
 import br.com.crosslife.domain.repository.UserRepository
-import br.com.crosslife.local.datapreferences.store.UserStore
+import br.com.crosslife.local.store.user.UserStore
 import br.com.crosslife.network.payload.PasswordPayload
 import br.com.crosslife.network.payload.UserPayload
 import br.com.crosslife.network.services.UserService
@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 
-class UserRepositoryImpl(
+internal class UserRepositoryImpl(
     private val userService: UserService,
     private val userStore: UserStore,
 ) : UserRepository {

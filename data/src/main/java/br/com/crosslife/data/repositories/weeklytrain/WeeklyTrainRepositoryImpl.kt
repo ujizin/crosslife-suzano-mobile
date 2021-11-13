@@ -3,14 +3,16 @@ package br.com.crosslife.data.repositories.weeklytrain
 import br.com.crosslife.data.repositories.networkFlow
 import br.com.crosslife.domain.model.WeeklyTrain
 import br.com.crosslife.domain.repository.WeeklyTrainRepository
+import br.com.crosslife.local.store.train.TrainStore
 import br.com.crosslife.network.services.WeeklyTrainService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 
-class WeeklyTrainRepositoryImpl(
+internal class WeeklyTrainRepositoryImpl(
     private val weeklyTrainService: WeeklyTrainService,
+    private val trainStore: TrainStore,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : WeeklyTrainRepository {
 

@@ -6,7 +6,8 @@ import br.com.crosslife.data.repositories.weeklytrain.WeeklyTrainRepositoryImpl
 import br.com.crosslife.domain.repository.NoticeRepository
 import br.com.crosslife.domain.repository.UserRepository
 import br.com.crosslife.domain.repository.WeeklyTrainRepository
-import br.com.crosslife.local.datapreferences.store.UserStore
+import br.com.crosslife.local.store.train.TrainStore
+import br.com.crosslife.local.store.user.UserStore
 import br.com.crosslife.network.services.NoticeService
 import br.com.crosslife.network.services.UserService
 import br.com.crosslife.network.services.WeeklyTrainService
@@ -31,7 +32,8 @@ object RepositoryModule {
     @Provides
     fun provideWeeklyTrainRepository(
         weeklyTrainService: WeeklyTrainService,
-    ): WeeklyTrainRepository = WeeklyTrainRepositoryImpl(weeklyTrainService)
+        trainStore: TrainStore
+    ): WeeklyTrainRepository = WeeklyTrainRepositoryImpl(weeklyTrainService, trainStore)
 
     @ViewModelScoped
     @Provides
