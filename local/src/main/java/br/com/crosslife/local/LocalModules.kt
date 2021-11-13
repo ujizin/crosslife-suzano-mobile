@@ -5,8 +5,10 @@ import androidx.room.Room
 import br.com.crosslife.local.dao.TrainDao
 import br.com.crosslife.local.datapreferences.DataPreferences
 import br.com.crosslife.local.datapreferences.DataPreferencesImpl
-import br.com.crosslife.local.datapreferences.store.UserStore
-import br.com.crosslife.local.datapreferences.store.UserStoreImpl
+import br.com.crosslife.local.store.train.TrainStore
+import br.com.crosslife.local.store.train.TrainStoreImpl
+import br.com.crosslife.local.store.user.UserStore
+import br.com.crosslife.local.store.user.UserStoreImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -37,7 +39,11 @@ object LocalModules {
 
     @Singleton
     @Provides
-    fun provideTrainDao(db: AppDatabase): TrainDao = db.trainDao()
+    internal fun provideTrainDao(db: AppDatabase): TrainDao = db.trainDao()
+
+    @Singleton
+    @Provides
+    fun provideTrainStore(trainDao: TrainDao): TrainStore = TrainStoreImpl(trainDao)
 
     @Singleton
     @Provides

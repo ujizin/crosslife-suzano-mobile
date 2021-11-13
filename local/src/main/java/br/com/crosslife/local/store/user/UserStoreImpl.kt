@@ -1,10 +1,10 @@
-package br.com.crosslife.local.datapreferences.store
+package br.com.crosslife.local.store.user
 
 import androidx.datastore.preferences.core.stringPreferencesKey
 import br.com.crosslife.local.datapreferences.DataPreferences
 import kotlinx.coroutines.flow.Flow
 
-class   UserStoreImpl(private val dataStore: DataPreferences) : UserStore {
+internal class UserStoreImpl(private val dataStore: DataPreferences) : UserStore {
 
     private val tokenKey = stringPreferencesKey(USER_TOKEN_KEY)
     private val usernameKey = stringPreferencesKey(USERNAME_KEY)

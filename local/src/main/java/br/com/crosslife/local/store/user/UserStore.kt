@@ -1,4 +1,4 @@
-package br.com.crosslife.local.datapreferences.store
+package br.com.crosslife.local.store.user
 
 import kotlinx.coroutines.flow.Flow
 

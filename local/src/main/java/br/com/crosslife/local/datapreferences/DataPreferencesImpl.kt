@@ -16,7 +16,7 @@ private const val PREFERENCES_NAME = "crosslife_preferences"
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = PREFERENCES_NAME)
 
-class DataPreferencesImpl(context: Context) : DataPreferences {
+internal class DataPreferencesImpl(context: Context) : DataPreferences {
 
     private val dataStore = context.dataStore
 
