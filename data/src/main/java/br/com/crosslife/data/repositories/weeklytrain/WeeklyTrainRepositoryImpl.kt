@@ -23,7 +23,7 @@ internal class WeeklyTrainRepositoryImpl(
         emit(weeklyTrains.toDomain())
     }.catch {
         val weeklyTrains = trainStore.getTrains()
-        check(weeklyTrains.isEmpty()) { throw it }
+        check(weeklyTrains.isNotEmpty()) { throw it }
         emit(weeklyTrains.localToDomain())
     }.flowOn(dispatcher)
 

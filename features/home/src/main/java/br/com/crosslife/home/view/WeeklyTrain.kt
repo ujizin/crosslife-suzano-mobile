@@ -18,6 +18,7 @@ import br.com.crosslife.commons.components.error.Error
 import br.com.crosslife.commons.components.weeklytrain.WeeklyTrainItem
 import br.com.crosslife.commons.extensions.capitalize
 import br.com.crosslife.commons.theme.Space
+import br.com.crosslife.commons.utils.DayOfWeek.Companion.getCurrentDay
 import br.com.crosslife.commons.utils.OnWeeklyTrainClick
 import br.com.crosslife.commons.utils.Saver.getPagerState
 import br.com.crosslife.domain.model.Result
@@ -58,7 +59,7 @@ private fun WeeklyTrainUI(
         PagerState(
             pageCount = weeklyTrains.size,
             infiniteLoop = true,
-            currentPage = br.com.crosslife.commons.utils.DayOfWeek.getCurrentDay(),
+            currentPage = getCurrentDay(),
             offscreenLimit = 7,
         )
     }
