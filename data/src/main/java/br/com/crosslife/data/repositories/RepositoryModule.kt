@@ -6,6 +6,7 @@ import br.com.crosslife.data.repositories.weeklytrain.WeeklyTrainRepositoryImpl
 import br.com.crosslife.domain.repository.NoticeRepository
 import br.com.crosslife.domain.repository.UserRepository
 import br.com.crosslife.domain.repository.WeeklyTrainRepository
+import br.com.crosslife.local.store.notice.NoticeStore
 import br.com.crosslife.local.store.train.TrainStore
 import br.com.crosslife.local.store.user.UserStore
 import br.com.crosslife.network.services.NoticeService
@@ -39,5 +40,6 @@ object RepositoryModule {
     @Provides
     fun provideNoticeRepository(
         noticeService: NoticeService,
-    ): NoticeRepository = NoticeRepositoryImpl(noticeService)
+        noticeStore: NoticeStore
+    ): NoticeRepository = NoticeRepositoryImpl(noticeService, noticeStore)
 }
