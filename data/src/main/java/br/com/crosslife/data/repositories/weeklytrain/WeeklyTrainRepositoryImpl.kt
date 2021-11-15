@@ -8,6 +8,7 @@ import br.com.crosslife.network.services.WeeklyTrainService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 
 internal class WeeklyTrainRepositoryImpl(
@@ -17,8 +18,13 @@ internal class WeeklyTrainRepositoryImpl(
 ) : WeeklyTrainRepository {
 
     override fun fetchWeeklyTrains(): Flow<List<WeeklyTrain>> = networkFlow {
-        val weeklyTrains = weeklyTrainService.fetchWeeklyTrains().toDomain()
-        emit(weeklyTrains)
+        val weeklyTrains = weeklyTrainService.fetchWeeklyTrains()
+        trainStore.insertTrains(*weeklyTrains.toLocal())
+        emit(weeklyTrains.toDomain())
+    }.catch {
+        val weeklyTrains = trainStore.getTrains()
+        check(weeklyTrains.isEmpty()) { throw it }
+        emit(weeklyTrains.localToDomain())
     }.flowOn(dispatcher)
 
     override fun fetchWeeklyTrain(id: Int): Flow<WeeklyTrain> = networkFlow {
