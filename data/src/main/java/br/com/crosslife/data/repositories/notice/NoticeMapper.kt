@@ -32,9 +32,7 @@ internal fun br.com.crosslife.local.entities.Notice.localToDomain() =
         imageUrl
     )
 
-internal fun List<Notice>.toLocal(): Array<LocalNotice> = map {
-    it.domainToLocal()
-}.toTypedArray()
+internal fun List<Notice>.toLocal(): Collection<LocalNotice> = map { it.domainToLocal() }
 
 internal fun Notice.domainToLocal() = LocalNotice(
     id,

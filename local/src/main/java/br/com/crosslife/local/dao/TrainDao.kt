@@ -13,5 +13,5 @@ interface TrainDao {
     fun getAll(): List<Train>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg train: Train)
+    fun insertAll(train: Collection<Train>)
 }

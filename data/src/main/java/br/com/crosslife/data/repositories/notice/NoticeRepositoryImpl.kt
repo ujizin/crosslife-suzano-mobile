@@ -19,7 +19,7 @@ internal class NoticeRepositoryImpl(
 
     override fun fetchNotices(sentence: String?): Flow<List<Notice>> = networkFlow {
         val notices = noticeService.fetchNotices(sentence).toDomain()
-        noticeStore.insertNotices(*notices.toLocal())
+        noticeStore.insertNotices(notices.toLocal())
         emit(notices)
     }.catch {
         // TODO filter notices with sentence parameter

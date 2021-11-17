@@ -13,5 +13,5 @@ interface NoticeDao {
     fun getAll(): List<Notice>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg notice: Notice)
+    fun insertAll(notice: Collection<Notice>)
 }

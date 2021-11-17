@@ -4,5 +4,5 @@ import br.com.crosslife.local.entities.Train
 
 interface TrainStore {
     suspend fun getTrains(): List<Train>
-    suspend fun insertTrains(vararg train: Train)
+    suspend fun insertTrains(trains: Collection<Train>)
 }

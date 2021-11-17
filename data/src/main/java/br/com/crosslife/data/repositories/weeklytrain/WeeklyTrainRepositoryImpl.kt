@@ -19,7 +19,7 @@ internal class WeeklyTrainRepositoryImpl(
 
     override fun fetchWeeklyTrains(): Flow<List<WeeklyTrain>> = networkFlow {
         val weeklyTrains = weeklyTrainService.fetchWeeklyTrains()
-        trainStore.insertTrains(*weeklyTrains.toLocal())
+        trainStore.insertTrains(weeklyTrains.toLocal())
         emit(weeklyTrains.toDomain())
     }.catch {
         val weeklyTrains = trainStore.getTrains()

@@ -9,7 +9,7 @@ class NoticeStoreImpl(
 
     override suspend fun getNotices() = noticeDao.getAll()
 
-    override suspend fun insertNotices(vararg notice: Notice) {
-        noticeDao.insertAll(*notice)
+    override suspend fun insertNotices(notices: Collection<Notice>) {
+        noticeDao.insertAll(notices)
     }
 }

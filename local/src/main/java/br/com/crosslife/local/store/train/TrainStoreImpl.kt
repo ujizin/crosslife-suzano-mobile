@@ -7,5 +7,5 @@ class TrainStoreImpl(private val trainDao: TrainDao) : TrainStore {
 
     override suspend fun getTrains() = trainDao.getAll()
 
-    override suspend fun insertTrains(vararg train: Train) = trainDao.insertAll(*train)
+    override suspend fun insertTrains(train: Collection<Train>) = trainDao.insertAll(train)
 }

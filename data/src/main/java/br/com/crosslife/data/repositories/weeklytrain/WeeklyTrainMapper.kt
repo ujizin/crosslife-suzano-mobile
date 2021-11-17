@@ -16,7 +16,7 @@ internal fun WeeklyTrainDTO.toDomain(): WeeklyTrain = WeeklyTrain(
     videoUrl
 )
 
-internal fun List<WeeklyTrainDTO>.toLocal() = map { it.toLocal() }.toTypedArray()
+internal fun List<WeeklyTrainDTO>.toLocal() = map { it.toLocal() }
 
 internal fun WeeklyTrainDTO.toLocal(): Train = Train(
     id,
