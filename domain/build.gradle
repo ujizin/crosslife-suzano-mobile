@@ -3,4 +3,9 @@ plugins {
     id("kotlin-android")
     id("kotlin-parcelize")
 }
+
 apply from: "../config-android.gradle"
+
+dependencies {
+    implementation libs.kotlin.datetime
+}
