@@ -19,6 +19,9 @@ import br.com.crosslife.commons.R
 import br.com.crosslife.commons.components.Button
 import br.com.crosslife.commons.extensions.capitalize
 import br.com.crosslife.commons.theme.Space
+import br.com.crosslife.domain.model.Instructor
+import br.com.crosslife.domain.model.InstructorOne
+import br.com.crosslife.domain.model.InstructorTwo
 
 @Composable
 fun NavController.ChatScreen() {
@@ -49,13 +52,13 @@ fun ChatHeader() {
 
 @Composable
 fun ChatBody() {
-    InstructorCard(Modifier.padding(top = Space.XM, bottom = Space.XXXS))
+    InstructorCard(Modifier.padding(top = Space.XM, bottom = Space.XXXS), InstructorOne)
     ChatDivider()
-    InstructorCard(Modifier.padding(top = Space.XXXS, bottom = Space.XXXS))
+    InstructorCard(Modifier.padding(top = Space.XXXS, bottom = Space.XXXS), InstructorTwo)
 }
 
 @Composable
-fun InstructorCard(modifier: Modifier) {
+fun InstructorCard(modifier: Modifier, instructor: Instructor) {
     Card(
         modifier
             .fillMaxWidth()
@@ -81,8 +84,8 @@ fun InstructorCard(modifier: Modifier) {
                     .fillMaxHeight()
                     .padding(start = Space.XXS)
             ) {
-                Text("Caio Teixeira", style = MaterialTheme.typography.h3)
-                Text("Instrutor 1", style = MaterialTheme.typography.body2)
+                Text(instructor.name, style = MaterialTheme.typography.h3)
+                Text(stringResource(id = R.string.instructor, instructor.number), style = MaterialTheme.typography.body2)
                 Spacer(Modifier.weight(1F))
                 Button(
                     Modifier
