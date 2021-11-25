@@ -9,13 +9,16 @@ import br.com.crosslife.local.store.user.UserStore
 import br.com.crosslife.network.payload.PasswordPayload
 import br.com.crosslife.network.payload.UserPayload
 import br.com.crosslife.network.services.UserService
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flowOn
 
 internal class UserRepositoryImpl(
     private val userService: UserService,
     private val userStore: UserStore,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : UserRepository {
 
     override fun fetchLogin(username: String, password: String): Flow<User> = networkFlow {
@@ -28,7 +31,7 @@ internal class UserRepositoryImpl(
             setToken(userDto.token)
         }
         emit(userDto.toDomain())
-    }
+    }.flowOn(dispatcher)
 
     override fun changePassword(
         username: String,
@@ -39,40 +42,40 @@ internal class UserRepositoryImpl(
         val userPayload = UserPayload(username, password, newPassword)
         userService.changePassword(userPayload)
         emit(Unit)
-    }
+    }.flowOn(dispatcher)
 
     override fun changePasswordWithToken(
         token: String,
         newPassword: String,
-    ): Flow<Unit> = flow {
+    ): Flow<Unit> = networkFlow {
         check(newPassword.isNotEmpty()) { throw EmptyError() }
         val userTokenPayload = PasswordPayload(newPassword)
         userStore.setToken(token)
         userService.changePasswordWithToken(userTokenPayload)
         emit(Unit)
-    }
+    }.flowOn(dispatcher)
 
-    override fun fetchLogout() = flow {
+    override fun fetchLogout() = networkFlow {
         userStore.apply {
             setUsername("")
             setToken("")
         }
         userService.logout()
         emit(Unit)
-    }
+    }.flowOn(dispatcher)
 
-    override fun fetchPassword(username: String): Flow<Unit> = flow {
+    override fun fetchPassword(username: String): Flow<Unit> = networkFlow {
         val userPayload = UserPayload(username)
         userService.forgotPassword(userPayload)
         emit(Unit)
-    }
+    }.flowOn(dispatcher)
 
-    override fun fetchDetailProfile(): Flow<DetailProfile> = flow {
-        userStore.getUsername().map { user ->
+    override fun fetchDetailProfile(): Flow<DetailProfile> = networkFlow {
+        userStore.getUsername().collect { user ->
             val detailProfile = userService.fetchDetailProfile(user)
             emit(detailProfile.toDomain())
         }
-    }
+    }.flowOn(dispatcher)
 
     override fun getToken() = userStore.getToken()
 

@@ -30,5 +30,5 @@ internal class WeeklyTrainRepositoryImpl(
     override fun fetchWeeklyTrain(id: Int): Flow<WeeklyTrain> = networkFlow {
         val weeklyTrain = weeklyTrainService.fetchWeeklyTrain(id).toDomain()
         emit(weeklyTrain)
-    }
+    }.flowOn(dispatcher)
 }
