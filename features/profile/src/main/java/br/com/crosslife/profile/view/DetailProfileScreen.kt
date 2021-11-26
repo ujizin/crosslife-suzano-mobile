@@ -12,9 +12,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import br.com.crosslife.commons.components.topbar.ScaffoldTopbar
 import br.com.crosslife.commons.R
 import br.com.crosslife.commons.components.Loading
+import br.com.crosslife.commons.components.error.Error
+import br.com.crosslife.commons.components.topbar.ScaffoldTopbar
 import br.com.crosslife.commons.extensions.capitalize
 import br.com.crosslife.commons.extensions.rememberFlowWithLifecycle
 import br.com.crosslife.commons.theme.Space
@@ -34,7 +35,9 @@ fun NavController.DetailProfileScreen(viewModel: DetailProfileViewModel = hiltVi
     ScaffoldTopbar(titleRes = R.string.advanced_profile) {
         when (val state: Result<DetailProfile> = detailProfileState) {
             Result.Initial, Result.Loading -> Loading()
-            is Result.Error -> Loading()
+            is Result.Error -> Error {
+                viewModel.getDetailProfile()
+            }
             is Result.Success -> DetailProfileUI(state.data)
         }
     }

@@ -22,7 +22,7 @@ fun NavController.ProfileScreen() {
 
 @Composable
 private fun NavController.ProfileBox() {
-    BottomBox(title = "Lucas Yuji") {
+    BottomBox(title = "") {
         ProfileItem(
             Purple,
             painterResource(id = R.drawable.ic_strength),

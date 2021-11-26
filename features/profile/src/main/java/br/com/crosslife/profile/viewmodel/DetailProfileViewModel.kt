@@ -23,7 +23,7 @@ class DetailProfileViewModel @Inject constructor(
         getDetailProfile()
     }
 
-    private fun getDetailProfile() {
+    fun getDetailProfile() {
         userRepository.fetchDetailProfile()
             .notify(viewModelScope, profileState())
     }
