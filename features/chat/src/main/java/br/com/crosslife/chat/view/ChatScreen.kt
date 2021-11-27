@@ -1,5 +1,6 @@
 package br.com.crosslife.chat.view
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -11,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -24,6 +26,7 @@ import br.com.crosslife.domain.model.Instructor
 import br.com.crosslife.domain.model.InstructorOne
 import br.com.crosslife.domain.model.InstructorTwo
 import br.com.crosslife.navigation.Screen
+import coil.compose.rememberImagePainter
 
 @Composable
 fun NavController.ChatScreen() {
@@ -74,8 +77,11 @@ fun NavController.InstructorCard(modifier: Modifier, instructor: Instructor) {
                 .height(120.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Box(
-                Modifier
+            Image(
+                painter = rememberImagePainter(instructor.imageUrl),
+                contentDescription = instructor.name,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
                     .fillMaxHeight()
                     .aspectRatio(1F)
                     .background(Color.Black, MaterialTheme.shapes.medium)
@@ -87,7 +93,10 @@ fun NavController.InstructorCard(modifier: Modifier, instructor: Instructor) {
                     .padding(start = Space.XXS)
             ) {
                 Text(instructor.name, style = MaterialTheme.typography.h3)
-                Text(stringResource(id = R.string.instructor, instructor.number), style = MaterialTheme.typography.body2)
+                Text(
+                    stringResource(id = R.string.instructor, instructor.number),
+                    style = MaterialTheme.typography.body2
+                )
                 Spacer(Modifier.weight(1F))
                 Button(
                     Modifier
@@ -95,6 +104,10 @@ fun NavController.InstructorCard(modifier: Modifier, instructor: Instructor) {
                         .defaultMinSize(minWidth = 80.dp),
                     textButton = stringResource(id = R.string.menu_item_chat).capitalize(),
                     onClick = {
+                        currentBackStackEntry?.arguments?.putParcelable(
+                            Instructor.INSTRUCTOR_ARG_KEY,
+                            instructor
+                        )
                         navigate(Screen.Conversation)
                     }
                 )

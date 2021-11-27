@@ -10,4 +10,9 @@ data class DetailItem(
     val description: String,
     val imageUrl: String,
     val videoUrl: String? = null,
-): Parcelable
+): Parcelable {
+
+    companion object {
+        const val DETAIL_ITEM_KEY = "detail_item"
+    }
+}

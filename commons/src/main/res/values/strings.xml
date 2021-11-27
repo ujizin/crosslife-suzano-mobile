@@ -74,5 +74,6 @@
     <string name="basal_metabolism">metabolismo basal</string>
 
     <string name="instructor">instrutor %d</string>
+    <string name="type_message">digite sua mensagem</string>
 
 </resources>

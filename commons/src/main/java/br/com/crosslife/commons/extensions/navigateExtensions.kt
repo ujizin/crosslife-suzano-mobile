@@ -3,6 +3,7 @@ package br.com.crosslife.commons.extensions
 import androidx.navigation.NavController
 import androidx.navigation.NavOptionsBuilder
 import br.com.crosslife.domain.model.DetailItem
+import br.com.crosslife.domain.model.DetailItem.Companion.DETAIL_ITEM_KEY
 import br.com.crosslife.navigation.Screen
 
 fun NavController.navigate(
@@ -39,6 +40,6 @@ fun NavController.navigateAndPop(
 }
 
 fun NavController.navigateToDetailItem(detailItem: DetailItem) {
-    currentBackStackEntry?.arguments?.putParcelable("detail_item", detailItem)
+    currentBackStackEntry?.arguments?.putParcelable(DETAIL_ITEM_KEY, detailItem)
     navigate(Screen.DetailItem)
 }
