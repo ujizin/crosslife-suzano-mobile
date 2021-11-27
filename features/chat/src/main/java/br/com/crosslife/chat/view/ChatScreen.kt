@@ -18,10 +18,12 @@ import androidx.navigation.NavController
 import br.com.crosslife.commons.R
 import br.com.crosslife.commons.components.Button
 import br.com.crosslife.commons.extensions.capitalize
+import br.com.crosslife.commons.extensions.navigate
 import br.com.crosslife.commons.theme.Space
 import br.com.crosslife.domain.model.Instructor
 import br.com.crosslife.domain.model.InstructorOne
 import br.com.crosslife.domain.model.InstructorTwo
+import br.com.crosslife.navigation.Screen
 
 @Composable
 fun NavController.ChatScreen() {
@@ -37,7 +39,7 @@ fun NavController.ChatScreen() {
 }
 
 @Composable
-fun ChatHeader() {
+private fun ChatHeader() {
     Text(
         text = stringResource(id = R.string.menu_item_chat).capitalize(),
         style = MaterialTheme.typography.h1,
@@ -51,14 +53,14 @@ fun ChatHeader() {
 }
 
 @Composable
-fun ChatBody() {
+private fun NavController.ChatBody() {
     InstructorCard(Modifier.padding(top = Space.XM, bottom = Space.XXXS), InstructorOne)
     ChatDivider()
     InstructorCard(Modifier.padding(top = Space.XXXS, bottom = Space.XXXS), InstructorTwo)
 }
 
 @Composable
-fun InstructorCard(modifier: Modifier, instructor: Instructor) {
+fun NavController.InstructorCard(modifier: Modifier, instructor: Instructor) {
     Card(
         modifier
             .fillMaxWidth()
@@ -92,7 +94,9 @@ fun InstructorCard(modifier: Modifier, instructor: Instructor) {
                         .align(Alignment.End)
                         .defaultMinSize(minWidth = 80.dp),
                     textButton = stringResource(id = R.string.menu_item_chat).capitalize(),
-                    onClick = {}
+                    onClick = {
+                        navigate(Screen.Conversation)
+                    }
                 )
             }
         }
