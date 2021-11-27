@@ -82,7 +82,7 @@ fun NavController.ConversationScreen(
                     modifier = Modifier.background(MaterialTheme.colors.primary, CircleShape),
                     onClick = {
                         if (inputState.value.isNotBlank()) {
-                            viewModel.sendMessage(inputState.value)
+                            viewModel.sendMessage(inputState.value.trim())
                             inputState.value = ""
                         }
                     }) {
