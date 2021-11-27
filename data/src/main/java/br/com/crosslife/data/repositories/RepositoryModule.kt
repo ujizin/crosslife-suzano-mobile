@@ -1,8 +1,10 @@
 package br.com.crosslife.data.repositories
 
+import br.com.crosslife.data.repositories.conversation.ConversationRepositoryImpl
 import br.com.crosslife.data.repositories.notice.NoticeRepositoryImpl
 import br.com.crosslife.data.repositories.user.UserRepositoryImpl
 import br.com.crosslife.data.repositories.weeklytrain.WeeklyTrainRepositoryImpl
+import br.com.crosslife.domain.repository.ConversationRepository
 import br.com.crosslife.domain.repository.NoticeRepository
 import br.com.crosslife.domain.repository.UserRepository
 import br.com.crosslife.domain.repository.WeeklyTrainRepository
@@ -42,4 +44,8 @@ object RepositoryModule {
         noticeService: NoticeService,
         noticeStore: NoticeStore
     ): NoticeRepository = NoticeRepositoryImpl(noticeService, noticeStore)
+
+    @ViewModelScoped
+    @Provides
+    fun provideConversationRepository(): ConversationRepository = ConversationRepositoryImpl()
 }

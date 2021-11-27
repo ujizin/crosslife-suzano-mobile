@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.dialog
 import br.com.crosslife.changepassword.view.ChangePasswordScreen
 import br.com.crosslife.chat.view.ChatScreen
+import br.com.crosslife.chat.view.ConversationScreen
 import br.com.crosslife.commons.components.animation.FadeAnimation
 import br.com.crosslife.commons.components.tabbar.TabBar
 import br.com.crosslife.detail.DetailScreen
@@ -75,6 +76,7 @@ interface Router {
                             startDestination = Screen.Chat.route
                         ) {
                             route(Screen.Chat) { ChatScreen() }
+                            route(Screen.Conversation) { ConversationScreen() }
                         }
                         navigation(
                             route = Screen.ProfileRoot.route,

@@ -32,6 +32,7 @@ sealed class Screen(
     object Home : Screen(HOME_PATH, Tab.Home)
     object Search : Screen(SEARCH_PATH, Tab.Search)
     object Chat : Screen(CHAT_PATH, Tab.Chat)
+    object Conversation : Screen(CONVERSATION_PATH, Tab.None)
     object Profile : Screen(PROFILE_PATH, Tab.Profile)
     object DetailProfile : Screen(DETAIL_PROFILE_PATH, Tab.None)
     object ChangePassword : Screen(CHANGE_PASSWORD_PATH, Tab.None)
@@ -70,6 +71,7 @@ sealed class Screen(
         private const val HOME_PATH = "home"
         private const val SEARCH_PATH = "search"
         private const val CHAT_PATH = "chat"
+        private const val CONVERSATION_PATH = "conversation"
 
         // Profile
         private const val PROFILE_PATH = "profile"
