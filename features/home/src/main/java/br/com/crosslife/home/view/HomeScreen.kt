@@ -9,7 +9,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import br.com.crosslife.ui.components.swiperefresh.SwipeRefresh
 import br.com.crosslife.commons.components.notices.noticesItems
 import br.com.crosslife.commons.components.search.SearchLazyColumn
 import br.com.crosslife.commons.components.search.currentText
@@ -20,6 +19,7 @@ import br.com.crosslife.commons.theme.Space
 import br.com.crosslife.commons.utils.DayOfWeek
 import br.com.crosslife.domain.model.Result
 import br.com.crosslife.home.viewmodel.HomeViewModel
+import br.com.crosslife.ui.components.swiperefresh.SwipeRefresh
 import com.google.accompanist.pager.ExperimentalPagerApi
 
 @ExperimentalPagerApi
@@ -40,7 +40,7 @@ fun NavController.HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
             searchState = searchFieldState,
             noticeResult = noticesState,
             onRetryClick = { viewModel.getNotices(searchFieldState.currentText) },
-            onValueChanged = {},
+            onValueChanged = { viewModel.getNotices(searchFieldState.currentText) },
             header = {
                 item { Logo(Modifier.padding(top = Space.XXXS)) }
             }
