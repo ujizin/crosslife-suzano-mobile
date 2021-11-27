@@ -26,9 +26,9 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun TextField(
-    label: String,
-    state: MutableState<String>,
     modifier: Modifier = Modifier,
+    label: String? = null,
+    state: MutableState<String>,
     modifierInput: Modifier = Modifier,
     isPassword: Boolean = false,
     valueChanged: ((String) -> Unit)? = null,
@@ -36,7 +36,9 @@ fun TextField(
     val isPasswordVisible = remember { mutableStateOf(isPassword) }
     val image = getPasswordIcon(isPasswordVisible.value)
     Column(modifier = modifier) {
-        Text(text = label)
+        label?.let {
+            Text(text = label)
+        }
         BasicTextField(
             value = state.value,
             modifier = Modifier
