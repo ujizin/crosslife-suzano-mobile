@@ -20,6 +20,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import br.com.crosslife.commons.extensions.capitalize
 import br.com.crosslife.commons.theme.Space
+import br.com.crosslife.commons.theme.White
 import br.com.crosslife.commons.utils.DayOfWeek
 import br.com.crosslife.commons.utils.OnWeeklyTrainClick
 import br.com.crosslife.domain.model.WeeklyTrain
@@ -56,10 +57,11 @@ fun WeeklyTrainItem(
                 .then(innerModifier)
         ) {
             val dayOfWeekRes = DayOfWeek.getDay(weeklyTrain.dayWeek).stringRes
-            Text(stringResource(dayOfWeekRes).capitalize(), style = titleStyle)
+            Text(stringResource(dayOfWeekRes).capitalize(), style = titleStyle, color = White)
             Text(
                 weeklyTrain.title,
                 fontWeight = FontWeight.Bold,
+                color = White,
                 style = subTitleStyle,
             )
         }
