@@ -1,6 +1,5 @@
 package br.com.crosslife.commons.components.topbar
 
-import androidx.annotation.StringRes
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -24,7 +23,7 @@ import br.com.crosslife.commons.extensions.capitalize
 @Composable
 fun NavController.ScaffoldTopbar(
     modifier: Modifier = Modifier,
-    @StringRes titleRes: Int? = null,
+    title: String? = null,
     overlapTopBar: Boolean = false,
     actions: @Composable RowScope.() -> Unit = {},
     content: @Composable () -> Unit,
@@ -36,7 +35,7 @@ fun NavController.ScaffoldTopbar(
             anim = Slide.UpToDown,
         ) {
             ColumnIf(!overlapTopBar) {
-                TopBar(titleRes, actions)
+                TopBar(title, actions)
                 FadeAnimation(delay = true) {
                     content()
                 }
@@ -47,15 +46,14 @@ fun NavController.ScaffoldTopbar(
 
 @Composable
 private fun NavController.TopBar(
-    @StringRes titleRes: Int? = null,
+    title: String?,
     actions: @Composable (RowScope.() -> Unit),
 ) {
     TopAppBar(
         modifier = Modifier.zIndex(2F),
         title = {
-            val title = titleRes ?: return@TopAppBar
-            Text(
-                stringResource(id = title).capitalize(),
+            val text = title ?: return@TopAppBar
+            Text(text.capitalize(),
                 style = MaterialTheme.typography.body1,
                 fontWeight = FontWeight.Bold,
             )

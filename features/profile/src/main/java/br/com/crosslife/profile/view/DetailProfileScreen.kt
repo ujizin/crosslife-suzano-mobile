@@ -32,7 +32,7 @@ fun NavController.DetailProfileScreen(viewModel: DetailProfileViewModel = hiltVi
     val detailProfileState by rememberFlowWithLifecycle(viewModel.profileState)
         .collectAsState(initial = Result.Initial)
 
-    ScaffoldTopbar(titleRes = R.string.advanced_profile) {
+    ScaffoldTopbar(title = stringResource(id = R.string.advanced_profile)) {
         when (val state: Result<DetailProfile> = detailProfileState) {
             Result.Initial, Result.Loading -> Loading()
             is Result.Error -> Error {

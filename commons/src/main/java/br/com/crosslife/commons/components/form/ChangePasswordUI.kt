@@ -12,10 +12,10 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
-import br.com.crosslife.commons.components.topbar.ScaffoldTopbar
 import br.com.crosslife.commons.R
 import br.com.crosslife.commons.components.Button
 import br.com.crosslife.commons.components.input.TextField
+import br.com.crosslife.commons.components.topbar.ScaffoldTopbar
 import br.com.crosslife.commons.theme.Space
 
 @ExperimentalAnimationApi
@@ -28,7 +28,7 @@ fun NavController.PasswordUI(
     resetFields: Boolean,
     onChangePasswordClick: () -> Unit,
 ) {
-    ScaffoldTopbar(titleRes = R.string.change_password) {
+    ScaffoldTopbar(title = stringResource(id = R.string.change_password)) {
         Column(
             modifier = Modifier
                 .padding(horizontal = Space.BORDER)

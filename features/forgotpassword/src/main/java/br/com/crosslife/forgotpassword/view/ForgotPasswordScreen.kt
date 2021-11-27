@@ -14,11 +14,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import br.com.crosslife.commons.components.topbar.ScaffoldTopbar
 import br.com.crosslife.commons.components.Button
 import br.com.crosslife.commons.components.input.TextField
 import br.com.crosslife.commons.components.snackbar.SnackBarError
 import br.com.crosslife.commons.components.snackbar.SnackBarSuccess
+import br.com.crosslife.commons.components.topbar.ScaffoldTopbar
 import br.com.crosslife.commons.extensions.capitalize
 import br.com.crosslife.commons.extensions.rememberFlowWithLifecycle
 import br.com.crosslife.commons.theme.Space
@@ -32,7 +32,7 @@ fun NavController.ForgotPasswordScreen(viewModel: ForgotPasswordViewModel = hilt
     val forgotPasswordState = rememberSaveable { mutableStateOf("") }
     val state by rememberFlowWithLifecycle(viewModel.forgotPassword)
         .collectAsState(initial = Result.Initial)
-    ScaffoldTopbar(titleRes = R.string.forgot_password) {
+    ScaffoldTopbar(title = stringResource(id = R.string.forgot_password)) {
         Column(
             Modifier
                 .padding(horizontal = Space.BORDER)
