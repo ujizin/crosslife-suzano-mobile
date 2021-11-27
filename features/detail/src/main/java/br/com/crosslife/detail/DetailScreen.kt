@@ -51,7 +51,7 @@ fun NavController.DetailScreen(detail: DetailItem?) {
                 override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
                     val delta = available.y
                     val newOffset = height.value + delta
-                    height.value = newOffset.coerceIn(-maxHeight.value, initialHeight)
+                    height.value = newOffset.coerceIn(-maxHeight.value * 0.7F, initialHeight)
                     return Offset.Zero
                 }
             }
