@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -75,6 +76,7 @@ fun NoticeItem(notice: Notice, onNoticeClick: OnNoticeClick) {
                 onNoticeClick(notice)
             }
             .padding(Space.S),
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
             painter = rememberImagePainter(notice.imageUrl),
@@ -82,7 +84,7 @@ fun NoticeItem(notice: Notice, onNoticeClick: OnNoticeClick) {
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .width(125.dp)
-                .fillMaxHeight()
+                .height(90.dp)
                 .background(MaterialTheme.colors.surface, MaterialTheme.shapes.medium)
                 .clip(MaterialTheme.shapes.small)
         )
