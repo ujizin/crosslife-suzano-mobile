@@ -81,8 +81,10 @@ fun NavController.ConversationScreen(
                 IconButton(
                     modifier = Modifier.background(MaterialTheme.colors.primary, CircleShape),
                     onClick = {
-                        viewModel.sendMessage(inputState.value)
-                        inputState.value = ""
+                        if (inputState.value.isNotBlank()) {
+                            viewModel.sendMessage(inputState.value)
+                            inputState.value = ""
+                        }
                     }) {
                     Icon(
                         Icons.Filled.Send,
