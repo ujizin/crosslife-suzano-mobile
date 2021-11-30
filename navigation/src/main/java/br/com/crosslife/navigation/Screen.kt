@@ -5,6 +5,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NamedNavArgument
 import androidx.navigation.compose.navArgument
 import androidx.navigation.navDeepLink
+import br.com.crosslife.navigation.Screen.Conversation.USERNAME_ARG
 import br.com.crosslife.navigation.Screen.RecoveryPassword.TOKEN_ARG
 
 
@@ -32,7 +33,18 @@ sealed class Screen(
     object Home : Screen(HOME_PATH, Tab.Home)
     object Search : Screen(SEARCH_PATH, Tab.Search)
     object Chat : Screen(CHAT_PATH, Tab.Chat)
-    object Conversation : Screen(CONVERSATION_PATH, Tab.None)
+    object Conversation : Screen(
+        CONVERSATION_PATH,
+        Tab.None,
+        listOf(navArgument("username") { type = NavType.StringType })
+    ) {
+        const val USERNAME_ARG = "username"
+
+        fun getRoute(username: String): String {
+            return "conversation/$username"
+        }
+    }
+
     object Profile : Screen(PROFILE_PATH, Tab.Profile)
     object DetailProfile : Screen(DETAIL_PROFILE_PATH, Tab.None)
     object ChangePassword : Screen(CHANGE_PASSWORD_PATH, Tab.None)
@@ -71,7 +83,7 @@ sealed class Screen(
         private const val HOME_PATH = "home"
         private const val SEARCH_PATH = "search"
         private const val CHAT_PATH = "chat"
-        private const val CONVERSATION_PATH = "conversation"
+        private const val CONVERSATION_PATH = "conversation/{$USERNAME_ARG}"
 
         // Profile
         private const val PROFILE_PATH = "profile"

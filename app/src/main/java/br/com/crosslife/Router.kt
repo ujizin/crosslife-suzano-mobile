@@ -15,8 +15,6 @@ import br.com.crosslife.commons.components.animation.FadeAnimation
 import br.com.crosslife.commons.components.tabbar.TabBar
 import br.com.crosslife.detail.DetailScreen
 import br.com.crosslife.domain.model.DetailItem
-import br.com.crosslife.domain.model.Instructor
-import br.com.crosslife.domain.model.Instructor.Companion.INSTRUCTOR_ARG_KEY
 import br.com.crosslife.forgotpassword.view.ForgotPasswordScreen
 import br.com.crosslife.home.view.HomeScreen
 import br.com.crosslife.login.view.LoginScreen
@@ -78,11 +76,7 @@ interface Router {
                             startDestination = Screen.Chat.route
                         ) {
                             route(Screen.Chat) { ChatScreen() }
-                            route(Screen.Conversation) {
-                                val instructor = previousBackStackEntry
-                                    ?.arguments?.getParcelable<Instructor>(INSTRUCTOR_ARG_KEY)
-                                ConversationScreen(instructor)
-                            }
+                            route(Screen.Conversation) { ConversationScreen() }
                         }
                         navigation(
                             route = Screen.ProfileRoot.route,
