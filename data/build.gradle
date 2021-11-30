@@ -12,4 +12,8 @@ dependencies {
     implementation project(":domain")
     implementation libs.hilt.hilt
     kapt libs.hilt.compiler
+
+    implementation platform(libs.firebase.bom)
+    implementation libs.firebase.storage
+    implementation libs.firebase.realtime
 }
