@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import br.com.crosslife.commons.theme.Space
+import br.com.crosslife.commons.theme.White
 
 @Composable
 fun BottomBox(
@@ -27,6 +28,7 @@ fun BottomBox(
             Text(
                 text = title,
                 style = MaterialTheme.typography.h2,
+                color = White,
                 maxLines = 3,
                 modifier = Modifier.padding(horizontal = Space.BORDER),
             )
