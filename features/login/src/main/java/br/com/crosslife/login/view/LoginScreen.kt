@@ -23,8 +23,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import br.com.crosslife.login.viewmodel.LoginUiState
-import br.com.crosslife.login.viewmodel.LoginViewModel
 import br.com.crosslife.commons.R
 import br.com.crosslife.commons.components.Button
 import br.com.crosslife.commons.components.input.TextField
@@ -33,6 +31,8 @@ import br.com.crosslife.commons.components.snackbar.SnackBarError
 import br.com.crosslife.commons.extensions.navigate
 import br.com.crosslife.commons.extensions.rememberFlowWithLifecycle
 import br.com.crosslife.commons.theme.Space
+import br.com.crosslife.login.viewmodel.LoginViewModel
+import br.com.crosslife.login.viewmodel.LoginViewState
 import br.com.crosslife.navigation.Screen
 import br.com.crosslife.navigation.extensions.navigateAndPop
 
@@ -42,10 +42,10 @@ fun NavController.LoginScreen(viewModel: LoginViewModel = hiltViewModel()) {
     val usernameState = rememberSaveable { mutableStateOf("") }
     val passwordState = rememberSaveable { mutableStateOf("") }
     val state by rememberFlowWithLifecycle(viewModel.login)
-        .collectAsState(initial = LoginUiState.Initial)
+        .collectAsState(initial = LoginViewState.Initial)
 
     when (state) {
-        is LoginUiState.Success -> navigateAndPop(Screen.HomeRoot, Screen.Login, true)
+        is LoginViewState.Success -> navigateAndPop(Screen.HomeRoot, Screen.Login, true)
         else -> {
             Column(
                 modifier = Modifier
@@ -81,7 +81,7 @@ fun NavController.LoginScreen(viewModel: LoginViewModel = hiltViewModel()) {
                     modifier = Modifier
                         .padding(top = Space.XXS)
                         .fillMaxWidth(),
-                    isLoading = state is LoginUiState.Loading,
+                    isLoading = state is LoginViewState.Loading,
                     onClick = {
                         viewModel.fetchLogin(usernameState.value, passwordState.value)
                     },
@@ -108,9 +108,9 @@ fun NavController.LoginScreen(viewModel: LoginViewModel = hiltViewModel()) {
                     )
                 }
             }
-            when (val result: LoginUiState = state) {
-                is LoginUiState.Error -> SnackBarError(result.error)
-                LoginUiState.InvalidAccount -> SnackBar(
+            when (val result: LoginViewState = state) {
+                is LoginViewState.Error -> SnackBarError(result.error)
+                LoginViewState.InvalidAccount -> SnackBar(
                     stringResource(id = R.string.invalid_account_or_password),
                     SnackBar.TIME_LONG,
                     SnackBar.Error)

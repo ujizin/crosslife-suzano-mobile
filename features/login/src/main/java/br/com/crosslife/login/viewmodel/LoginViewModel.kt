@@ -16,26 +16,26 @@ class LoginViewModel @Inject constructor(
     private val userRepository: UserRepository,
 ) : ViewModel(), ViewModelExtensions {
 
-    val login: StateFlow<LoginUiState> = MutableStateFlow(LoginUiState.Initial)
+    val login: StateFlow<LoginViewState> = MutableStateFlow(LoginViewState.Initial)
 
     fun fetchLogin(username: String, password: String) {
         userRepository.fetchLogin(username, password)
-            .onStart { login().value = LoginUiState.Loading }
+            .onStart { login().value = LoginViewState.Loading }
             .catchNetwork { error ->
                 login().value = when (error.status) {
-                    Status.UNAUTHORIZED -> LoginUiState.InvalidAccount
-                    else -> LoginUiState.Error(error)
+                    Status.UNAUTHORIZED -> LoginViewState.InvalidAccount
+                    else -> LoginViewState.Error(error)
                 }
             }
-            .onEach { login().value = LoginUiState.Success }
+            .onEach { login().value = LoginViewState.Success }
             .launchIn(viewModelScope)
     }
 }
 
-sealed class LoginUiState {
-    object Initial : LoginUiState()
-    object Loading : LoginUiState()
-    data class Error(val error: ServerError) : LoginUiState()
-    object Success : LoginUiState()
-    object InvalidAccount : LoginUiState()
+sealed class LoginViewState {
+    object Initial : LoginViewState()
+    object Loading : LoginViewState()
+    data class Error(val error: ServerError) : LoginViewState()
+    object Success : LoginViewState()
+    object InvalidAccount : LoginViewState()
 }
