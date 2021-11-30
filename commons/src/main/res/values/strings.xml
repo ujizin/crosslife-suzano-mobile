@@ -23,7 +23,8 @@
     <!-- Home -->
     <string name="weekly_train">treino da semana</string>
     <string name="notices">noticias</string>
-    <string name="chat_description">converse e tire suas dúvidas com nossos  instrutores por aqui:</string>
+    <string name="chat_description">converse e tire suas dúvidas com nossos instrutores por aqui:</string>
+    <string name="chat_instructor_description">converse e tire as dúvidas de nossos clientes por aqui:</string>
     <string name="or">ou</string>
 
     <!-- Profile  -->
