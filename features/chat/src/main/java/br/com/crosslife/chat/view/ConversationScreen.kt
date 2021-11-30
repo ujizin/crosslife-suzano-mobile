@@ -4,6 +4,7 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
@@ -23,18 +24,18 @@ import br.com.crosslife.chat.viewmodel.ConversationViewModel
 import br.com.crosslife.chat.viewmodel.ConversationViewState
 import br.com.crosslife.commons.components.Loading
 import br.com.crosslife.commons.components.error.Error
+import br.com.crosslife.commons.components.tabbar.Keyboard
+import br.com.crosslife.commons.components.tabbar.keyboardAsState
 import br.com.crosslife.commons.components.topbar.ScaffoldTopbar
 import br.com.crosslife.commons.extensions.capitalize
 import br.com.crosslife.commons.extensions.rememberFlowWithLifecycle
 import br.com.crosslife.commons.theme.Gray
 import br.com.crosslife.commons.theme.Space
 import br.com.crosslife.domain.model.Conversation
-import br.com.crosslife.domain.model.Instructor
 
 @ExperimentalAnimationApi
 @Composable
 fun NavController.ConversationScreen(
-    instructor: Instructor?,
     viewModel: ConversationViewModel = hiltViewModel()
 ) {
     val inputState = remember { mutableStateOf("") }
@@ -42,7 +43,7 @@ fun NavController.ConversationScreen(
         initial = ConversationViewState.Initial
     )
 
-    ScaffoldTopbar(title = instructor?.name, modifier = Modifier.fillMaxSize()) {
+    ScaffoldTopbar(title = viewModel.senderUsername, modifier = Modifier.fillMaxSize()) {
         Column(Modifier.fillMaxSize()) {
             Box(
                 modifier = Modifier
@@ -53,10 +54,13 @@ fun NavController.ConversationScreen(
             ) {
                 when (val state: ConversationViewState = conversations) {
                     ConversationViewState.Initial -> Loading()
-                    is ConversationViewState.Error -> Error {
+                    ConversationViewState.Error -> Error {
                         viewModel.getConversations()
                     }
-                    is ConversationViewState.Messages -> ConversationColumn(state.data)
+                    is ConversationViewState.Messages -> ConversationUI(
+                        state.data,
+                        viewModel.senderUsername
+                    )
                 }
             }
             Row(
@@ -98,33 +102,52 @@ fun NavController.ConversationScreen(
 }
 
 @Composable
-private fun ConversationColumn(conversations: List<Conversation>) {
+private fun ConversationUI(conversations: List<Conversation>, username: String) {
     val lazyState = rememberLazyListState()
+    val keyboardState by keyboardAsState()
+    if (keyboardState == Keyboard.Opened) {
+        ScrollToLastIndex(lazyState, conversations)
+    }
+
     LazyColumn(
         state = lazyState,
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Bottom,
-        horizontalAlignment = Alignment.End,
     ) {
         items(conversations) { conversation ->
-            Conversation(conversation)
+            Conversation(conversation, username)
         }
     }
 
+    ScrollToLastIndex(lazyState, conversations)
+}
+
+@Composable
+private fun ScrollToLastIndex(lazyState: LazyListState, conversations: List<Conversation>) {
     if (conversations.isNotEmpty()) {
-        LaunchedEffect(conversations.lastIndex) {
-            lazyState.scrollToItem(conversations.lastIndex)
+        val index by rememberUpdatedState(newValue = conversations.lastIndex)
+        LaunchedEffect(index) {
+            lazyState.scrollToItem(index)
         }
     }
 }
 
 @Composable
-private fun Conversation(conversation: Conversation) {
-    Text(
-        conversation.message,
+private fun Conversation(conversation: Conversation, senderUsername: String) {
+    val (alignment, background) = when (senderUsername) {
+        conversation.user -> Pair(Alignment.CenterStart, MaterialTheme.colors.surface)
+        else -> Pair(Alignment.CenterEnd, MaterialTheme.colors.primary)
+    }
+    Box(
         modifier = Modifier
             .padding(Space.S)
-            .background(MaterialTheme.colors.primary, RoundedCornerShape(4.dp))
-            .padding(Space.XS)
-    )
+            .fillMaxWidth(),
+        contentAlignment = alignment
+    ) {
+        Text(
+            conversation.message, modifier = Modifier
+                .background(background, RoundedCornerShape(4.dp))
+                .padding(Space.XS)
+        )
+    }
 }
