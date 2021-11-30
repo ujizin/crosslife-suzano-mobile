@@ -29,6 +29,7 @@ internal class UserRepositoryImpl(
         userStore.apply {
             setUsername(username)
             setToken(userDto.token)
+            setAdmin(userDto.isAdmin)
         }
         emit(userDto.toDomain())
     }.flowOn(dispatcher)
@@ -59,6 +60,7 @@ internal class UserRepositoryImpl(
         userStore.apply {
             setUsername("")
             setToken("")
+            setAdmin(false)
         }
         userService.logout()
         emit(Unit)

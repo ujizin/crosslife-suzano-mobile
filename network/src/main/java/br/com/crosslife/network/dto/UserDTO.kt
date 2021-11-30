@@ -9,6 +9,6 @@ data class UserDTO(
     val user: String?,
     @field:Json(name = "Token")
     val token: String,
-    @field:Json(name = "admin")
-    val isAdmin: Boolean?,
+    @field:Json(name = "Admin")
+    val isAdmin: Boolean = false,
 )

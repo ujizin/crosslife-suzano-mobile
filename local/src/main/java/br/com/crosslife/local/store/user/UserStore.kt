@@ -8,4 +8,7 @@ interface UserStore {
 
     fun getUsername(): Flow<String>
     suspend fun setUsername(username: String)
+
+    fun isAdmin(): Flow<Boolean>
+    suspend fun setAdmin(isAdmin: Boolean)
 }
