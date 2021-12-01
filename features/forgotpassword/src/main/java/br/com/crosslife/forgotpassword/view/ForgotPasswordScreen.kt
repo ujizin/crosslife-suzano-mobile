@@ -11,6 +11,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -63,7 +64,14 @@ fun NavController.ForgotPasswordScreen(viewModel: ForgotPasswordViewModel = hilt
     }
     when (val result: Result<*> = state) {
         is Result.Error -> SnackBarError(result.serverError)
-        is Result.Success -> SnackBarSuccess(R.string.forgot_password_sent)
+        is Result.Success -> {
+            viewModel.sendForgotNotification(
+                LocalContext.current,
+                stringResource(id = R.string.forgot_password_notification_title),
+                stringResource(id = R.string.forgot_password_notification_message),
+            )
+            SnackBarSuccess(R.string.forgot_password_sent)
+        }
         else -> Unit
     }
 }
