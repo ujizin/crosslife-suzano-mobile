@@ -12,6 +12,10 @@
     <string name="video">video</string>
     <string name="play">play</string>
 
+    <!--  Forgot password  -->
+    <string name="forgot_password_notification_title">email enviado</string>
+    <string name="forgot_password_notification_message">verifique a caixa de entrada de seu email!</string>
+
     <!--  Menu  -->
     <string name="menu_item_home">home</string>
     <string name="menu_item_search">buscar</string>
