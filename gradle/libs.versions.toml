@@ -67,8 +67,9 @@ room-room = { module = "androidx.room:room-runtime", version.ref = "room" }
 room-kapt = { module = "androidx.room:room-compiler", version.ref = "room" }
 
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase" }
-firebase-storage = { module = "com.google.firebase:firebase-firestore-ktx" }
 firebase-realtime = { module = "com.google.firebase:firebase-database" }
+firebase-messaging = { module = "com.google.firebase:firebase-messaging-ktx" }
+firebase-analytics = { module = 'com.google.firebase:firebase-analytics-ktx' }
 
 [bundles]
 androidx-accompanist = [

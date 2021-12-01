@@ -46,6 +46,10 @@ dependencies {
     implementation libs.compose.nav.hilt
     implementation libs.androidx.activity.compose
     implementation libs.androidx.appcompat
+
+    implementation libs.firebase.bom
+    implementation libs.firebase.messaging
+    implementation libs.firebase.analytics
 }
 
 apply plugin: 'com.google.gms.google-services'
