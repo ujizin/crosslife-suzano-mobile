@@ -30,7 +30,7 @@ internal class UserStoreImpl(private val dataStore: DataPreferences) : UserStore
     }
 
     companion object {
-        private const val USER_TOKEN_KEY = "user_token"
+        private const val USER_TOKEN_KEY = "user_token_key"
         private const val USERNAME_KEY = "username_key"
         private const val IS_ADMIN_KEY = "is_admin_key"
     }
