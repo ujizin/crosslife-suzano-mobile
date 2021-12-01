@@ -6,6 +6,11 @@ plugins {
 apply from: "../config-android.gradle"
 apply from: "../config-compose.gradle"
 
+android {
+    defaultConfig {
+        buildConfigField("String", "APP_URL", "\"https://www.crosslife.com.br\"")
+    }
+}
 dependencies {
     implementation project(':domain')
 

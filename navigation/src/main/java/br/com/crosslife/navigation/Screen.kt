@@ -23,7 +23,7 @@ sealed class Screen(
         tabItem = Tab.None,
         arguments = listOf(navArgument("token") { type = NavType.StringType }),
         deepLinks = listOf(navDeepLink {
-            uriPattern = "$BASE_DEEPLINK/$RECOVERY_PASSWORD_PATH"
+            uriPattern = "${BuildConfig.APP_URL}/$RECOVERY_PASSWORD_PATH"
         })
     ) {
         const val TOKEN_ARG = "token"
@@ -60,9 +60,6 @@ sealed class Screen(
     object Logout : Screen(LOGOUT_PATH, Tab.Profile)
 
     companion object {
-        // TODO set url on build config
-        private const val BASE_DEEPLINK = "https://www.crosslife.com.br"
-
         private const val SPLASH_PATH = "splash"
         private const val LOGIN_PATH = "login"
         private const val FORGOT_PASSWORD_PATH = "forgot_password"
