@@ -8,6 +8,8 @@ import br.com.crosslife.local.datapreferences.DataPreferences
 import br.com.crosslife.local.datapreferences.DataPreferencesImpl
 import br.com.crosslife.local.store.notice.NoticeStore
 import br.com.crosslife.local.store.notice.NoticeStoreImpl
+import br.com.crosslife.local.store.notification.NotificationStore
+import br.com.crosslife.local.store.notification.NotificationStoreImpl
 import br.com.crosslife.local.store.train.TrainStore
 import br.com.crosslife.local.store.train.TrainStoreImpl
 import br.com.crosslife.local.store.user.UserStore
@@ -59,6 +61,11 @@ object LocalModules {
     @Singleton
     @Provides
     fun provideUserStore(dataStore: DataPreferences): UserStore = UserStoreImpl(dataStore)
+
+    @Singleton
+    @Provides
+    fun provideNotificationStore(dataStore: DataPreferences): NotificationStore =
+        NotificationStoreImpl(dataStore)
 
     @Singleton
     @Provides
