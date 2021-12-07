@@ -28,7 +28,7 @@ class ChatRepositoryImpl(
             .addOnSuccessListener { snapshot ->
                 val entry = snapshot.value as Map<*, *>
                 val conversations = entry.entries.mapNotNull { map ->
-                    val mapperValue = (map.value as List<*>).lastOrNull() as? Map<*, *>
+                    val mapperValue = (map.value as? List<*>)?.lastOrNull() as? Map<*, *>
                     val name = map.key as? String
                     val message = mapperValue?.get(MESSAGE_PARAM) as? String
 
