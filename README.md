@@ -26,7 +26,7 @@ Android libraries that were used:
 - Flow
 - Material IO
 - Modularization
-- Entre outros
+- Among others
 
 ## Layout
 
