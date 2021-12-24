@@ -1,20 +1,21 @@
 
 # Crosslife Suzano Mobile
 
-A Crosslife Suzano Mobile é um projeto que será desenvolvido para o aplicativo mobile Android, voltado para o público da academia Crosslife, e também vai ser utilizado para o trabalho de conclusão de curso da faculdade IMPACTA.
+Crosslife Suzano Mobile is an Android application project, geared towards the Crosslife gym audience, being used for the final paper of the IMPACTA college.
 
-## Aplicativo
+## Application
 
-O aplicativo terá o foco de auxiliar e comunicar aos clientes da academia sobre a mesma, terá informações como:
-- Treinos da semana
-- Notícias
+The app focus on assisting and communicating to the gym's customers about the gym, it will have information such as:
+
+- Weekly trains
+- News
 - Chat
-- Perfil avançado, contendo informações de bioimpedância
-- Entre outros
+- Advanced profile, containing bioimpedance information
+- Among others
 
-## Tecnologias (Bibliotecas)
+## Technologies (Libraries)
 
-Foram utilizadas bibliotecas mais recentes do Android, como:
+Android libraries that were used:
 
 - Compose
 - Navigator Compose
@@ -28,11 +29,13 @@ Foram utilizadas bibliotecas mais recentes do Android, como:
 
 ## Layout
 
-O Layout foi inteiramente realizado na ferramenta [FIGMA](https://www.figma.com).
+The layout was made with [FIGMA](https://www.figma.com).
 
 <img src="https://i.imgur.com/broOqPL.png">
-<font size="3px">Para mais detalhes, acesse aqui: https://www.figma.com/file/fb9DxWbWhOglfcohtqfuC4/5Tech-Mobile?node-id=0%3A1</font>
+<font size="3px">To more details, access here: https://www.figma.com/file/fb9DxWbWhOglfcohtqfuC4/5Tech-Mobile?node-id=0%3A1</font>
 
-## Arquitetura
-Nesse projeto está sendo utilizado a arquitetura MVVM (ModelView ViewModel), Repository (DataSource) & Service
+## Architecture
+
+This project are using Architecture Components Android & Clean Architecture 
+
 <img src="https://developer.android.com/topic/libraries/architecture/images/final-architecture.png">
