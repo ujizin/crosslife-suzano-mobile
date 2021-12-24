@@ -1,4 +1,4 @@
-### Selecione seu idioma: [English](https://github.com/DevLucasYuji/crosslife-suzano-mobile/blob/main/readme.md) / Portuguese
+### Selecione seu idioma: [English](https://github.com/DevLucasYuji/crosslife-suzano-mobile/blob/main/README.md) / Portuguese
 
 # Crosslife Suzano Mobile
 
